@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+// Other themes
+// Darkly: https://jenil.github.io/bulmaswatch/darkly/
+
+// Variables
+$pcturquoise: #16BAC5;
+$pcdeepblue: #2364AA;
+$pcfunblue: #3499ED;
+$pcsummergreen: #8AC926;
+$pcspringgreen: #7ac74f;
+$pcyellow: #FFBA49;
+$pcpalered: #EF5B5B;
+
+$primary: $pcturquoise;
+$link: $pcdeepblue;
+$info: $pcfunblue;
+$success: $pcspringgreen;
+$warning: $pcyellow;
+$danger: $pcpalered;
+
+// $family-sans-serif: 'Rubik', 'Montserrat', 'Raleway', 'Maven Pro', "Cabin", "Open Sans", "Lato", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-sans-serif: "Rubik", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+// Could be optimized by importing things piecewise as detailed on
+// https://bulma.io/documentation/customize/with-webpack/
+@import "~bulma/bulma"
