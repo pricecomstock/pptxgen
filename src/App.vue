@@ -4,7 +4,7 @@
     <div class="section">
       <router-view/>
     </div>
-    <pcfoot></pcfoot>
+    <!-- <pcfoot></pcfoot> -->
   </div>
 </template>
 
