@@ -1,5 +1,5 @@
 <template>
-  <section class="slide hero is-black is-fullheight">
+  <section class="slide hero is-fullheight">
     <div class="hero-body">
       <div class="container is-fluid">
         <h1 class="pres-title title-title">

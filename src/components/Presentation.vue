@@ -11,9 +11,11 @@
 
 <script>
 import Title from "@/components/slides/Title.vue"
+import Bullets from "@/components/slides/Bullets.vue"
 export default {
   components: {
-    Title
+    Title,
+    Bullets
   },
   computed: {
     currentSlideComponent() {
@@ -39,11 +41,16 @@ export default {
   width: 80vw;
   
   .pres-title {
-    font-size: 4vw;
+    font-size: 5vw;
   }
   
   .pres-body {
-    font-size: 1.75vw;
+    font-size: 2.5vw;
+  }
+
+  .slide-title {
+    margin-left: 4vw;
+    margin-top: 2vw;
   }
 }
 </style>

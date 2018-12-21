@@ -5,6 +5,8 @@ import store from "./store";
 import "./scss/pcstyles.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+import "animate.css";
+
 Vue.config.productionTip = false;
 
 new Vue({
