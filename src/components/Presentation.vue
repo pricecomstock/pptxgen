@@ -85,16 +85,16 @@ export default {
   overflow: hidden;
 
   .pres-title {
-    font-size: 10vh;
+    font-size: 5vw;
   }
 
   .pres-body {
-    font-size: 6vh;
+    font-size: 3vw;
   }
 
   .slide-title {
     margin-left: 4vw;
-    margin-top: 3vh;
+    margin-top: 4vh;
   }
 
   .slide-counter {
