@@ -1,5 +1,5 @@
 <template>
-  <section class="slide hero is-fullheight">
+  <section class="slide hero is-fullheight has-bg-img">
     <div class="hero-body">
       <div class="container is-fluid">
         <h1 class="pres-title title-title">
@@ -25,6 +25,11 @@ export default {
         };
       }
     }
+  },
+  computed: {
+    slideStyle() {
+      return "{background: url('@/assets/fog.jpg'); backgroundSize: cover;}";
+    }
   }
 };
 </script>
@@ -32,5 +37,10 @@ export default {
 <style lang="scss" scoped>
 .title-title {
   width: 100%;
+}
+
+.has-bg-img {
+  background: url('/assets/otie.jpg')center center;
+  background-size:cover;
 }
 </style>
