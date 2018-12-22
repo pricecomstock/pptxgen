@@ -15,7 +15,8 @@
 <script>
 import Title from "@/components/slides/Title.vue";
 import Bullets from "@/components/slides/Bullets.vue";
-import HalfImage from "@/components/slides/HalfImage.vue";
+import HalfImageTitle from "@/components/slides/HalfImageTitle.vue";
+import HalfImageBullets from "@/components/slides/HalfImageBullets.vue";
 import testSlides from "@/testSlides.js";
 export default {
   props: {
@@ -34,7 +35,8 @@ export default {
   components: {
     Title,
     Bullets,
-    HalfImage
+    HalfImageTitle,
+    HalfImageBullets
   },
   computed: {
     currentSlide() {
@@ -95,6 +97,7 @@ export default {
   .slide-title {
     margin-left: 4vw;
     margin-top: 4vh;
+    margin-bottom: 2vh;
   }
 
   .slide-counter {
@@ -104,6 +107,7 @@ export default {
     position: absolute;
     right: 0px;
     top: 0px;
+    // z-index: 1;
   }
 }
 
@@ -111,8 +115,15 @@ export default {
   outline: none;
 }
 
-.fill-img-container {
+.center-parent {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.fill-img-container {
+  // display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
@@ -123,5 +134,39 @@ export default {
   min-width: 100%;
   min-height: 100%;
   object-fit: cover;
+}
+
+.has-bg-img {
+  // background: url('/assets/otie.jpg')center center;
+  // background-size:cover;
+  background-image: url("https://i.imgur.com/o1TOin9.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  // background-attachment: fixed;
+  // filter: brightness(50%);
+  // opacity: 0.5;
+  background-size: cover;
+  background-color: #000;
+}
+
+.has-bg-img p {
+  color: white;
+  z-index: 1;
+  position: relative;
+}
+
+.darken-pseudo {
+  position: relative;
+}
+
+.darken-pseudo:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 </style>
