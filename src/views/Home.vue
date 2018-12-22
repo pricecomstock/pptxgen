@@ -12,7 +12,7 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import Presentation from "@/components/Presentation.vue";
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "home",
@@ -22,14 +22,18 @@ export default {
   },
   methods: {
     fullScreenElementWithId(id) {
-      var elem = document.getElementById(id)
+      var elem = document.getElementById(id);
+      elem.focus();
       if (elem.requestFullscreen) {
         elem.requestFullscreen();
-      } else if (elem.mozRequestFullScreen) { /* Firefox */
+      } else if (elem.mozRequestFullScreen) {
+        /* Firefox */
         elem.mozRequestFullScreen();
-      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      } else if (elem.webkitRequestFullscreen) {
+        /* Chrome, Safari and Opera */
         elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      } else if (elem.msRequestFullscreen) {
+        /* IE/Edge */
         elem.msRequestFullscreen();
       }
     }
@@ -46,4 +50,3 @@ export default {
   height: 100%;
 }
 </style>
-

@@ -22,15 +22,15 @@ export default {
         return {
           title: "This is a title slide that's pretty long!",
           subtitle: "Here's a little more detail"
-        }
+        };
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .title-title {
-  width: 100%
+  width: 100%;
 }
 </style>

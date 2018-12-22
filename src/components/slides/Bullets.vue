@@ -19,16 +19,12 @@ export default {
       default() {
         return {
           title: "Some Great Points",
-          bullets: [
-            "Here is the first bullet",
-            "Bullet #2",
-            "Item C"
-          ]
-        }
+          bullets: ["Here is the first bullet", "Bullet #2", "Item C"]
+        };
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
