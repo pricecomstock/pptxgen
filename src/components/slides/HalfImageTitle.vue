@@ -41,7 +41,13 @@ export default {
 .half-image-title {
   width: 100%;
   font-size: 4vw;
-  
+  display: block;
+}
+
+.half-image-subtitle {
+  width: 100%;
+  font-size: 2vw;
+  display: block;
 }
 
 .half-image-text-container {

@@ -1,5 +1,5 @@
 <template>
-  <div class="center-parent has-bg-img darken-pseudo">
+  <div class="slide center-parent has-bg-img darken-pseudo">
     <div class="title-body">
       <div class="container is-fluid">
         <p class="pres-title title-title">

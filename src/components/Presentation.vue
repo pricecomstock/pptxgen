@@ -95,8 +95,9 @@ export default {
   }
 
   .slide-title {
-    margin-left: 4vw;
-    margin-top: 4vh;
+    padding-left: 4vw;
+    // margin-top: 4vh;
+    padding-top: 4vh;
     margin-bottom: 2vh;
   }
 
@@ -109,6 +110,10 @@ export default {
     top: 0px;
     // z-index: 1;
   }
+}
+
+.slide {
+  height: 100%;
 }
 
 .presentation:focus {
@@ -167,6 +172,6 @@ export default {
   left: 0;
   right: 0;
   display: block;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.55);
 }
 </style>

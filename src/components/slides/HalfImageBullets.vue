@@ -24,12 +24,14 @@
     </div>
     <div v-if="!slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo">
       <div class="container is-fluid center-parent">
-        <p class="half-image-title">
-          {{ slideOptions.title }}
-        </p>
-        <p class="pres-body">
-          {{ slideOptions.subtitle }}
-        </p>
+        <div>
+          <p class="half-image-title">
+            {{ slideOptions.title }}
+          </p>
+          <p class="half-image-subtitle">
+            {{ slideOptions.subtitle }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -75,7 +77,7 @@ export default {
   }
 }
 .half-numbered {
-  margin-left: 12%;
+  margin-left: 14%;
   margin-right: 12%;
   margin-top: 0;
   // list-style: disc;

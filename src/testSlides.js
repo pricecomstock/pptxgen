@@ -39,13 +39,20 @@ const testSlides = [
     options: {
       title: "Here's a list slide",
       bullets: [
-        "Isn't this soooo powerpointy?",
-        "I actually rolled it myself!",
-        "Alright maybe a couple more points",
-        "Here is a long point like you would have in your presentation if you were bad",
-        "Hell yeah"
+        "Just a detail or two",
       ],
-      plaintext: true
+      plaintext: true,
+      images: [
+        {
+          // data: null, // TODO: This should maybe be URL,
+          url: 'https://i.redd.it/8ewex5he4k0y.jpg',
+          position: {
+            bottom: "10%",
+            right: "10%"
+          },
+          width: "25%"
+        }
+      ]
     }
   },
   {
@@ -59,7 +66,7 @@ const testSlides = [
   {
     type: "HalfImageTitle",
     options: {
-      title: "Maybe this is a thoughtful quote",
+      title: "A cool caption for sure",
       image: "assets/fog.jpg",
       imageLeft: true
     }
