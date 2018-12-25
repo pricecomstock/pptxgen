@@ -5,7 +5,11 @@
     @keyup.left="previousSlide()"
     @keyup.right="nextSlide()"
     @keypress.enter="nextSlide()">
-    <div class="tag is-dark slide-counter">{{currentSlideIndex + 1}}/{{this.slideshow.length}}</div>
+    <div
+      class="tag slide-counter"
+      :class="{'is-dark': currentSlideIndex != (this.slideshow.length - 1), 'is-danger': currentSlideIndex === (this.slideshow.length - 1)}"
+      v-if="currentSlideIndex !== 0"
+      >{{currentSlideIndex + 1}}/{{this.slideshow.length}}</div>
     <keep-alive>
       <component 
       :slide-options="currentSlide.options"
@@ -110,7 +114,7 @@ export default {
     position: absolute;
     right: 0px;
     top: 0px;
-    // z-index: 1;
+    z-index: 5;
   }
 }
 
