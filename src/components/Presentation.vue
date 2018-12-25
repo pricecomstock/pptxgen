@@ -6,9 +6,11 @@
     @keyup.right="nextSlide()"
     @keypress.enter="nextSlide()">
     <div class="tag is-dark slide-counter">{{currentSlideIndex + 1}}/{{this.slideshow.length}}</div>
-    <component 
-    :slide-options="currentSlide.options"
-    :is="currentSlideComponent"></component>
+    <keep-alive>
+      <component 
+      :slide-options="currentSlide.options"
+      :is="currentSlideComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
