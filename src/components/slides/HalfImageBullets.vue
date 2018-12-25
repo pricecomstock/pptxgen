@@ -56,10 +56,11 @@ export default {
   computed: {
     listClasses() {
       return {
-        'half-bullets': !this.slideOptions.plaintext && !this.slideOptions.ordered,
-        'half-numbered': this.slideOptions.ordered,
-        'half-plain': this.slideOptions.plaintext,
-      }
+        "half-bullets":
+          !this.slideOptions.plaintext && !this.slideOptions.ordered,
+        "half-numbered": this.slideOptions.ordered,
+        "half-plain": this.slideOptions.plaintext
+      };
     }
   }
 };

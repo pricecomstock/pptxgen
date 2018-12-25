@@ -42,7 +42,7 @@ export default {
           images: [
             {
               // data: null, // TODO: This should maybe be URL,
-              url: 'https://i.redd.it/8ewex5he4k0y.jpg',
+              url: "https://i.redd.it/8ewex5he4k0y.jpg",
               position: {
                 top: "0px",
                 right: "0px",
@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     imageStyles() {
-      return this.slideOptions.images.map( (img) => {
+      return this.slideOptions.images.map(img => {
         return {
           position: "absolute",
           top: img.position.top || null, // ? img.position.top : null,
@@ -67,8 +67,8 @@ export default {
           left: img.position.left || null, // hasOwnProperty("left") ? img.position.left : null,
           width: img.width || "30%",
           height: img.height || "auto"
-        }
-      })
+        };
+      });
     }
   }
 };
@@ -104,5 +104,4 @@ export default {
     margin-bottom: 0.3em;
   }
 }
-
 </style>

@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <button class="button is-primary" @click="fullScreenElementWithId('presentation-window')">Fullscreen</button>
+    <button class="button is-danger" @click="loadSlides()">Load Slides</button>
     <hr>
     <div class="section columns is-centered">
-      <presentation id="presentation-window"></presentation>
+      <presentation id="presentation-window" :slideshow="slides"></presentation>
     </div>
   </div>
 </template>
@@ -12,10 +13,23 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import Presentation from "@/components/Presentation.vue";
-// import axios from "axios";
+import axios from "@/axios-backend";
 
 export default {
   name: "home",
+  data() {
+    return {
+      slides: [
+        {
+          type: "Title",
+          options: {
+            title: "No slideshow loaded",
+            subtitle: "...yet"
+          }
+        }
+      ]
+    };
+  },
   components: {
     HelloWorld,
     Presentation
@@ -36,11 +50,14 @@ export default {
         /* IE/Edge */
         elem.msRequestFullscreen();
       }
+    },
+    loadSlides() {
+      axios.get("/slides").then(res => {
+        // console.log(res.data);
+        this.slides = res.data.slides;
+      });
     }
   }
-  // mounted() {
-  //   axios.get("http://google.com");
-  // }
 };
 </script>
 
