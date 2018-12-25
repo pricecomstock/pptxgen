@@ -165,7 +165,7 @@ export default {
 }
 
 .darken-pseudo:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -173,5 +173,14 @@ export default {
   right: 0;
   display: block;
   background-color: rgba(0, 0, 0, 0.55);
+}
+
+.slide img {
+  z-index: 1;
+}
+
+.slide * {
+  position: relative;
+  z-index: 2;
 }
 </style>

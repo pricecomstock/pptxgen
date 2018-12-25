@@ -38,19 +38,26 @@ const testSlides = [
     type: "Bullets",
     options: {
       title: "Here's a list slide",
-      bullets: [
-        "Just a detail or two",
-      ],
+      bullets: ["Just a detail or two"],
       plaintext: true,
       images: [
         {
           // data: null, // TODO: This should maybe be URL,
-          url: 'https://i.redd.it/8ewex5he4k0y.jpg',
+          url: "https://i.redd.it/8ewex5he4k0y.jpg",
           position: {
             bottom: "10%",
             right: "10%"
           },
           width: "25%"
+        },
+        {
+          // data: null, // TODO: This should maybe be URL,
+          url: "https://i.redd.it/8ewex5he4k0y.jpg",
+          position: {
+            top: "10%",
+            left: "10%"
+          },
+          width: "15%"
         }
       ]
     }
@@ -75,10 +82,7 @@ const testSlides = [
     type: "HalfImageBullets",
     options: {
       title: "You want some reasons?",
-      bullets: [
-        "Here's a reason",
-        "Here's another"
-      ],
+      bullets: ["Here's a reason", "Here's another"],
       image: "assets/fog.jpg",
       imageLeft: true,
       plaintext: false,
@@ -90,10 +94,7 @@ const testSlides = [
     options: {
       title: "Now I'm over here",
       subtitle: "and can still have a subtitle!",
-      bullets: [
-        "Fact A",
-        "Fact B"
-      ],
+      bullets: ["Fact A", "Fact B"],
       image: "assets/fog.jpg",
       imageLeft: false,
       plaintext: false,
