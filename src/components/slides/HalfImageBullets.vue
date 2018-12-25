@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-gapless center-parent">
-    <div v-if="slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo">
+    <div v-if="slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo" :style="[backgroundStyles]">
       <div class="container is-fluid center-parent">
         <p class="half-image-title">
           {{ slideOptions.title }}
@@ -22,7 +22,7 @@
         </li>
       </ol>
     </div>
-    <div v-if="!slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo">
+    <div v-if="!slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo" :style="[backgroundStyles]">
       <div class="container is-fluid center-parent">
         <div>
           <p class="half-image-title">
@@ -60,6 +60,11 @@ export default {
           !this.slideOptions.plaintext && !this.slideOptions.ordered,
         "half-numbered": this.slideOptions.ordered,
         "half-plain": this.slideOptions.plaintext
+      };
+    },
+    backgroundStyles() {
+      return {
+        "background-image": `url("${this.slideOptions.image}")`
       };
     }
   }

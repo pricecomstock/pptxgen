@@ -1,5 +1,5 @@
 <template>
-  <div class="slide center-parent has-bg-img darken-pseudo">
+  <div class="slide center-parent has-bg-img darken-pseudo" :style="[backgroundStyles]">
     <div class="title-body">
       <div class="container is-fluid">
         <p class="pres-title title-title">
@@ -26,7 +26,13 @@ export default {
       }
     }
   },
-  computed: {}
+  computed: {
+    backgroundStyles() {
+      return {
+        "background-image": `url("${this.slideOptions.image}")`
+      };
+    }
+  }
 };
 </script>
 

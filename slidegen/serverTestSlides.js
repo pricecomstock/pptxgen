@@ -4,7 +4,7 @@ const testSlides = [
     options: {
       title: "Test props title",
       subtitle: "from test kitchen",
-      image: ""
+      image: "https://i.redd.it/j4wdc7bc1f621.jpg"
     }
   },
   {
@@ -67,7 +67,7 @@ const testSlides = [
     type: "HalfImageTitle",
     options: {
       title: "Maybe this is a thoughtful quote",
-      image: "assets/fog.jpg",
+      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: false
     }
   },
@@ -75,7 +75,7 @@ const testSlides = [
     type: "HalfImageTitle",
     options: {
       title: "A cool caption for sure",
-      image: "assets/fog.jpg",
+      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: true
     }
   },
@@ -84,7 +84,7 @@ const testSlides = [
     options: {
       title: "You want some reasons?",
       bullets: ["Here's a reason", "Here's another"],
-      image: "assets/fog.jpg",
+      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: true,
       plaintext: false,
       ordered: false
@@ -96,7 +96,7 @@ const testSlides = [
       title: "Now I'm over here",
       subtitle: "and can still have a subtitle!",
       bullets: ["Fact A", "Fact B"],
-      image: "assets/fog.jpg",
+      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: false,
       plaintext: false,
       ordered: true

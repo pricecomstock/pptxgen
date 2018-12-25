@@ -146,7 +146,7 @@ export default {
 .has-bg-img {
   // background: url('/assets/otie.jpg')center center;
   // background-size:cover;
-  background-image: url("https://i.imgur.com/o1TOin9.jpg");
+  background-image: url("https://i.redd.it/nvlfhjq6gz521.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   // background-attachment: fixed;

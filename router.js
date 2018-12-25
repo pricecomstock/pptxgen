@@ -1,6 +1,6 @@
 var express = require("express");
 
-const testSlides = require("./serverTestSlides");
+const slidegen = require("./slidegen/slidegen");
 
 var router = express.Router();
 router.use(express.json());
@@ -19,7 +19,7 @@ router.get("/slides", (req, res) => {
   // let subtitle = req.query.subtitle || 'subtitle';
   res.json({
     message: "Here are some slides",
-    slides: testSlides
+    slides: slidegen.generateSlideshow()
   });
 });
 
