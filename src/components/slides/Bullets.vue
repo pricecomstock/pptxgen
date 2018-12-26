@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     imageStyles() {
-      return this.slideOptions.images.map(img => {
+      return this.slideOptions.contentImages.map(img => {
         return {
           position: "absolute",
           top: img.position.top || null, // ? img.position.top : null,

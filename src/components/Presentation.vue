@@ -23,19 +23,17 @@ import Title from "@/components/slides/Title.vue";
 import Bullets from "@/components/slides/Bullets.vue";
 import HalfImageTitle from "@/components/slides/HalfImageTitle.vue";
 import HalfImageBullets from "@/components/slides/HalfImageBullets.vue";
-import testSlides from "@/testSlides.js";
 export default {
   props: {
     slideshow: {
       type: Array,
-      default() {
-        return testSlides;
-      }
+      required: true
     }
   },
   data() {
     return {
-      currentSlideIndex: 0
+      currentSlideIndex: 0,
+      preloadedImages: []
     };
   },
   components: {
@@ -50,6 +48,11 @@ export default {
     },
     currentSlideComponent() {
       return this.currentSlide.type;
+    }
+  },
+  watch: {
+    slideshow() {
+      this.newSlideshow();
     }
   },
   methods: {
@@ -68,6 +71,31 @@ export default {
       } else {
         // console.log("Already at start of slideshow!");
       }
+    },
+    newSlideshow() {
+      this.clearLoadedImages();
+      this.preloadImages();
+    },
+    clearLoadedImages() {
+      this.preloadedImages = [];
+    },
+    preloadImages() {
+      this.slideshow.forEach(slide => {
+        if (slide.options.imageUrl) {
+          this.loadImageFromUrl(slide.options.imageUrl);
+        }
+
+        if (slide.options.contentImages) {
+          slide.options.contentImages.forEach(cImg => {
+            this.loadImageFromUrl(cImg.url);
+          });
+        }
+      });
+    },
+    loadImageFromUrl(url) {
+      let img = new Image();
+      img.src = url;
+      this.preloadedImages.push(img);
     }
   }
   // ready() {

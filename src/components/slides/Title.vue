@@ -29,7 +29,7 @@ export default {
   computed: {
     backgroundStyles() {
       return {
-        "background-image": `url("${this.slideOptions.image}")`
+        "background-image": `url("${this.slideOptions.imageUrl}")`
       };
     }
   }

@@ -1,4 +1,4 @@
-const randImg = require("../images");
+const randImg = require("../randImage");
 
 // const sample = {
 //   type: "Title",
@@ -16,7 +16,7 @@ const titleSlideFunctions = {
       options: {
         title,
         subtitle,
-        image: randImg.landscape()
+        imageUrl: randImg.landscape()
       }
     };
   }

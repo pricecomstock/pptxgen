@@ -4,7 +4,7 @@ const testSlides = [
     options: {
       title: "Test props title",
       subtitle: "from test kitchen",
-      image: "https://i.redd.it/j4wdc7bc1f621.jpg"
+      imageUrl: "https://i.redd.it/j4wdc7bc1f621.jpg"
     }
   },
   {
@@ -41,7 +41,7 @@ const testSlides = [
       title: "Here's a list slide",
       bullets: ["Just a detail or two"],
       plaintext: true,
-      images: [
+      contentImages: [
         {
           // data: null, // TODO: This should maybe be URL,
           url: "https://i.redd.it/8ewex5he4k0y.jpg",
@@ -67,7 +67,7 @@ const testSlides = [
     type: "HalfImageTitle",
     options: {
       title: "Maybe this is a thoughtful quote",
-      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
+      imageUrl: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: false
     }
   },
@@ -75,7 +75,7 @@ const testSlides = [
     type: "HalfImageTitle",
     options: {
       title: "A cool caption for sure",
-      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
+      imageUrl: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: true
     }
   },
@@ -84,7 +84,7 @@ const testSlides = [
     options: {
       title: "You want some reasons?",
       bullets: ["Here's a reason", "Here's another"],
-      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
+      imageUrl: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: true,
       plaintext: false,
       ordered: false
@@ -96,7 +96,7 @@ const testSlides = [
       title: "Now I'm over here",
       subtitle: "and can still have a subtitle!",
       bullets: ["Fact A", "Fact B"],
-      image: "https://i.redd.it/j4wdc7bc1f621.jpg",
+      imageUrl: "https://i.redd.it/j4wdc7bc1f621.jpg",
       imageLeft: false,
       plaintext: false,
       ordered: true
