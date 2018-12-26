@@ -1,9 +1,9 @@
 <template>
   <div class="slide">
-    <div class="pres-title slide-title has-text-left">
+    <div class="pres-title slide-title has-text-left" :style="{'max-width':slideOptions.maxWidth}">
       {{slideOptions.title}}
     </div>
-    <div class="has-text-left">
+    <div class="has-text-left" :style="{'max-width':slideOptions.maxWidth}">
       <ul v-if="!slideOptions.ordered && !slideOptions.plaintext" class="bullet-bullets pres-body">
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
@@ -20,7 +20,7 @@
         </li>
       </ul>
     </div>
-    <img v-for="(image, index) in slideOptions.images"
+    <img v-for="(image, index) in slideOptions.contentImages"
     :src="image.url"
     :style="imageStyles[index]"
     alt="Uh image"
@@ -66,7 +66,8 @@ export default {
           bottom: img.position.bottom || null, // hasOwnProperty("bottom") ? img.position.bottom : null,
           left: img.position.left || null, // hasOwnProperty("left") ? img.position.left : null,
           width: img.width || "30%",
-          height: img.height || "auto"
+          height: img.height || "auto",
+          "max-height": img.maxHeight || "90%"
         };
       });
     }

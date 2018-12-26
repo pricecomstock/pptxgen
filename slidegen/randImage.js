@@ -1,14 +1,32 @@
 var reddit = require('./reddit')
 
-// function generateSlideshow(length, title, subtitle) {
-function randomChoice(array) {
-  return array[Math.floor(Math.random() * array.length)];
-}
-
 const imageFunctions = {
   async landscape() {
     let url = await reddit.randomImageFromSubreddit("earthporn")
     return url
+  },
+  async animal() {
+    return await reddit.randomImageFromMultireddit([
+      "aww",
+      "doggos",
+      "cats"
+    ])
+  },
+  async gif() {
+    return await reddit.randomImageOrGifFromMultireddit([
+      "gifs",
+      "highqualitygifs"
+    ]) 
+  },
+  async graph() {
+    return await reddit.randomImageOrGifFromMultireddit([
+      "dataisbeautiful",
+      "dataisugly",
+      "data_irl",
+      "mapporn",
+      "wordcloud",
+      "redactedcharts"
+    ])
   }
 };
 

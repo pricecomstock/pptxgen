@@ -10,15 +10,24 @@ const randImg = require("../randImage");
 // };
 
 const titleSlideFunctions = {
-  async generateTitleSlide(title, subtitle) {
+  assembleTitleSlide(title, subtitle, imageUrl) {
     return {
       type: "Title",
       options: {
         title,
         subtitle,
-        imageUrl: await randImg.landscape()
+        imageUrl
       }
     };
+  },
+  async generateTitleSlide(title, subtitle) {
+    return this.assembleTitleSlide(title, subtitle, await randImg.landscape());
+  },
+  async generateFullRandomTitleSlide() {
+    return await this.generateTitleSlide(
+      "TODO Make Random String",
+      "TODO Another One",
+    )
   }
 };
 
