@@ -73,6 +73,7 @@ export default {
       }
     },
     newSlideshow() {
+      this.currentSlideIndex = 0;
       this.clearLoadedImages();
       this.preloadImages();
     },

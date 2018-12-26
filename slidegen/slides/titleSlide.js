@@ -1,4 +1,5 @@
 const randImg = require("../randImage");
+const randString = require("../randString")
 
 // const sample = {
 //   type: "Title",
@@ -25,8 +26,8 @@ const titleSlideFunctions = {
   },
   async generateFullRandomTitleSlide() {
     return await this.generateTitleSlide(
-      "TODO Make Random String",
-      "TODO Another One",
+      await randString.wikiTitle(),
+      await randString.wikiDescription(),
     )
   }
 };

@@ -1,8 +1,8 @@
-const randomChoice = require('./randomChoice')
+const randomChoice = require('../utils/randomChoice')
 
 const axios = require('axios').create({
   baseURL: 'https://reddit.com/',
-  timeout: 2000,
+  timeout: 3000,
 })
 
 const redditFunctions = {

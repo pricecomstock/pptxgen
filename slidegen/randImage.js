@@ -1,4 +1,5 @@
-var reddit = require('./reddit')
+var reddit = require('./sources/reddit')
+const wikipedia = require('./sources/wikipedia')
 
 const imageFunctions = {
   async landscape() {
@@ -27,6 +28,16 @@ const imageFunctions = {
       "wordcloud",
       "redactedcharts"
     ])
+  },
+  async wiki() {
+    let imageUrl = null;
+
+    while (!imageUrl) {
+      let article = await wikipedia.getRandomWikipediaArticle();
+      imageUrl = article.originalimage.source;
+    }
+    
+    return imageUrl
   }
 };
 
