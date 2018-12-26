@@ -53,7 +53,7 @@ export default {
     },
     loadSlides() {
       axios.get("/slides").then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         this.slides = res.data.slides;
       });
     }

@@ -2,12 +2,14 @@
 const titleGen = require("./slides/titleSlide");
 
 // function generateSlideshow(length, title, subtitle) {
-function generateSlideshow() {
+async function generateSlideshow() {
   //   return testSlides;
-  let emptySlides = Array(4).fill(0);
-  return emptySlides.map(() => {
+  let emptySlides = Array(2).fill(0);
+  let slidePromises = emptySlides.map(() => {
     return titleGen.generateTitleSlide("Dogs", "Price Comstock");
   });
+
+  return await Promise.all(slidePromises)
 }
 
 module.exports.generateSlideshow = generateSlideshow;

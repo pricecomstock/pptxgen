@@ -10,13 +10,13 @@ const randImg = require("../randImage");
 // };
 
 const titleSlideFunctions = {
-  generateTitleSlide(title, subtitle) {
+  async generateTitleSlide(title, subtitle) {
     return {
       type: "Title",
       options: {
         title,
         subtitle,
-        imageUrl: randImg.landscape()
+        imageUrl: await randImg.landscape()
       }
     };
   }
