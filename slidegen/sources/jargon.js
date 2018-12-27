@@ -9,4 +9,12 @@ function generateJargonPhrase() {
   return `${randomChoice(adverbs)} ${randomChoice(verbs)} ${randomChoice(adjectives)} ${randomChoice(nouns)}`
 }
 
+function generateShortJargonPhrase() {
+  if (Math.random() < 0.5) {
+    return randomChoice(adjectives) + " " + randomChoice(nouns)
+  } else {
+    return randomChoice(adverbs) + " " + randomChoice(verbs)
+  }
+}
+
 module.exports.generateJargonPhrase = generateJargonPhrase

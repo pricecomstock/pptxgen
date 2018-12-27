@@ -1,6 +1,6 @@
 <template>
   <div class="slide">
-    <div class="pres-title slide-title has-text-left" :style="{'max-width':slideOptions.maxWidth}">
+    <div class="pres-title slide-title has-text-left">
       {{slideOptions.title}}
     </div>
     <div class="has-text-left" :style="{'max-width':slideOptions.maxWidth}">
@@ -65,9 +65,10 @@ export default {
           right: img.position.right || null, // hasOwnProperty("right") ? img.position.right : null,
           bottom: img.position.bottom || null, // hasOwnProperty("bottom") ? img.position.bottom : null,
           left: img.position.left || null, // hasOwnProperty("left") ? img.position.left : null,
-          width: img.width || "30%",
+          width: img.width || "auto",
           height: img.height || "auto",
-          "max-height": img.maxHeight || "90%"
+          "max-height": img.maxHeight || "65%",
+          "max-width": img.maxWidth || "50%"
         };
       });
     }
@@ -98,8 +99,8 @@ export default {
 }
 
 .bullet-plain {
-  margin-left: 6%;
-  margin-right: 6%;
+  margin-left: 14%;
+  margin-right: 4%;
 
   li {
     margin-bottom: 0.3em;

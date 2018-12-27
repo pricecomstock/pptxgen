@@ -28,6 +28,12 @@ const stringFunctions = {
     let article = await wikipedia.getRandomWikipediaArticle()
     return article.extract;
   },
+  async wikiExtractExcerpt() {
+    // Gets one sentence from an extract
+    let article = await wikipedia.getRandomWikipediaArticle()
+    let extract = article.extract;
+    return randomChoice(extract.split(".")) + "."
+  },
   async wikiDescription() {
     let article = await wikipedia.getRandomWikipediaArticle()
     return article.description;
@@ -44,7 +50,7 @@ const stringFunctions = {
   quote() {
     return randomChoice(quotes).quote
   },
-  name() {
+  realName() {
     return randomChoice(quotes).author
   }
 }

@@ -12,7 +12,7 @@ const bodySlideFunctions = {
         title: await randString.wikiTitle(),
         bullets: [
           randString.jargon(),
-          randString.name()
+          randString.realName()
         ],
         plaintext: Math.random() < 0.5, // random true false
         maxWidth: "45%",
@@ -31,7 +31,7 @@ const bodySlideFunctions = {
   },
   async generateAboutMeSlide() {
     const minBullets = 2;
-    const maxBullets = 4;
+    const maxBullets = 3;
     const bulletCount = randomInt(minBullets, maxBullets);
     let bullets = []
     for (let i = 0; i < bulletCount; i++) {
@@ -77,7 +77,7 @@ const bodySlideFunctions = {
     return {
       type: "Bullets",
       options: {
-        title: "Our Strategy",
+        title: randomChoice(stringLists.strategyTitles),
         bullets: [
           randString.jargon(),
           randString.jargon(),
