@@ -1,4 +1,4 @@
-const randomChoice = require('../utils/randomChoice')
+const randomChoice = require('../utils/randUtils').randomChoice
 
 const axios = require('axios').create({
   baseURL: 'https://reddit.com/',

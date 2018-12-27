@@ -1,4 +1,4 @@
-const randomChoice = require('./utils/randomChoice')
+const randomChoice = require('./utils/randUtils').randomChoice
 const wikipedia = require('./sources/wikipedia')
 const jargon = require('./sources/jargon')
 const fs = require('fs');

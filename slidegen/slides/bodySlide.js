@@ -1,7 +1,7 @@
 const randImg = require("../randImage");
 const randString = require("../randString");
-const randomChoice = require('../utils/randomChoice')
-const randomInt = require('../utils/randomInt')
+const randomChoice = require('../utils/randUtils').randomChoice
+const randomInt = require('../utils/randUtils').randomInt
 const stringLists = require('../sources/stringLists')
 
 const bodySlideFunctions = {

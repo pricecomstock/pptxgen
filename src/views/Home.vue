@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <hr>
+    <hr v-if="slideshowLoaded">
     <div v-if="slideshowLoaded">
       <button class="button is-outlined is-primary" @click="fullScreenPresentation()">
         <span class="icon is-medium">
