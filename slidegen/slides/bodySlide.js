@@ -12,7 +12,7 @@ const bodySlideFunctions = {
         title: await randString.wikiTitle(),
         bullets: [
           randString.jargon(),
-          randString.realName()
+          randString.quoteAuthor()
         ],
         plaintext: Math.random() < 0.5, // random true false
         maxWidth: "45%",

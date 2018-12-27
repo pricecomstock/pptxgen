@@ -5,60 +5,96 @@ const axios = require('axios').create({
   timeout: 3000,
 })
 
-const redditFunctions = {
-  async randomUrlFromSubreddit(subreddit, testRE) {
-    let url = ""
-    let response = {}
-    while (! testRE.test(url)) {// not an image url, retry
-      try {
-        response = await axios.get(`r/${subreddit}/random.json`)
-        
-        let data = response.data
-        if (Array.isArray(response.data)) {
-          data = data[0]
-        }
-
-        // console.log(data)
-
-        // Find the children with a valid image url
-        const validChildren = data.data.children.filter( child => {
-          return testRE.test(child.data.url)
-        })
-
-        if (validChildren && validChildren.length !== 0) {
-          let validChild = randomChoice(validChildren)
-          try {
-            url = validChild.data.url;
-          } catch(err) {
-            console.error("Error getting data from validChildren", validChildren)
-          }
-          // console.log(url)
-        }
-
-      } catch(err) {
-        console.error("Loading from reddit failed", err)
-        // console.log(response)
-        url = ""
+async function randomUrlFromSubreddit(subreddit, testRE) {
+  let url = ""
+  let response = {}
+  while (! testRE.test(url)) {// not an image url, retry
+    try {
+      response = await axios.get(`r/${subreddit}/random.json`)
+      
+      let data = response.data
+      if (Array.isArray(response.data)) {
+        data = data[0]
       }
+
+      // Find the children with a valid image url
+      const validChildren = data.data.children.filter( child => {
+        return testRE.test(child.data.url)
+      })
+
+      if (validChildren && validChildren.length !== 0) {
+        let validChild = randomChoice(validChildren)
+        try {
+          url = validChild.data.url;
+        } catch(err) {
+          console.error("Error getting data from validChildren", validChildren)
+        }
+        // console.log(url)
+      }
+
+    } catch(err) {
+      console.error("Loading from reddit failed", err)
+      // console.log(response)
+      url = ""
     }
-    return url
-  },
-  async randomImageFromSubreddit(subreddit) {
-    const validImageUrlRE = /\.(jpg|png)$/;
-    return this.randomUrlFromSubreddit(subreddit, validImageUrlRE)
-  },
-  async randomImageOrGifFromSubreddit(subreddit) {
-    const validImageUrlRE = /\.(jpg|png|gif)$/;
-    return this.randomUrlFromSubreddit(subreddit, validImageUrlRE)
-  },
-  async randomImageFromMultireddit(subredditList) {
-    return this.randomImageFromSubreddit(randomChoice(subredditList))
-  },
-  async randomImageOrGifFromMultireddit(subredditList) {
-    return this.randomImageOrGifFromSubreddit(randomChoice(subredditList))
   }
+  return url
+}
+
+async function randomTitleFromSubreddit(subreddit) {
+  let title = ""
+  let response = {}
+  const tagMatchRe = /[\[\(].+[\]\)]/gi
+  while (title == "") {
+    try {
+      response = await axios.get(`r/${subreddit}/random.json`)
+      
+      let data = response.data
+      if (Array.isArray(response.data)) {
+        data = data[0]
+      }
+
+      title = randomChoice(data.data.children).data.title
+    } catch (err) {
+      console.error(err)
+    }
+
+    let title = title.replace(tagMatchRe, "")
+    let title = title.trim()
+  }
+  return title
+}
+
+async function randomImageFromSubreddit(subreddit) {
+  const validImageUrlRE = /\.(jpg|png)$/;
+  return this.randomUrlFromSubreddit(subreddit, validImageUrlRE)
+}
+
+async function randomImageOrGifFromSubreddit(subreddit) {
+  const validImageUrlRE = /\.(jpg|png|gif)$/;
+  return this.randomUrlFromSubreddit(subreddit, validImageUrlRE)
+}
+
+async function randomImageFromMultireddit(subredditList) {
+  return this.randomImageFromSubreddit(randomChoice(subredditList))
+}
+
+async function randomImageOrGifFromMultireddit(subredditList) {
+  return this.randomImageOrGifFromSubreddit(randomChoice(subredditList))
+}
+
+async function randomTitleFromMultireddit(subredditList) {
+  return this.randomTitleFromSubreddit(randomChoice(subredditList))
 }
 
 
 
-module.exports = redditFunctions;
+module.exports = {
+  randomUrlFromSubreddit,
+  randomTitleFromSubreddit,
+  randomImageFromSubreddit,
+  randomImageOrGifFromSubreddit,
+  randomImageFromMultireddit,
+  randomImageOrGifFromMultireddit,
+  randomTitleFromMultireddit
+};
