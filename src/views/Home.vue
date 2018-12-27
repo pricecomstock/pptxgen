@@ -18,16 +18,16 @@
         <div class="box" v-if="customize">
           <div class="field">
             <div class="control">
-              <label class="label is-large">I am</label>
+              <label class="label is-large">Presenter's Name</label>
               <input type="text" v-model="presenter" class="input is-large" placeholder="An Expert">
             </div>
           </div>
-          <div class="field">
+          <!-- <div class="field">
             <div class="control">
               <label class="label is-large">And I need slides on</label>
               <input type="text" v-model="topic" class="input is-large" placeholder="A Topic">
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@ export default {
     loadSlides() {
       this.slideshowLoading = true;
 
-      axios.get(`/slides?title=${this.topic}&subtitle=${"by " + this.presenter}`).then(res => {
+      axios.get(`/slides?presenter=${this.presenter}`).then(res => {
         // console.log(res.data);
         this.slides = res.data.slides;
         this.slideshowLoaded = true;

@@ -2,7 +2,7 @@ const randomChoice = require('../utils/randUtils').randomChoice
 
 const axios = require('axios').create({
   baseURL: 'https://reddit.com/',
-  timeout: 3000,
+  timeout: 5000,
 })
 
 async function randomUrlFromSubreddit(subreddit, testRE) {
@@ -33,7 +33,7 @@ async function randomUrlFromSubreddit(subreddit, testRE) {
       }
 
     } catch(err) {
-      console.error("Loading from reddit failed", err)
+      console.error("Loading from reddit failed", err.message)
       // console.log(response)
       url = ""
     }
@@ -44,7 +44,7 @@ async function randomUrlFromSubreddit(subreddit, testRE) {
 async function randomTitleFromSubreddit(subreddit) {
   let title = ""
   let response = {}
-  const tagMatchRe = /[\[\(].+[\]\)]/gi
+  // const tagMatchRe = /[\[\(].+[\]\)]/gi
   while (title == "") {
     try {
       response = await axios.get(`r/${subreddit}/random.json`)
@@ -56,11 +56,11 @@ async function randomTitleFromSubreddit(subreddit) {
 
       title = randomChoice(data.data.children).data.title
     } catch (err) {
-      console.error(err)
+      console.error("error getting subreddit title", err.msg)
     }
 
-    let title = title.replace(tagMatchRe, "")
-    let title = title.trim()
+    // title = title.replace(tagMatchRe, "")
+    title = title.trim()
   }
   return title
 }

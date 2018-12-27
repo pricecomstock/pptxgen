@@ -15,11 +15,10 @@ router.get("/", function(req, res) {
 //-----//
 router.get("/slides", (req, res) => {
   // let slideCount = req.query.count;
-  let title = req.query.title;
-  let subtitle = req.query.subtitle;
+  let presenter = req.query.presenter || '';
   // console.log(req.query)
   // console.log("Generating Title Slide with", title, subtitle)
-  slidegen.generateSlideshow(title, subtitle).then(slideshow => {
+  slidegen.generateSlideshow(presenter).then(slideshow => {
     // console.log(slideshow);
     res.json({
       message: "Here are some slides",

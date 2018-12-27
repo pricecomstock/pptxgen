@@ -17,4 +17,7 @@ function generateShortJargonPhrase() {
   }
 }
 
-module.exports.generateJargonPhrase = generateJargonPhrase
+module.exports = {
+  generateJargonPhrase,
+  generateShortJargonPhrase
+}

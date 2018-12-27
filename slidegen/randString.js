@@ -6,6 +6,12 @@ const fs = require('fs');
 const csvParse = require('csv-parse/lib/sync')
 const stringLists = require('./sources/stringLists')
 
+function titleCase(s) {
+  return s.replace(/\w*/g, (txt) => {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+
 var books = []
 fs.readFile('slidegen/sources/txt/books.csv', 'utf8', (err, data) => {
   if (err) throw err;
@@ -25,12 +31,11 @@ var jeopardy = []
 fs.readFile('slidegen/sources/txt/jeopardy.csv', 'utf8', (err, data) => {
   if (err) throw err;
   jeopardy = csvParse(data, {
-    columns: true,
-    cast: true
+    columns: true
   })
   .map( record => {
     return {
-        category: record.category,
+        category: titleCase(record.category),
         question: record.question,
         answer: record.answer
       }
@@ -66,8 +71,10 @@ async function wikiExtract() {
 async function wikiExtractExcerpt() {
   // Gets one sentence from an extract
   let article = await wikipedia.getRandomWikipediaArticle()
-  let extract = article.extract;
-  return randomChoice(extract.split(".")) + "."
+  let extractSentences = article.extract.split(".").filter(sentence => {
+    return !(sentence.trim() == "")
+  })
+  return randomChoice(extractSentences) + "."
 }
 
 async function wikiDescription() {
@@ -187,17 +194,15 @@ async function compositePhrase() {
 
   if (choice <= 0.25) {
     return jeopardyQuestion();
-  } else if (choice <= 0.5) {
-    return await wikiDescription();
   } else if (choice <= 0.7) {
     return quote();
   } else if (choice <= 0.77) {
     return jargon();
-  } else if (choice <= 0.85) {
+  } else if (choice <= 0.8) {
     return shortJargon();
   } else {
     const redditChoice = Math.random();
-    if (redditChoice <= 0.5) {
+    if (redditChoice <= 0.4) {
       return await redditAdvice();
     } else if (redditChoice <= 0.8) {
       return await redditStrange();
@@ -210,8 +215,8 @@ async function compositePhrase() {
 async function compositeTopic() {
   const choice = Math.random();
 
-  if (choice <= 0.4) {
-    return wikiTitle();
+  if (choice <= 0.5) {
+    return await wikiTitle();
   } else if (choice <= 0.7) {
     return jeopardyAnswer();
   } else if (choice <= 0.85) {
@@ -221,6 +226,50 @@ async function compositeTopic() {
   }
 }
 
+async function compositeProfound() {
+  const choice = Math.random();
+
+  if (choice <= 0.6) {
+    return await compositeQuestion();
+  } else if (choice <= 0.85) {
+    return quote();
+  } else if (choice <= 0.95) {
+    return await redditPhrases();
+  } else {
+    return await redditStrange();
+  }
+}
+
+async function compositeHuman() {
+  const choice = Math.random();
+
+  if (choice <= 0.5) {
+    return quoteAuthor();
+  } else {
+    return bookAuthor();
+  }
+}
+
+async function compositeBullet() {
+  const choice = Math.random();
+
+  if (choice <= 0.8) {
+    return await compositePhrase();
+  } else if (choice <= 0.95) {
+    return await compositeQuestion();
+  } else {
+    return await compositeTopic();
+  }
+}
+
+// setTimeout(async () => {
+//   console.debug("Composite Bullet:", await compositeBullet())
+//   console.debug("Composite Topic:", await compositeTopic())
+//   console.debug("Composite Human:", await compositeHuman())
+//   console.debug("Composite Phrase:", await compositePhrase())
+//   console.debug("Composite Question:", await compositeQuestion())
+// }, 3000)
+
 module.exports = {
   wikiTitle,
   wikiExtract,
@@ -228,6 +277,7 @@ module.exports = {
   wikiDescription,
   wikiAll,
   jargon,
+  shortJargon,
   quoteAndAuthor,
   quote,
   quoteAuthor,
@@ -238,5 +288,15 @@ module.exports = {
   jeopardyCategory,
   redditQuestion,
   getToKnowQuestion,
-  philisophicalQuestions
+  philisophicalQuestion,
+  compositeQuestion,
+  compositePhrase,
+  compositeTopic,
+  redditNoContext,
+  redditStrange,
+  redditAdvice,
+  redditPhrases,
+  compositeHuman,
+  compositeBullet,
+  compositeProfound
 }

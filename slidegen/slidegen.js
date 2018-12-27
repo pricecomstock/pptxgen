@@ -22,18 +22,14 @@ const weightedBodySlideGenFunctions = [
   },
   {
     generator: bodyGen.generateQuoteHalfImage,
-    weight: 8
+    weight: 6
   },
   {
     generator: bodyGen.generateExtractHalfImage,
-    weight: 8
+    weight: 2
   },
   {
     generator: bodyGen.generateStrategySlide,
-    weight: 8
-  },
-  {
-    generator: bodyGen.generateAboutMeSlide,
     weight: 8
   }
 ]
@@ -70,9 +66,9 @@ function getBodySlideGenerators(count) {
 }
 
 // function generateSlideshow(length, title, subtitle) {
-async function generateSlideshow(title, subtitle) {
-  const slideCount = 12;
-
+async function generateSlideshow(presenter) {
+  const desiredSlideCount = 12;
+  let slideCount = 0;
   
   // let slideGenerators = []
   // These are function references, not invocations
@@ -84,19 +80,32 @@ async function generateSlideshow(title, subtitle) {
   // let slidePromises = slideGenerators.map( generator => {
     //   return generator() // invoke to get a promise
     // })
-    
   let slidePromises = []
-
-  if (title != '' && subtitle != '') { // both exist
-    slidePromises.push(titleGen.generateTitleSlide(title, subtitle))
+  
+  function addBodySlide() {
+    slidePromises.push(getRandomBodySlideGenFunction()())
+    slideCount++;
+  }
+    
+  // TITLE SLIDE
+  if (presenter != '') { // both exist
+    slidePromises.push(titleGen.generateTitleSlideForPresenter(presenter))
   } else {
     slidePromises.push(titleGen.generateFullRandomTitleSlide())
   }
+  slideCount++;
 
-  for (let i = 0; i < 8; i++) {
-    slidePromises.push(getRandomBodySlideGenFunction()())
+  // ABOUT ME SLIDE
+  slidePromises.push(bodyGen.generateAboutMeSlide())
+  slideCount++;
+  
+  // BODY SLIDES
+  while (slideCount < desiredSlideCount - 1) {
+    addBodySlide()
   }
-  slidePromises.push(titleGen.generateFullRandomTitleSlide())
+
+  slidePromises.push(titleGen.generateEndSlide())
+  slideCount++;
 
   return await Promise.all(slidePromises)
 }

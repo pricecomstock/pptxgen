@@ -1,20 +1,20 @@
 <template>
   <div class="slide">
-    <div class="pres-title slide-title has-text-left">
+    <div class="pres-title slide-title has-text-left" :style="titleStyles">
       {{slideOptions.title}}
     </div>
-    <div class="has-text-left" :style="{'max-width':slideOptions.maxWidth}">
-      <ul v-if="!slideOptions.ordered && !slideOptions.plaintext" class="bullet-bullets pres-body">
+    <div class="has-text-left">
+      <ul v-if="!slideOptions.ordered && !slideOptions.plaintext" class="bullet-bullets pres-body" :style="bulletStyles">
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
       </ul>
-      <ol v-if="slideOptions.ordered" class="bullet-numbers pres-body">
+      <ol v-if="slideOptions.ordered" class="bullet-numbers pres-body" :style="bulletStyles">
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
       </ol>
-      <ul v-if="slideOptions.plaintext" class="bullet-plain pres-body">
+      <ul v-if="slideOptions.plaintext" class="bullet-plain pres-body" :style="bulletStyles">
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import scale from "../mixins/scale"
 export default {
   props: {
     slideOptions: {
@@ -56,6 +57,7 @@ export default {
       }
     }
   },
+  mixins: [scale],
   computed: {
     imageStyles() {
       return this.slideOptions.contentImages.map(img => {
@@ -67,10 +69,28 @@ export default {
           left: img.position.left || null, // hasOwnProperty("left") ? img.position.left : null,
           width: img.width || "auto",
           height: img.height || "auto",
-          "max-height": img.maxHeight || "65%",
+          "max-height": img.maxHeight || "75%",
           "max-width": img.maxWidth || "50%"
         };
       });
+    },
+    bulletStyles() {
+      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05)
+      return {
+        "font-size": `${1+fontSizeModifier}vw`,
+        'max-width': this.slideOptions.maxWidth
+      }
+    },
+    titleStyles() {
+      let fontSizeModifier = this.scale(this.slideOptions.title.length, 0, 50, 0.5, 0)
+      return {
+        "font-size": `${4+fontSizeModifier}vw`
+      }
+    },
+    bulletCharCount() {
+      return this.slideOptions.bullets.reduce( (accumulator, currentValue) => {
+        return accumulator + currentValue.length;
+      }, 0)
     }
   }
 };
@@ -78,8 +98,8 @@ export default {
 
 <style lang="scss">
 .bullet-bullets {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 8%;
+  margin-right: 8%;
   margin-top: 0;
   list-style: disc;
 
@@ -99,7 +119,7 @@ export default {
 }
 
 .bullet-plain {
-  margin-left: 14%;
+  margin-left: 6%;
   margin-right: 4%;
 
   li {
