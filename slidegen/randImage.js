@@ -6,6 +6,24 @@ const imageFunctions = {
     let url = await reddit.randomImageFromSubreddit("earthporn")
     return url
   },
+  async background() {
+    return await reddit.randomImageFromMultireddit([
+      "earthporn",
+      "botanicalporn",
+      "waterporn",
+      "seaporn",
+      "skyporn",
+      "fireporn",
+      "winterporn",
+      "desertporn",
+      "autumnporn",
+      "weatherporn",
+      "bridgeporn",
+      "cityporn",
+      "ruralporn",
+      "spaceporn"
+    ])
+  },
   async animal() {
     return await reddit.randomImageFromMultireddit([
       "aww",
@@ -27,6 +45,11 @@ const imageFunctions = {
       "mapporn",
       "wordcloud",
       "redactedcharts"
+    ])
+  },
+  async stockPhoto() {
+    return await reddit.randomImageFromSubreddit([
+      "wtfstockphotos"
     ])
   },
   async wiki() {

@@ -22,7 +22,7 @@ const titleSlideFunctions = {
     };
   },
   async generateTitleSlide(title, subtitle) {
-    return this.assembleTitleSlide(title, subtitle, await randImg.landscape());
+    return this.assembleTitleSlide(title, subtitle, await randImg.background());
   },
   async generateFullRandomTitleSlide() {
     return await this.generateTitleSlide(

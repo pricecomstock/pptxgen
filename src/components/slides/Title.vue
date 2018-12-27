@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import backgroundImage from "../mixins/backgroundImage";
 export default {
   props: {
     slideOptions: {
@@ -26,13 +27,7 @@ export default {
       }
     }
   },
-  computed: {
-    backgroundStyles() {
-      return {
-        "background-image": `url("${this.slideOptions.imageUrl}")`
-      };
-    }
-  }
+  mixins: [backgroundImage]
 };
 </script>
 

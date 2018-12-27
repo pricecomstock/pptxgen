@@ -1,7 +1,7 @@
 <template>
   <div class="columns is-gapless center-parent">
     <div v-if="slideOptions.imageLeft" class="column is-half fill-img-container half-image-image-container">
-      <img :src="slideOptions.image" alt="uh there should be an image here sorry">
+      <img :src="slideOptions.imageUrl" alt="uh there should be an image here sorry">
     </div>
     <div class="column is-half half-image-text-container">
       <div class="container is-fluid center-parent">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-if="!slideOptions.imageLeft" class="column is-half fill-img-container half-image-image-container">
-      <img :src="slideOptions.image" alt="uh there should be an image here sorry">
+      <img :src="slideOptions.imageUrl" alt="uh there should be an image here sorry">
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
       default() {
         return {
           title: "This is a title slide that's pretty long!",
-          image: "assets/otie.jpg",
+          imageUrl: "assets/otie.jpg",
           imgLeft: false
         };
       }
@@ -39,13 +39,13 @@ export default {
 <style lang="scss">
 .half-image-title {
   width: 100%;
-  font-size: 4vw;
+  font-size: 2vw;
   display: block;
 }
 
 .half-image-subtitle {
   width: 100%;
-  font-size: 2vw;
+  font-size: 1.5vw;
   display: block;
 }
 

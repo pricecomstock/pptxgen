@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import backgroundImage from "../mixins/backgroundImage";
 export default {
   props: {
     slideOptions: {
@@ -61,13 +62,9 @@ export default {
         "half-numbered": this.slideOptions.ordered,
         "half-plain": this.slideOptions.plaintext
       };
-    },
-    backgroundStyles() {
-      return {
-        "background-image": `url("${this.slideOptions.image}")`
-      };
     }
-  }
+  },
+  mixins: [backgroundImage]
 };
 </script>
 

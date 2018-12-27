@@ -3,16 +3,16 @@
     <div class="columns is-centered">
       <div class="column is-one-third">
         <div class="buttons has-addons is-centered">
-          <a class="button is-outlined is-large is-rounded" @click="customize=!customize">
-            <span class="icon is-large">
-              <i class="fas fa-cog fa-lg"></i>
-            </span>
-          </a>
           <a class="button is-success is-large is-rounded" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
             <span class="icon is-medium">
               <i class="fas fa-comment-alt"></i>
             </span>
             <span>Present Now!</span>
+          </a>
+          <a class="button is-outlined is-large is-rounded" @click="customize=!customize">
+            <span class="icon is-large">
+              <i class="fas fa-cog fa-lg"></i>
+            </span>
           </a>
         </div>
         <div class="box" v-if="customize">

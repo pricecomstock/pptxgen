@@ -9,7 +9,27 @@ const weightedBodySlideGenFunctions = [
   //   weight: 8
   // },
   {
+    generator: bodyGen.generateStockPhotoSlide,
+    weight: 8
+  },
+  {
     generator: bodyGen.generateBodySlideWithGraph,
+    weight: 8
+  },
+  {
+    generator: bodyGen.generateWikiImageSlide,
+    weight: 8
+  },
+  {
+    generator: bodyGen.generateQuoteHalfImage,
+    weight: 8
+  },
+  {
+    generator: bodyGen.generateExtractHalfImage,
+    weight: 8
+  },
+  {
+    generator: bodyGen.generateStrategySlide,
     weight: 8
   },
   {
@@ -51,6 +71,7 @@ function getBodySlideGenerators(count) {
 
 // function generateSlideshow(length, title, subtitle) {
 async function generateSlideshow(title, subtitle) {
+  const slideCount = 12;
 
   
   // let slideGenerators = []
@@ -64,14 +85,15 @@ async function generateSlideshow(title, subtitle) {
     //   return generator() // invoke to get a promise
     // })
     
-    let slidePromises = []
+  let slidePromises = []
 
-    if (title != '' && subtitle != '') { // both exist
-      slidePromises.push(titleGen.generateTitleSlide(title, subtitle))
-    } else {
-      slidePromises.push(titleGen.generateFullRandomTitleSlide())
-    }
-  for (let i = 0; i < 6; i++) {
+  if (title != '' && subtitle != '') { // both exist
+    slidePromises.push(titleGen.generateTitleSlide(title, subtitle))
+  } else {
+    slidePromises.push(titleGen.generateFullRandomTitleSlide())
+  }
+
+  for (let i = 0; i < 8; i++) {
     slidePromises.push(getRandomBodySlideGenFunction()())
   }
   slidePromises.push(titleGen.generateFullRandomTitleSlide())
