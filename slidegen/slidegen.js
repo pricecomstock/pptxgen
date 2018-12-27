@@ -50,8 +50,9 @@ function getBodySlideGenerators(count) {
 }
 
 // function generateSlideshow(length, title, subtitle) {
-async function generateSlideshow() {
+async function generateSlideshow(title, subtitle) {
 
+  
   // let slideGenerators = []
   // These are function references, not invocations
   // slideGenerators.push(titleGen.generateFullRandomTitleSlide)
@@ -63,8 +64,13 @@ async function generateSlideshow() {
     //   return generator() // invoke to get a promise
     // })
     
-  let slidePromises = []
-  slidePromises.push(titleGen.generateFullRandomTitleSlide())
+    let slidePromises = []
+
+    if (title != '' && subtitle != '') { // both exist
+      slidePromises.push(titleGen.generateTitleSlide(title, subtitle))
+    } else {
+      slidePromises.push(titleGen.generateFullRandomTitleSlide())
+    }
   for (let i = 0; i < 6; i++) {
     slidePromises.push(getRandomBodySlideGenFunction()())
   }

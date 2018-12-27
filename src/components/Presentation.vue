@@ -53,6 +53,7 @@ export default {
   watch: {
     slideshow() {
       this.newSlideshow();
+      this.fullscreen();
     }
   },
   methods: {
@@ -97,6 +98,9 @@ export default {
       let img = new Image();
       img.src = url;
       this.preloadedImages.push(img);
+    },
+    fullscreen() {
+      this.$emit("fullscreen")
     }
   }
   // ready() {

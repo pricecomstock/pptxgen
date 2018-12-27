@@ -15,9 +15,11 @@ router.get("/", function(req, res) {
 //-----//
 router.get("/slides", (req, res) => {
   // let slideCount = req.query.count;
-  // let title = req.query.title || 'title'; // TODO || getRandomTitle();
-  // let subtitle = req.query.subtitle || 'subtitle';
-  slidegen.generateSlideshow().then(slideshow => {
+  let title = req.query.title;
+  let subtitle = req.query.subtitle;
+  console.log(req.query)
+  console.log("Generating Title Slide with", title, subtitle)
+  slidegen.generateSlideshow(title, subtitle).then(slideshow => {
     // console.log(slideshow);
     res.json({
       message: "Here are some slides",
