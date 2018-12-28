@@ -10,15 +10,15 @@ const weightedBodySlideGenFunctions = [
   // },
   {
     generator: bodyGen.generateStockPhotoSlide,
-    weight: 8
+    weight: 6
   },
   {
     generator: bodyGen.generateBodySlideWithGraph,
-    weight: 8
+    weight: 10
   },
   {
     generator: bodyGen.generateWikiImageSlide,
-    weight: 8
+    weight: 10
   },
   {
     generator: bodyGen.generateQuoteHalfImage,
@@ -26,11 +26,19 @@ const weightedBodySlideGenFunctions = [
   },
   {
     generator: bodyGen.generateExtractHalfImage,
-    weight: 2
+    weight: 1
+  },
+  {
+    generator: bodyGen.generateHalfBulletSlide,
+    weight: 20
+  },
+  {
+    generator: bodyGen.generateWeirdThoughtSlide,
+    weight: 20
   },
   {
     generator: bodyGen.generateStrategySlide,
-    weight: 8
+    weight: 6
   }
 ]
 
