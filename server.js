@@ -23,12 +23,12 @@ app.use("/api", api);
 // Favicon
 app.get("/favicon.ico", function(req, res) {
   //   console.log("favicon GET");
-  res.sendFile("/favicon.ico");
+  res.sendFile(__dirname + "/favicon.ico");
 });
 
 // Everything else should fall through to vue-router
 app.get("/*", function(req, res) {
-  res.sendFile("/index.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 var port = process.env.PORT || 5000;

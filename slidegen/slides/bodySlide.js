@@ -44,7 +44,7 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
 async function generateBodySlideWithGraph() {
   return assembleStandardSlide(
       await randString.compositeTopic(),
-      await getBullets(randomInt(1, 2)),
+      await getBullets(randomInt(2, 3)),
       await randImg.graph()
     );
 }
@@ -52,7 +52,7 @@ async function generateBodySlideWithGraph() {
 async function generateWikiImageSlide() {
   return assembleStandardSlide(
     await randString.wikiTitle(),
-    await getBullets(randomInt(1, 2)),
+    await getBullets(randomInt(2, 3)),
     await randImg.wiki()
   );
 }
@@ -70,7 +70,7 @@ async function generateStrategySlide() {
 async function generateStockPhotoSlide() {
   return assembleStandardSlide(
     await randString.compositeTopic(),
-    await getBullets(randomInt(1,2)),
+    await getBullets(randomInt(2,3)),
     await randImg.stockPhoto()
   );
 }
