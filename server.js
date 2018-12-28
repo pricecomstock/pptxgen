@@ -3,7 +3,7 @@ var api = require("./router.js").router;
 var serveStatic = require("serve-static");
 
 var app = express();
-app.use(serveStatic(__dirname + "/public"));
+app.use(serveStatic(__dirname + "/dist"));
 
 // This is for development mostly
 app.use(function(req, res, next) {
@@ -23,12 +23,12 @@ app.use("/api", api);
 // Favicon
 app.get("/favicon.ico", function(req, res) {
   //   console.log("favicon GET");
-  res.sendFile(__dirname + "/favicon.ico");
+  res.sendFile("/favicon.ico");
 });
 
 // Everything else should fall through to vue-router
 app.get("/*", function(req, res) {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile("/index.html");
 });
 
 var port = process.env.PORT || 5000;
