@@ -23,17 +23,27 @@ import Title from "@/components/slides/Title.vue";
 import Bullets from "@/components/slides/Bullets.vue";
 import HalfImageTitle from "@/components/slides/HalfImageTitle.vue";
 import HalfImageBullets from "@/components/slides/HalfImageBullets.vue";
+
 export default {
   props: {
     slideshow: {
       type: Array,
       required: true
     }
+    // theme: {
+    //   type: Object,
+    //   required: false,
+    //   default: {
+    //     color: "#222",
+    //     texture: 0
+    //   }
+    // }
   },
   data() {
     return {
       currentSlideIndex: 0,
-      preloadedImages: []
+      preloadedImages: [],
+      baseUrl: process.env.BASE_URL
     };
   },
   components: {

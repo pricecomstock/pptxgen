@@ -86,11 +86,6 @@ export default {
       return {
         "font-size": `${4+fontSizeModifier}vw`
       }
-    },
-    bulletCharCount() {
-      return this.slideOptions.bullets.reduce( (accumulator, currentValue) => {
-        return accumulator + currentValue.length;
-      }, 0)
     }
   }
 };

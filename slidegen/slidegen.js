@@ -18,7 +18,7 @@ const weightedBodySlideGenFunctions = [
   },
   {
     generator: bodyGen.generateWikiImageSlide,
-    weight: 10
+    weight: 12
   },
   {
     generator: bodyGen.generateQuoteHalfImage,
@@ -30,11 +30,11 @@ const weightedBodySlideGenFunctions = [
   },
   {
     generator: bodyGen.generateHalfBulletSlide,
-    weight: 20
+    weight: 5
   },
   {
     generator: bodyGen.generateWeirdThoughtSlide,
-    weight: 20
+    weight: 3
   },
   {
     generator: bodyGen.generateStrategySlide,

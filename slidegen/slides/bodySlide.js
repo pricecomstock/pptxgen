@@ -45,7 +45,7 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
   const imageLeft = il || Math.random() < 0.2
   const plaintext = pt || Math.random() < 0.2
   const ordered = ol || Math.random() < 0.3
-  return {
+  let slide = {
     type: "HalfImageBullets",
     options: {
       title: title,
@@ -56,6 +56,8 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
       ordered: ordered
     }
   }
+
+  return slide
 }
 
 async function generateBodySlideWithGraph() {
@@ -131,7 +133,7 @@ async function generateExtractHalfImage() {
 }
 
 async function generateHalfBulletSlide() {
-  assembleHalfImageBulletSlide(
+  return assembleHalfImageBulletSlide(
     await randString.compositeTopic(),
     await getBullets(randomInt(2,3)),
     await randImg.background()
@@ -139,9 +141,9 @@ async function generateHalfBulletSlide() {
 }
 
 async function generateWeirdThoughtSlide() {
-  assembleHalfImageBulletSlide(
+  return assembleHalfImageBulletSlide(
     await randString.compositeQuestion(),
-    [await randString.redditPhrases()],
+    await getBullets(randomInt(1,2)),
     await randImg.background(),
     true,
     false,

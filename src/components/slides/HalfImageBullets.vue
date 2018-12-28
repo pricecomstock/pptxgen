@@ -2,7 +2,7 @@
   <div class="columns is-gapless center-parent">
     <div v-if="slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo" :style="[backgroundStyles]">
       <div class="container is-fluid center-parent">
-        <p class="half-image-title">
+        <p class="half-image-title" :style="titleStyles">
           {{ slideOptions.title }}
         </p>
         <p class="pres-body">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="column is-half pres-body">
-      <ul v-if="!slideOptions.ordered" class="has-text-left" :class="listClasses">
+      <ul v-if="!slideOptions.ordered" class="has-text-left" :class="listClasses" :style="bulletStyles">
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
@@ -25,7 +25,7 @@
     <div v-if="!slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo" :style="[backgroundStyles]">
       <div class="container is-fluid center-parent">
         <div>
-          <p class="half-image-title">
+          <p class="half-image-title" :style="titleStyles">
             {{ slideOptions.title }}
           </p>
           <p class="half-image-subtitle">
@@ -39,6 +39,7 @@
 
 <script>
 import backgroundImage from "../mixins/backgroundImage";
+import scale from "../mixins/scale"
 export default {
   props: {
     slideOptions: {
@@ -62,9 +63,21 @@ export default {
         "half-numbered": this.slideOptions.ordered,
         "half-plain": this.slideOptions.plaintext
       };
+    },
+    bulletStyles() {
+      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 250, 2, 1.05)
+      return {
+        "font-size": `${1+fontSizeModifier}vw`
+      }
+    },
+    titleStyles() {
+      let fontSizeModifier = this.scale(this.slideOptions.title.length, 0, 50, 0.5, 0)
+      return {
+        "font-size": `${4+fontSizeModifier}vw`
+      }
     }
   },
-  mixins: [backgroundImage]
+  mixins: [backgroundImage, scale],
 };
 </script>
 
