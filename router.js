@@ -14,9 +14,14 @@ router.get("/", function(req, res) {
 // GET //
 //-----//
 router.get("/slides", (req, res) => {
+  console.log(req.query)
   let slideCount = req.query.count || 10;
   let presenter = req.query.presenter || "";
-  let questions = req.query.questions || false;
+
+  let questions = false;
+  if (req.query.questions) {
+    questions = req.query.questions == "true"
+  }
   // console.log(req.query)
   // console.log("Generating Title Slide with", title, subtitle)
   slidegen

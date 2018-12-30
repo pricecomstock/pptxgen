@@ -132,7 +132,7 @@ export default {
       this.slideshowLoading = true;
 
       axios
-        .get(`/slides?presenter=${this.presenter}&count=${this.numSlides}`)
+        .get(`/slides?presenter=${this.presenter}&count=${this.numSlides}&questions=${this.questionPrompt}`)
         .then(res => {
           // console.log(res.data);
           this.slides = res.data.slides;
