@@ -6,6 +6,6 @@ const backgroundImage = {
       };
     }
   }
-}
+};
 
-export default backgroundImage
+export default backgroundImage;

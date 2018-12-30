@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import scale from "../mixins/scale"
+import scale from "../mixins/scale";
 export default {
   props: {
     slideOptions: {
@@ -75,17 +75,23 @@ export default {
       });
     },
     bulletStyles() {
-      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05)
+      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05);
       return {
-        "font-size": `${1+fontSizeModifier}vw`,
-        'max-width': this.slideOptions.maxWidth
-      }
+        "font-size": `${1 + fontSizeModifier}vw`,
+        "max-width": this.slideOptions.maxWidth
+      };
     },
     titleStyles() {
-      let fontSizeModifier = this.scale(this.slideOptions.title.length, 0, 50, 0.5, 0)
+      let fontSizeModifier = this.scale(
+        this.slideOptions.title.length,
+        0,
+        50,
+        0.5,
+        0
+      );
       return {
-        "font-size": `${4+fontSizeModifier}vw`
-      }
+        "font-size": `${4 + fontSizeModifier}vw`
+      };
     }
   }
 };

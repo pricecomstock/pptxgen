@@ -74,7 +74,7 @@ function getBodySlideGenerators(count) {
 }
 
 // function generateSlideshow(length, title, subtitle) {
-async function generateSlideshow(presenter, desiredSlideCount) {
+async function generateSlideshow(presenter, desiredSlideCount, questions) {
   let currentSlideCount = 0;
   
   // let slideGenerators = []
@@ -111,7 +111,7 @@ async function generateSlideshow(presenter, desiredSlideCount) {
     addBodySlide()
   }
 
-  slidePromises.push(titleGen.generateEndSlide())
+  slidePromises.push(titleGen.generateEndSlide(questions))
   currentSlideCount++;
 
   return await Promise.all(slidePromises)

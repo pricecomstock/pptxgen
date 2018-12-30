@@ -38,12 +38,12 @@ const titleSlideFunctions = {
       "by " + presenter
     )
   },
-  async generateEndSlide() {
+  async generateEndSlide(questions) {
     return {
       type: "Title",
       options: {
         title: randomChoice(stringLists.endTitles),
-        subtitle: randomChoice(stringLists.questionPrompts),
+        subtitle: questions ? randomChoice(stringLists.questionPrompts) : "",
         imageUrl: await randImg.background()
       }
     }

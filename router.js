@@ -15,17 +15,19 @@ router.get("/", function(req, res) {
 //-----//
 router.get("/slides", (req, res) => {
   let slideCount = req.query.count || 10;
-  let presenter = req.query.presenter || '';
+  let presenter = req.query.presenter || "";
   let questions = req.query.questions || false;
   // console.log(req.query)
   // console.log("Generating Title Slide with", title, subtitle)
-  slidegen.generateSlideshow(presenter, slideCount).then(slideshow => {
-    // console.log(slideshow);
-    res.json({
-      message: "Here are some slides",
-      slides: slideshow
+  slidegen
+    .generateSlideshow(presenter, slideCount, questions)
+    .then(slideshow => {
+      // console.log(slideshow);
+      res.json({
+        message: "Here are some slides",
+        slides: slideshow
+      });
     });
-  });
 });
 
 //------//

@@ -93,10 +93,10 @@ export default {
           }
         }
       ],
-      presenter: '',
+      presenter: "",
       numSlidesOptions: [6, 8, 10, 12, 14],
       numSlides: 10,
-      topic: '',
+      topic: "",
       slideshowLoaded: false,
       slideshowLoading: false,
       customize: false,
@@ -126,17 +126,19 @@ export default {
       }
     },
     fullScreenPresentation() {
-      this.fullScreenElementWithId('presentation-window');
+      this.fullScreenElementWithId("presentation-window");
     },
     loadSlides() {
       this.slideshowLoading = true;
 
-      axios.get(`/slides?presenter=${this.presenter}&count=${this.numSlides}`).then(res => {
-        // console.log(res.data);
-        this.slides = res.data.slides;
-        this.slideshowLoaded = true;
-        this.slideshowLoading = false;
-      });
+      axios
+        .get(`/slides?presenter=${this.presenter}&count=${this.numSlides}`)
+        .then(res => {
+          // console.log(res.data);
+          this.slides = res.data.slides;
+          this.slideshowLoaded = true;
+          this.slideshowLoading = false;
+        });
     }
   }
 };

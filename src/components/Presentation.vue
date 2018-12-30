@@ -110,7 +110,7 @@ export default {
       this.preloadedImages.push(img);
     },
     fullscreen() {
-      this.$emit("fullscreen")
+      this.$emit("fullscreen");
     }
   }
   // ready() {

@@ -39,7 +39,7 @@
 
 <script>
 import backgroundImage from "../mixins/backgroundImage";
-import scale from "../mixins/scale"
+import scale from "../mixins/scale";
 export default {
   props: {
     slideOptions: {
@@ -65,19 +65,25 @@ export default {
       };
     },
     bulletStyles() {
-      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 250, 2, 1.05)
+      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 250, 2, 1.05);
       return {
-        "font-size": `${1+fontSizeModifier}vw`
-      }
+        "font-size": `${1 + fontSizeModifier}vw`
+      };
     },
     titleStyles() {
-      let fontSizeModifier = this.scale(this.slideOptions.title.length, 0, 50, 0.5, 0)
+      let fontSizeModifier = this.scale(
+        this.slideOptions.title.length,
+        0,
+        50,
+        0.5,
+        0
+      );
       return {
-        "font-size": `${4+fontSizeModifier}vw`
-      }
+        "font-size": `${4 + fontSizeModifier}vw`
+      };
     }
   },
-  mixins: [backgroundImage, scale],
+  mixins: [backgroundImage, scale]
 };
 </script>
 
