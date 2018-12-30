@@ -3,7 +3,14 @@ const randString = require("../randString");
 const randomChoice = require('../utils/randUtils').randomChoice
 const randomInt = require('../utils/randUtils').randomInt
 const normInt = require('../utils/randUtils').normInt
+const getWeightedRandomFunction = require('../utils/randUtils').getWeightedRandomFunction
 const stringLists = require('../sources/stringLists')
+
+const randomNumBullets = getWeightedRandomFunction({
+  1: 45,
+  2: 53,
+  3: 2
+})
 
 async function getBullets(numBullets) {
   let bullets = []
@@ -18,7 +25,7 @@ async function getBullets(numBullets) {
 function assembleStandardSlide(title, bullets, image_url, pt, ol) {
   const plaintext = pt || Math.random < 0.2;
   const ordered = ol || false;
-  const imageWidth = randomInt(25,45)
+  const imageWidth = randomInt(35,60)
   return {
     type: "Bullets",
     options: {
@@ -63,7 +70,7 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
 async function generateBodySlideWithGraph() {
   return assembleStandardSlide(
       await randString.compositeTopic(),
-      await getBullets(randomInt(2, 3)),
+      await getBullets(randomNumBullets()),
       await randImg.graph()
     );
 }
@@ -71,7 +78,7 @@ async function generateBodySlideWithGraph() {
 async function generateWikiImageSlide() {
   return assembleStandardSlide(
     await randString.wikiTitle(),
-    await getBullets(randomInt(2, 3)),
+    await getBullets(randomNumBullets()),
     await randImg.wiki()
   );
 }
@@ -89,7 +96,7 @@ async function generateStrategySlide() {
 async function generateStockPhotoSlide() {
   return assembleStandardSlide(
     await randString.compositeTopic(),
-    await getBullets(randomInt(2,3)),
+    await getBullets(randomNumBullets()),
     await randImg.stockPhoto()
   );
 }
@@ -135,7 +142,7 @@ async function generateExtractHalfImage() {
 async function generateHalfBulletSlide() {
   return assembleHalfImageBulletSlide(
     await randString.compositeTopic(),
-    await getBullets(randomInt(2,3)),
+    await getBullets(randomNumBullets()),
     await randImg.background()
   )
 }
@@ -143,7 +150,7 @@ async function generateHalfBulletSlide() {
 async function generateWeirdThoughtSlide() {
   return assembleHalfImageBulletSlide(
     await randString.compositeQuestion(),
-    await getBullets(randomInt(1,2)),
+    await getBullets(randomNumBullets()),
     await randImg.background(),
     true,
     false,

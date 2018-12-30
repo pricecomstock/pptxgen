@@ -22,13 +22,47 @@ function normInt(min, max) {
   return Math.floor(min + norm() * (max - min + 1));
 }
 
+
+/* This function takes an object like
+{ 'a': 10, 'b': 40, 'c': 50 }
+and will create a function that when called, will return a random key weighted by its value.
+Easiest way is to treat the weight as a percentage
+*/
+function getWeightedRandomFunction(spec) {
+  var i, j, table=[];
+  // const totalWeight = Object.keys(spec).reduce( (prev, cur) => {
+  //   return prev + cur;
+  // });
+
+  for (i in spec) {
+    // The constant 10 below should be computed based on the
+    // weights in the spec for a correct and optimal table size.
+    // E.g. the spec {0:0.999, 1:0.001} will break this impl.
+    for (j=0; j<spec[i]; j++) {
+      table.push(i);
+    }
+  }
+
+  return function() {
+    return table[Math.floor(Math.random() * table.length)];
+  }
+}
+
+// let testSpec = {
+//   a: 5,
+//   b: 25,
+//   c: 70
+// }
+
+// let testSpecFunction = getWeightedRandomFunction(testSpec)
 // for (let i=0; i<10; i++) {
-//   console.log(normInt(20,50))
+//   console.log(testSpecFunction(20,50))
 // }
 
 module.exports = {
   randomChoice,
   randomInt,
   norm,
-  normInt
+  normInt,
+  getWeightedRandomFunction
 };
