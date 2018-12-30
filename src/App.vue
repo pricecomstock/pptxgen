@@ -13,7 +13,7 @@ import Nav from "@/components/nav/Nav.vue";
 import Footer from "@/components/nav/Footer.vue";
 
 export default {
-  name: "home",
+  name: "app",
   components: {
     pcnav: Nav,
     pcfoot: Footer

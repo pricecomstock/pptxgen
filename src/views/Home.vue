@@ -2,14 +2,14 @@
   <div class="home">
     <div class="columns is-centered">
       <div class="column is-one-third">
-        <div class="buttons has-addons is-centered">
+        <div class="buttons is-centered">
           <a class="button is-success is-large is-rounded" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
             <span class="icon is-medium">
               <i class="fas fa-comment-alt"></i>
             </span>
             <span>Present Now!</span>
           </a>
-          <a class="button is-outlined is-large is-rounded" @click="customize=!customize">
+          <a class="button is-white is-large" @click="customize=!customize">
             <span class="icon is-large">
               <i class="fas fa-cog fa-lg"></i>
             </span>
@@ -20,6 +20,34 @@
             <div class="control">
               <label class="label is-large">Presenter's Name</label>
               <input type="text" v-model="presenter" class="input is-large" placeholder="An Expert">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label is-large">Number of slides</label>
+              <div class="buttons has-addons is-centered">
+                <span
+                  v-for="(option, index) in numSlidesOptions"
+                  class="button"
+                  :class="{'is-selected': numSlides === option, 'is-success': numSlides === option}"
+                  @click="numSlides = option"
+                  :key="index">{{ option }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label is-large">Other Options</label>
+              <div class="buttons has-addons is-centered">
+                <span
+                  class="button"
+                  :class="{'is-selected': numSlides === questionPrompt, 'is-info': questionPrompt}"
+                  @click="questionPrompt = !questionPrompt">Questions</span>
+                <!-- <span
+                  class="button is-danger"
+                  :class="{'is-selected': numSlides === nsfw, 'is-outlined': !nsfw}"
+                  @click="nsfw = !nsfw">NSFW</span> -->
+              </div>
             </div>
           </div>
           <!-- <div class="field">
@@ -66,10 +94,14 @@ export default {
         }
       ],
       presenter: '',
+      numSlidesOptions: [6, 8, 10, 12, 14],
+      numSlides: 10,
       topic: '',
       slideshowLoaded: false,
       slideshowLoading: false,
-      customize: false
+      customize: false,
+      questionPrompt: false,
+      nsfw: false
     };
   },
   components: {
@@ -99,7 +131,7 @@ export default {
     loadSlides() {
       this.slideshowLoading = true;
 
-      axios.get(`/slides?presenter=${this.presenter}`).then(res => {
+      axios.get(`/slides?presenter=${this.presenter}&count=${this.numSlides}`).then(res => {
         // console.log(res.data);
         this.slides = res.data.slides;
         this.slideshowLoaded = true;

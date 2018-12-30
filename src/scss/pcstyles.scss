@@ -32,4 +32,5 @@ $family-sans-serif: "Rubik", BlinkMacSystemFont, -apple-system, "Segoe UI", "Rob
 
 // Could be optimized by importing things piecewise as detailed on
 // https://bulma.io/documentation/customize/with-webpack/
-@import "~bulma/bulma"
+@import "~bulma/bulma";
+// @import "~bulma-slider/dist/css/bulma-slider.sass";

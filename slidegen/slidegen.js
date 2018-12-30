@@ -74,9 +74,8 @@ function getBodySlideGenerators(count) {
 }
 
 // function generateSlideshow(length, title, subtitle) {
-async function generateSlideshow(presenter) {
-  const desiredSlideCount = 12;
-  let slideCount = 0;
+async function generateSlideshow(presenter, desiredSlideCount) {
+  let currentSlideCount = 0;
   
   // let slideGenerators = []
   // These are function references, not invocations
@@ -92,7 +91,7 @@ async function generateSlideshow(presenter) {
   
   function addBodySlide() {
     slidePromises.push(getRandomBodySlideGenFunction()())
-    slideCount++;
+    currentSlideCount++;
   }
     
   // TITLE SLIDE
@@ -101,19 +100,19 @@ async function generateSlideshow(presenter) {
   } else {
     slidePromises.push(titleGen.generateFullRandomTitleSlide())
   }
-  slideCount++;
+  currentSlideCount++;
 
   // ABOUT ME SLIDE
   slidePromises.push(bodyGen.generateAboutMeSlide())
-  slideCount++;
+  currentSlideCount++;
   
   // BODY SLIDES
-  while (slideCount < desiredSlideCount - 1) {
+  while (currentSlideCount < desiredSlideCount - 1) {
     addBodySlide()
   }
 
   slidePromises.push(titleGen.generateEndSlide())
-  slideCount++;
+  currentSlideCount++;
 
   return await Promise.all(slidePromises)
 }
