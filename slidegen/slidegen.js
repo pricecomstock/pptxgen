@@ -1,6 +1,8 @@
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
+const randomInt = require("./utils/randUtils").randomInt;
+const randomChoice = require("./utils/randUtils").randomChoice;
 
 const weightedBodySlideGenFunctions = [
   // {
@@ -41,6 +43,19 @@ const weightedBodySlideGenFunctions = [
     weight: 6
   }
 ]
+
+function generateTheme() {
+  const generateColor = () => {
+    return "#" + (Math.random() * 0x777777<<0).toString(16).padStart(6, '0');
+  }
+
+  return {
+    color1: generateColor(),
+    color2: generateColor(),
+    texture: randomInt(1, 41),
+    gradientType: Math.random() < 0.5 ? "linear-gradient" : "radial-gradient"
+  }
+}
 
 function getRandomBodySlideGenFunction() {
   const generators = weightedBodySlideGenFunctions.map( generator => {
@@ -114,7 +129,12 @@ async function generateSlideshow(presenter, desiredSlideCount, questions) {
   slidePromises.push(titleGen.generateEndSlide(questions))
   currentSlideCount++;
 
-  return await Promise.all(slidePromises)
+  let slideshow = {
+    slides: await Promise.all(slidePromises),
+    theme: generateTheme()
+  }
+
+  return slideshow
 }
 
 module.exports.generateSlideshow = generateSlideshow;

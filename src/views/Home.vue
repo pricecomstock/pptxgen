@@ -68,7 +68,7 @@
         <span>Fullscreen</span>
       </button>
       <div class="section columns is-centered">
-        <presentation @fullscreen="fullScreenPresentation()" id="presentation-window" :slideshow="slides"></presentation>
+        <presentation @fullscreen="fullScreenPresentation()" id="presentation-window" :slideshow="slides" :theme="theme"></presentation>
       </div>
     </div>
   </div>
@@ -101,7 +101,8 @@ export default {
       slideshowLoading: false,
       customize: false,
       questionPrompt: false,
-      nsfw: false
+      nsfw: false,
+      theme: {}
     };
   },
   components: {
@@ -132,10 +133,15 @@ export default {
       this.slideshowLoading = true;
 
       axios
-        .get(`/slides?presenter=${this.presenter}&count=${this.numSlides}&questions=${this.questionPrompt}`)
+        .get(
+          `/slides?presenter=${this.presenter}&count=${
+            this.numSlides
+          }&questions=${this.questionPrompt}`
+        )
         .then(res => {
           // console.log(res.data);
           this.slides = res.data.slides;
+          this.theme = res.data.theme;
           this.slideshowLoaded = true;
           this.slideshowLoading = false;
         });

@@ -12,7 +12,7 @@ const scale = {
         try {
           return accumulator + currentValue.length;
         } catch (err) {
-          return accumulator
+          return accumulator;
         }
       }, 0);
     }

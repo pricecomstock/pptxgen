@@ -20,7 +20,7 @@ router.get("/slides", (req, res) => {
 
   let questions = false;
   if (req.query.questions) {
-    questions = req.query.questions == "true"
+    questions = req.query.questions == "true";
   }
   // console.log(req.query)
   // console.log("Generating Title Slide with", title, subtitle)
@@ -30,7 +30,8 @@ router.get("/slides", (req, res) => {
       // console.log(slideshow);
       res.json({
         message: "Here are some slides",
-        slides: slideshow
+        slides: slideshow.slides,
+        theme: slideshow.theme
       });
     });
 });

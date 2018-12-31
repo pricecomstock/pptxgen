@@ -30,15 +30,18 @@ export default {
     slideshow: {
       type: Array,
       required: true
+    },
+    theme: {
+      type: Object,
+      required: false,
+      default() {
+        return {
+          color1: "#222",
+          color2: "#225",
+          texture: 0
+        };
+      }
     }
-    // theme: {
-    //   type: Object,
-    //   required: false,
-    //   default: {
-    //     color: "#222",
-    //     texture: 0
-    //   }
-    // }
   },
   data() {
     return {
@@ -62,9 +65,12 @@ export default {
     },
     themeStyles() {
       return {
-        'background-image': 'url("/textures/1.png"), linear-gradient(red, orange)'
-        // 'background-image': 'url("../assets/textures/1.png"), linear-gradient(red, orange);'
-      }
+        "background-image": `url("/textures/${
+          this.theme.texture
+        }.png"), repeating-linear-gradient(${this.theme.color1}, ${
+          this.theme.color2
+        })`
+      };
     }
   },
   watch: {
