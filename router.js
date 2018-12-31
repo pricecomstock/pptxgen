@@ -14,7 +14,7 @@ router.get("/", function(req, res) {
 // GET //
 //-----//
 router.get("/slides", (req, res) => {
-  console.log(req.query)
+  // console.log(req.query)
   let slideCount = req.query.count || 10;
   let presenter = req.query.presenter || "";
 

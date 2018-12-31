@@ -1,4 +1,5 @@
 const randomChoice = require('./utils/randUtils').randomChoice
+const getWeightedRandomFunction = require('./utils/randUtils').getWeightedRandomFunction
 const wikipedia = require('./sources/wikipedia')
 const reddit = require('./sources/reddit')
 const jargonCreator = require('./sources/jargon')
@@ -39,6 +40,9 @@ fs.readFile('slidegen/sources/txt/jeopardy.csv', 'utf8', (err, data) => {
         question: record.question,
         answer: record.answer
       }
+  })
+  .filter( record => {
+    return !record.question.includes("<a href") // filter out image based jeopardy questions
   })
 })
 
@@ -226,6 +230,27 @@ async function compositeTopic() {
   }
 }
 
+async function compositeTitle() {
+  const chooser = getWeightedRandomFunction({
+    "wiki": 10,
+    "book": 20,
+    "jeopardyAnswer": 50,
+    "jeopardyCategory": 20
+  })
+
+  const choice = chooser()
+
+  if (choice === "wiki") {
+    return await wikiTitle();
+  } else if (choice === "book") {
+    return bookTitle();
+  } else if (choice === "jeopardyAnswer") {
+    return jeopardyAnswer();
+  } else {
+    return jeopardyCategory();
+  }
+}
+
 async function compositeProfound() {
   const choice = Math.random();
 
@@ -298,5 +323,6 @@ module.exports = {
   redditPhrases,
   compositeHuman,
   compositeBullet,
-  compositeProfound
+  compositeProfound,
+  compositeTitle
 }

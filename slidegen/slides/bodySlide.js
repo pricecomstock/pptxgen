@@ -69,7 +69,7 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
 
 async function generateBodySlideWithGraph() {
   return assembleStandardSlide(
-      await randString.compositeTopic(),
+      await randString.compositeTitle(),
       await getBullets(randomNumBullets()),
       await randImg.graph()
     );
@@ -77,7 +77,7 @@ async function generateBodySlideWithGraph() {
 
 async function generateWikiImageSlide() {
   return assembleStandardSlide(
-    await randString.wikiTitle(),
+    await randString.compositeTitle(),
     await getBullets(randomNumBullets()),
     await randImg.wiki()
   );
@@ -95,7 +95,7 @@ async function generateStrategySlide() {
 
 async function generateStockPhotoSlide() {
   return assembleStandardSlide(
-    await randString.compositeTopic(),
+    await randString.compositeTitle(),
     await getBullets(randomNumBullets()),
     await randImg.stockPhoto()
   );
@@ -141,7 +141,7 @@ async function generateExtractHalfImage() {
 
 async function generateHalfBulletSlide() {
   return assembleHalfImageBulletSlide(
-    await randString.compositeTopic(),
+    await randString.compositeTitle(),
     await getBullets(randomNumBullets()),
     await randImg.background()
   )
