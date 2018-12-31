@@ -13,6 +13,7 @@
       >{{currentSlideIndex + 1}}/{{this.slideshow.length}}</div>
     <keep-alive>
       <component 
+      id="current-slide"
       :slide-options="currentSlide.options"
       :is="currentSlideComponent"></component>
     </keep-alive>
@@ -24,6 +25,7 @@ import Title from "@/components/slides/Title.vue";
 import Bullets from "@/components/slides/Bullets.vue";
 import HalfImageTitle from "@/components/slides/HalfImageTitle.vue";
 import HalfImageBullets from "@/components/slides/HalfImageBullets.vue";
+import WebFontLoader from 'webfontloader';
 
 export default {
   props: {
@@ -39,7 +41,8 @@ export default {
           colors: ["#222", "#225"],
           gradientType: "linear-gradient",
           gradientDirection: "0deg",
-          texture: 0
+          texture: 0,
+          font: "Aleo"
         };
       }
     }
@@ -72,14 +75,14 @@ export default {
           this.theme.gradientDirection == "" ? "" : this.theme.gradientDirection + ", "
         }${
           this.theme.colors.join(", ")
-        })`
+        })`,
+        "font-family": `"${this.theme.font}", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`
       };
     }
   },
   watch: {
     slideshow() {
       this.newSlideshow();
-      this.fullscreen();
     }
   },
   methods: {
@@ -101,8 +104,18 @@ export default {
     },
     newSlideshow() {
       this.currentSlideIndex = 0;
+      this.loadFonts();
       this.clearLoadedImages();
       this.preloadImages();
+    },
+    loadFonts() {
+      if (this.theme.font) {
+        WebFontLoader.load({
+          google: {
+            families: [this.theme.font]
+          }
+        });
+      }
     },
     clearLoadedImages() {
       this.preloadedImages = [];
@@ -128,6 +141,9 @@ export default {
     fullscreen() {
       this.$emit("fullscreen");
     }
+  },
+  mounted() {
+    this.newSlideshow();
   }
   // ready() {
   //   // var el = this.$el;
@@ -168,6 +184,7 @@ export default {
   }
 
   .slide-counter {
+    font-family: "Rubik", sans-serif;
     font-size: 1.4vw;
     border-radius: 0 0 0 1vw;
     min-width: 6vw;

@@ -70,6 +70,13 @@
       <div class="section columns is-centered">
         <presentation @fullscreen="fullScreenPresentation()" id="presentation-window" :slideshow="slides" :theme="theme"></presentation>
       </div>
+      <!-- <button class="button is-info is-outlined" @click="exportSlide()">Export Slide as Image</button>
+      <a :href="downloadableImage" v-if="downloadableImage != ''" class="button is-success" @click="exportSlide()">
+        <span class="icon is-medium">
+          <i class="fas fa-download"></i>
+        </span>
+        <span>Download</span>
+      </a> -->
     </div>
   </div>
 </template>
@@ -79,6 +86,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import Presentation from "@/components/Presentation.vue";
 import axios from "@/axios-backend";
+// import html2canvas from 'html2canvas';
 
 export default {
   name: "home",
@@ -102,7 +110,9 @@ export default {
       customize: false,
       questionPrompt: false,
       nsfw: false,
-      theme: {}
+      theme: {},
+      imageReadyToDownload: false,
+      downloadableImage: ''
     };
   },
   components: {
@@ -145,7 +155,13 @@ export default {
           this.slideshowLoaded = true;
           this.slideshowLoading = false;
         });
-    }
+    },
+    // exportSlide() {
+    //   html2canvas(document.querySelector('#presentation-window'))
+    //     .then( (canvas) => {
+    //       this.downloadableImage = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    //     })
+    // }
   }
 };
 </script>

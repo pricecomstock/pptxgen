@@ -32,14 +32,14 @@ const weightedBodySlideGenFunctions = [
     generator: bodyGen.generateExtractHalfImage,
     weight: 1
   },
-  {
-    generator: bodyGen.generateHalfBulletSlide,
-    weight: 5
-  },
-  {
-    generator: bodyGen.generateWeirdThoughtSlide,
-    weight: 3
-  },
+  // {
+  //   generator: bodyGen.generateHalfBulletSlide,
+  //   weight: 5
+  // },
+  // {
+  //   generator: bodyGen.generateWeirdThoughtSlide,
+  //   weight: 3
+  // },
   {
     generator: bodyGen.generateStrategySlide,
     weight: 6
@@ -61,6 +61,35 @@ const numGradientStepsPicker = getWeightedRandomFunction({
   6: 1
 })
 
+const fontPicker = getWeightedRandomFunction({
+  // Normal 70%
+  "Rubik": 15,
+  "Aleo": 15,
+  "Nunito": 10,
+  "Noto Serif": 10,
+  "Cabin": 10,
+  "Merriweather": 10,
+
+  // Goofy 24%
+  "Anton": 3,
+  "Caveat": 3,
+  "Kalam": 3,
+  "Patrick Hand": 3,
+  "Cutive Mono": 3,
+  "Coming Soon": 3,
+  "Just Me Again Down Here": 3,
+  "Kavivanar": 3,
+
+
+  // Hard to read 6%
+  "Lobster": 1,
+  "Pacifico": 1,
+  "Dancing Script": 1,
+  "Reenie Beanie": 1,
+  "Condiment": 1,
+  "Orbitron": 1
+})
+
 function generateTheme() {
 
   let colors = []
@@ -75,7 +104,8 @@ function generateTheme() {
     colors: colors,
     texture: randomInt(1, 41),
     gradientType: gradientType,
-    gradientDirection: gradientType == "linear-gradient" ? `${randomInt(-179, 180)}deg` : ''
+    gradientDirection: gradientType == "linear-gradient" ? `${randomInt(-179, 180)}deg` : '',
+    font: fontPicker()
   }
 }
 

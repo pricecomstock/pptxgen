@@ -39,7 +39,7 @@ export default {
 <style lang="scss">
 .half-image-title {
   width: 100%;
-  font-size: 2vw;
+  font-size: 3vw;
   display: block;
 }
 
