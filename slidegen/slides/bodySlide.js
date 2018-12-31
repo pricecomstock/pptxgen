@@ -25,7 +25,7 @@ async function getBullets(numBullets) {
 function assembleStandardSlide(title, bullets, image_url, pt, ol) {
   const plaintext = pt || Math.random < 0.2;
   const ordered = ol || false;
-  const imageWidth = randomInt(35,60)
+  const imageWidth = randomInt(35,55)
   return {
     type: "Bullets",
     options: {
@@ -38,8 +38,8 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
         {
           url: image_url,
           position: {
-            bottom: "3%",
-            right: "3%"
+            bottom: `${randomInt(2,20)}%`,
+            right: "2%"
           },
           width: `${imageWidth}%`
         }

@@ -3,6 +3,8 @@ const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
 const randomInt = require("./utils/randUtils").randomInt;
 const randomChoice = require("./utils/randUtils").randomChoice;
+const getWeightedRandomFunction = require("./utils/randUtils").getWeightedRandomFunction;
+
 
 const weightedBodySlideGenFunctions = [
   // {
@@ -44,16 +46,33 @@ const weightedBodySlideGenFunctions = [
   }
 ]
 
+function generateColor() {
+  return "#" + (Math.random() * 0x777777<<0).toString(16).padStart(6, '0');
+}
+
+const numGradientStepsPicker = getWeightedRandomFunction({
+  2: 6,
+  3: 4,
+  4: 3,
+  5: 2,
+  6: 1
+})
+
 function generateTheme() {
-  const generateColor = () => {
-    return "#" + (Math.random() * 0x777777<<0).toString(16).padStart(6, '0');
+
+  let colors = []
+  let numGradientSteps = numGradientStepsPicker()
+  for (let i=0; i<numGradientSteps; i++) {
+    colors.push(generateColor())
   }
 
+  const gradientType = Math.random() < 0.5 ? "linear-gradient" : "radial-gradient";
+
   return {
-    color1: generateColor(),
-    color2: generateColor(),
+    colors: colors,
     texture: randomInt(1, 41),
-    gradientType: Math.random() < 0.5 ? "linear-gradient" : "radial-gradient"
+    gradientType: gradientType,
+    gradientDirection: gradientType == "linear-gradient" ? `${randomInt(-179, 180)}deg` : ''
   }
 }
 

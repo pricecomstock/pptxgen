@@ -67,7 +67,7 @@ export default {
     bulletStyles() {
       let fontSizeModifier = this.scale(this.bulletCharCount, 0, 250, 2, 1.05);
       return {
-        "font-size": `${1 + fontSizeModifier}vw`
+        "font-size": `${3 + fontSizeModifier}vh`
       };
     },
     titleStyles() {

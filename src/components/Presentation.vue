@@ -36,8 +36,9 @@ export default {
       required: false,
       default() {
         return {
-          color1: "#222",
-          color2: "#225",
+          colors: ["#222", "#225"],
+          gradientType: "linear-gradient",
+          gradientDirection: "0deg",
           texture: 0
         };
       }
@@ -67,8 +68,10 @@ export default {
       return {
         "background-image": `url("/textures/${
           this.theme.texture
-        }.png"), repeating-linear-gradient(${this.theme.color1}, ${
-          this.theme.color2
+        }.png"), ${this.theme.gradientType}(${
+          this.theme.gradientDirection == "" ? "" : this.theme.gradientDirection + ", "
+        }${
+          this.theme.colors.join(", ")
         })`
       };
     }
