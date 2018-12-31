@@ -37,6 +37,13 @@ const imageFunctions = {
       "highqualitygifs"
     ]) 
   },
+  async interesting() {
+    return await reddit.randomImageOrGifFromMultireddit([
+      "crappydesign",
+      "design",
+      "graffiti"
+    ]) 
+  },
   async graph() {
     return await reddit.randomImageOrGifFromMultireddit([
       "dataisbeautiful",
