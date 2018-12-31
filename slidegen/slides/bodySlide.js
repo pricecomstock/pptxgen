@@ -38,7 +38,7 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
         {
           url: image_url,
           position: {
-            bottom: `${randomInt(2,20)}%`,
+            bottom: `${randomInt(2,12)}%`,
             right: "2%"
           },
           width: `${imageWidth}%`

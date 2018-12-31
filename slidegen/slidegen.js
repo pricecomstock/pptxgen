@@ -47,14 +47,17 @@ const weightedBodySlideGenFunctions = [
 ]
 
 function generateColor() {
-  return "#" + (Math.random() * 0x777777<<0).toString(16).padStart(6, '0');
+  let r = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+  let g = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+  let b = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+  return "#" + r + g + b;
 }
 
 const numGradientStepsPicker = getWeightedRandomFunction({
-  2: 6,
-  3: 4,
+  2: 14,
+  3: 8,
   4: 3,
-  5: 2,
+  5: 1,
   6: 1
 })
 
