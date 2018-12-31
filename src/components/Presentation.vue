@@ -2,6 +2,7 @@
   <div
     tabindex="0"
     class="presentation"
+    :style="themeStyles"
     @keyup.left="previousSlide()"
     @keyup.right="nextSlide()"
     @keypress.enter="nextSlide()">
@@ -58,6 +59,12 @@ export default {
     },
     currentSlideComponent() {
       return this.currentSlide.type;
+    },
+    themeStyles() {
+      return {
+        'background-image': 'url("/textures/1.png"), linear-gradient(red, orange)'
+        // 'background-image': 'url("../assets/textures/1.png"), linear-gradient(red, orange);'
+      }
     }
   },
   watch: {
@@ -128,12 +135,13 @@ export default {
 
 <style lang="scss">
 .presentation {
-  background-color: black;
   color: #eee;
   height: 45vw;
   width: 80vw;
   position: relative;
   overflow: hidden;
+  // background-color: #8a0027;
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
   .pres-title {
     font-size: 5vw;

@@ -4,6 +4,7 @@ var serveStatic = require("serve-static");
 
 var app = express();
 app.use(serveStatic(__dirname + "/dist"));
+app.use("/textures", serveStatic(__dirname + "/dist/textures"));
 
 // This is for development mostly
 app.use(function(req, res, next) {

@@ -9,7 +9,11 @@ const scale = {
   computed: {
     bulletCharCount() {
       return this.slideOptions.bullets.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.length;
+        try {
+          return accumulator + currentValue.length;
+        } catch (err) {
+          return accumulator
+        }
       }, 0);
     }
   }
