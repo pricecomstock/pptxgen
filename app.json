@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dokku": {
+      "predeploy": "npm config set -g production false",
       "postdeploy": "npm run build"
     }
   }
