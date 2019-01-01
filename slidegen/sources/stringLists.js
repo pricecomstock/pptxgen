@@ -7,16 +7,20 @@ const stringLists = {
     "Who I am...",
     "All about me",
     "Let me tell you about myself",
+    "First, let me introduce myself",
+    "Let me introduce myself",
+    "About the presenter"
   ],
   strategyTitles: [
     "Our Strategy",
     "The Solution",
     "My Promise",
-    "What can we do?",
+    "What to do?",
     "How do we solve this problem?",
     "Our Proposal",
     "Our Solution",
     "The Fix",
+    "The Pitch"
   ],
   endTitles: [
     "The End",

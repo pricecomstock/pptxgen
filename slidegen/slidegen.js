@@ -32,10 +32,10 @@ const weightedBodySlideGenFunctions = [
     generator: bodyGen.generateExtractHalfImage,
     weight: 1
   },
-  // {
-  //   generator: bodyGen.generateHalfBulletSlide,
-  //   weight: 5
-  // },
+  {
+    generator: bodyGen.generateHalfBulletSlide,
+    weight: 5
+  },
   // {
   //   generator: bodyGen.generateWeirdThoughtSlide,
   //   weight: 3

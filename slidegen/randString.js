@@ -3,6 +3,7 @@ const getWeightedRandomFunction = require('./utils/randUtils').getWeightedRandom
 const wikipedia = require('./sources/wikipedia')
 const reddit = require('./sources/reddit')
 const jargonCreator = require('./sources/jargon')
+const misc = require('./sources/miscApi')
 const fs = require('fs');
 const csvParse = require('csv-parse/lib/sync')
 const stringLists = require('./sources/stringLists')
@@ -198,11 +199,15 @@ async function compositePhrase() {
 
   if (choice <= 0.25) {
     return jeopardyQuestion();
-  } else if (choice <= 0.7) {
+  } else if (choice <= 0.5) {
     return quote();
-  } else if (choice <= 0.77) {
+  } else if (choice <= 0.6) {
+    return await misc.getRandomAdvice();
+  } else if (choice <= 0.68) {
+    return await misc.getNumberTrivia();
+  } else if (choice <= 0.7) {
     return jargon();
-  } else if (choice <= 0.8) {
+  } else if (choice <= 0.73) {
     return shortJargon();
   } else {
     const redditChoice = Math.random();
@@ -254,10 +259,12 @@ async function compositeTitle() {
 async function compositeProfound() {
   const choice = Math.random();
 
-  if (choice <= 0.6) {
+  if (choice <= 0.5) {
     return await compositeQuestion();
-  } else if (choice <= 0.85) {
+  } else if (choice <= 0.75) {
     return quote();
+  } else if (choice <= 0.87) {
+    return await misc.getInspirationalQuote();
   } else if (choice <= 0.95) {
     return await redditPhrases();
   } else {

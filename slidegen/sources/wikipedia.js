@@ -9,6 +9,7 @@ async function getRandomWikipediaArticle() {
     return response.data;
   } catch (err) {
     return getRandomWikipediaArticle()
+    //FIX this could be an infinite loop
   }
 }
 
