@@ -2,29 +2,16 @@
   <div class="home">
     <div class="columns is-centered">
       <div class="column is-one-third">
-        <div class="buttons is-centered">
-          <a class="button is-success is-large is-rounded" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
-            <span class="icon is-medium">
-              <i class="fas fa-comment-alt"></i>
-            </span>
-            <span>Present Now!</span>
-          </a>
-          <a class="button is-white is-large" @click="customize=!customize">
-            <span class="icon is-large">
-              <i class="fas fa-cog fa-lg"></i>
-            </span>
-          </a>
-        </div>
-        <div class="box" v-if="customize">
+        <div class="box">
           <div class="field">
             <div class="control">
-              <label class="label is-large">Presenter's Name</label>
-              <input type="text" v-model="presenter" class="input is-large" placeholder="An Expert">
+              <label class="label is-medium">Presenter's Name</label>
+              <input type="text" v-model="presenter" class="input is-medium" placeholder="An Expert">
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-large">Number of slides</label>
+              <label class="label is-medium">Number of slides</label>
               <div class="buttons has-addons is-centered">
                 <span
                   v-for="(option, index) in numSlidesOptions"
@@ -37,7 +24,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-large">Other Options</label>
+              <label class="label is-medium">Other Options</label>
               <div class="buttons has-addons is-centered">
                 <span
                   class="button"
@@ -52,10 +39,18 @@
           </div>
           <!-- <div class="field">
             <div class="control">
-              <label class="label is-large">And I need slides on</label>
-              <input type="text" v-model="topic" class="input is-large" placeholder="A Topic">
+              <label class="label is-medium">And I need slides on</label>
+              <input type="text" v-model="topic" class="input is-medium" placeholder="A Topic">
             </div>
           </div> -->
+        </div>
+        <div class="buttons is-centered">
+          <a class="button is-success is-large is-rounded" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
+            <span class="icon is-medium">
+              <i class="fas fa-comment-alt"></i>
+            </span>
+            <span>Present Now!</span>
+          </a>
         </div>
       </div>
     </div>
@@ -107,7 +102,6 @@ export default {
       topic: "",
       slideshowLoaded: false,
       slideshowLoading: false,
-      customize: false,
       questionPrompt: false,
       nsfw: false,
       theme: {},

@@ -1,9 +1,9 @@
 <template>
-  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link class="navbar-item placeholder-logo" to="/" disabled>
         <span class="icon is-medium">
-          <i class="fas fa-lg fa-infinity"></i>
+          <i class="fas fa-lg fa-chalkboard-teacher"></i>
         </span>
         <span>{{ appName }}</span>
       </router-link>
@@ -15,7 +15,7 @@
     </div>
     <div class="navbar-menu" :class="{'is-active':showNav}" id="navMenu">
       <div class="navbar-start">
-        <router-link class="navbar-item" to="/home" exact-active-class="is-active">Home</router-link>
+        <!-- <router-link class="navbar-item" to="/home" exact-active-class="is-active">Home</router-link> -->
         <!-- <div class="navbar-item has-dropdown is-hoverable" @mouseover="showTopDropdown = true" @mouseout="showTopDropdown = false">
           <router-link class="navbar-link" to="/about" :class="{'is-active': inAbout }">About</router-link>
           <div class="navbar-dropdown">
@@ -26,32 +26,33 @@
           </div>
         </div> -->
       </div>
-      <div class="navbar-end">
+      <!-- <div class="navbar-end">
         <div class="navbar-item" v-if="!showNav">
           <div class="field">
             <p class="control">
               <router-link class="button is-white" to="/" tag="a">
                 Submit
-                <!-- <span class="icon">
+                <span class="icon">
                   <i class="fas fa-download"></i>
-                </span> -->
+                </span>
               </router-link>
             </p>
           </div>
         </div>
         <router-link v-else class="navbar-item" to="/">Submit</router-link>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
 
 <script>
+import details from "@/details.js"
 export default {
   name: "NavBar",
   data() {
     return {
       showNav: false,
-      appName: process.env.VUE_APP_TITLE
+      appName: details.appTitle
     };
   },
   computed: {

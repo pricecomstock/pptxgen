@@ -50,11 +50,12 @@
 </template>
 
 <script>
+import details from "@/details.js"
 export default {
   name: "Footer",
   data() {
     return {
-      appName: process.env.VUE_APP_TITLE,
+      appName: details.appTitle,
       year: new Date().getFullYear(),
       displaySocialLinks: {
         twitter: true,
@@ -62,8 +63,8 @@ export default {
         blog: false,
         github: true
       },
-      githubUrl: process.env.VUE_APP_GITHUB_URL,
-      version: process.env.VUE_APP_VERSION
+      githubUrl: details.githubUrl,
+      version: details.appVersion
     };
   },
   computed: {
