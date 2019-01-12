@@ -16,7 +16,7 @@
                 <span
                   v-for="(option, index) in numSlidesOptions"
                   class="button"
-                  :class="{'is-selected': numSlides === option, 'is-success': numSlides === option}"
+                  :class="{'is-selected': numSlides === option, 'is-info': numSlides === option}"
                   @click="numSlides = option"
                   :key="index">{{ option }}</span>
               </div>
@@ -45,7 +45,7 @@
           </div> -->
         </div>
         <div class="buttons is-centered">
-          <a class="button is-success is-large is-rounded" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
+          <a class="button is-info is-large" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
             <span class="icon is-medium">
               <i class="fas fa-comment-alt"></i>
             </span>
