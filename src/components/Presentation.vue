@@ -11,6 +11,16 @@
       :class="{'is-dark': currentSlideIndex != (this.slideshow.length - 1), 'is-danger': currentSlideIndex === (this.slideshow.length - 1)}"
       v-if="currentSlideIndex !== 0"
       >{{currentSlideIndex + 1}}/{{this.slideshow.length}}</div>
+    <div @click="previousSlide()" v-if="isMobile" class="slide-mover left">
+      <span class="icon is-large">
+        <i class="fas fa-2x fa-arrow-left"></i>
+      </span>
+    </div>
+    <div @click="nextSlide()" v-if="isMobile" class="slide-mover right">
+      <span class="icon is-large">
+        <i class="fas fa-2x fa-arrow-right"></i>
+      </span>
+    </div>
     <keep-alive>
       <component 
       id="current-slide"
@@ -51,7 +61,8 @@ export default {
     return {
       currentSlideIndex: 0,
       preloadedImages: [],
-      baseUrl: process.env.BASE_URL
+      baseUrl: process.env.BASE_URL,
+      isMobile: false
     };
   },
   components: {
@@ -93,6 +104,9 @@ export default {
       } else {
         // console.log("Already at end of slideshow!");
       }
+    },
+    isMobileDevice() {
+      return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
     },
     previousSlide() {
       if (this.currentSlideIndex > 0) {
@@ -143,6 +157,7 @@ export default {
     }
   },
   mounted() {
+    this.isMobile = this.isMobileDevice()
     this.newSlideshow();
   }
   // ready() {
@@ -185,13 +200,36 @@ export default {
 
   .slide-counter {
     font-family: "Rubik", sans-serif;
-    font-size: 1.4vw;
+    font-size: 1.5em;
     border-radius: 0 0 0 1vw;
-    min-width: 6vw;
+    min-width: 8%;
     position: absolute;
     right: 0px;
     top: 0px;
     z-index: 5;
+  }
+
+  .slide-mover {
+    position: absolute;
+    bottom: 0px;
+    min-width: 14%;
+    font-size: 1.4vw;
+    padding-top: 1.6%;
+    padding-bottom: 0.8%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    z-index: 5;
+  }
+  
+  .right {
+    right: 0px;
+    border-radius: 1vw 0 0 0;
+  }
+  
+  .left {
+    left: 0px;
+    border-radius: 0 1vw 0 0;
   }
 }
 
