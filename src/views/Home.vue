@@ -60,7 +60,7 @@
         <span class="icon is-medium">
           <i class="fas fa-expand"></i>
         </span>
-        <span>Fullscreen</span>
+        <span>Fullscreen (recommended)</span>
       </button>
       <div class="section columns is-centered">
         <presentation @fullscreen="fullScreenPresentation()" id="presentation-window" :slideshow="slides" :theme="theme"></presentation>
