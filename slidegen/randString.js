@@ -7,6 +7,7 @@ const misc = require('./sources/miscApi')
 const fs = require('fs');
 const csvParse = require('csv-parse/lib/sync')
 const stringLists = require('./sources/stringLists')
+const grammars = require('./sources/grammar/grammar')
 
 function titleCase(s) {
   return s.replace(/\w*/g, (txt) => {
@@ -294,6 +295,10 @@ async function compositeBullet() {
   }
 }
 
+function aboutMe() {
+  return grammars.aboutMe();
+}
+
 // setTimeout(async () => {
 //   console.debug("Composite Bullet:", await compositeBullet())
 //   console.debug("Composite Topic:", await compositeTopic())
@@ -331,5 +336,6 @@ module.exports = {
   compositeHuman,
   compositeBullet,
   compositeProfound,
-  compositeTitle
+  compositeTitle,
+  aboutMe
 }

@@ -106,7 +106,7 @@ export default {
       nsfw: false,
       theme: {},
       imageReadyToDownload: false,
-      downloadableImage: ''
+      downloadableImage: ""
     };
   },
   components: {
@@ -149,7 +149,7 @@ export default {
           this.slideshowLoaded = true;
           this.slideshowLoading = false;
         });
-    },
+    }
     // exportSlide() {
     //   html2canvas(document.querySelector('#presentation-window'))
     //     .then( (canvas) => {

@@ -35,7 +35,7 @@ import Title from "@/components/slides/Title.vue";
 import Bullets from "@/components/slides/Bullets.vue";
 import HalfImageTitle from "@/components/slides/HalfImageTitle.vue";
 import HalfImageBullets from "@/components/slides/HalfImageBullets.vue";
-import WebFontLoader from 'webfontloader';
+import WebFontLoader from "webfontloader";
 
 export default {
   props: {
@@ -80,14 +80,16 @@ export default {
     },
     themeStyles() {
       return {
-        "background-image": `url("/textures/${
-          this.theme.texture
-        }.png"), ${this.theme.gradientType}(${
-          this.theme.gradientDirection == "" ? "" : this.theme.gradientDirection + ", "
-        }${
-          this.theme.colors.join(", ")
-        })`,
-        "font-family": `"${this.theme.font}", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`
+        "background-image": `url("/textures/${this.theme.texture}.png"), ${
+          this.theme.gradientType
+        }(${
+          this.theme.gradientDirection == ""
+            ? ""
+            : this.theme.gradientDirection + ", "
+        }${this.theme.colors.join(", ")})`,
+        "font-family": `"${
+          this.theme.font
+        }", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`
       };
     }
   },
@@ -106,7 +108,10 @@ export default {
       }
     },
     isMobileDevice() {
-      return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+      return (
+        typeof window.orientation !== "undefined" ||
+        navigator.userAgent.indexOf("IEMobile") !== -1
+      );
     },
     previousSlide() {
       if (this.currentSlideIndex > 0) {
@@ -157,7 +162,7 @@ export default {
     }
   },
   mounted() {
-    this.isMobile = this.isMobileDevice()
+    this.isMobile = this.isMobileDevice();
     this.newSlideshow();
   }
   // ready() {
@@ -221,12 +226,12 @@ export default {
     cursor: pointer;
     z-index: 5;
   }
-  
+
   .right {
     right: 0px;
     border-radius: 1vw 0 0 0;
   }
-  
+
   .left {
     left: 0px;
     border-radius: 0 1vw 0 0;

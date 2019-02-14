@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import details from "@/details.js"
+import details from "@/details.js";
 export default {
   name: "Footer",
   data() {
