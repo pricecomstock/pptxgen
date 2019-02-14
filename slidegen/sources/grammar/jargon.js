@@ -22,8 +22,8 @@ grammar.addModifiers({
   }
 });
 
-console.log(grammar.flatten("#shortJargon#"));
-console.log(grammar.flatten("#jargon#"));
+// console.log(grammar.flatten("#shortJargon#"));
+// console.log(grammar.flatten("#jargon#"));
 
 function generateJargonPhrase() {
   return grammar.flatten("#jargon#");
@@ -33,7 +33,7 @@ function generateShortJargonPhrase() {
   return grammar.flatten("#shortJargon#");
 }
 
-// module.exports = {
-//   generateJargonPhrase,
-//   generateShortJargonPhrase
-// }
+module.exports = {
+  generateJargonPhrase,
+  generateShortJargonPhrase
+}
