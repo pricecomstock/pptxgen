@@ -26,7 +26,7 @@ const grammar = tracery.createGrammar({
   industry: corpora.industries,
   academicSubject: corpora.academicSubjects,
   company: corpora.companies,
-  organization: ["#charity#", "#company#", "Big #industry.capitalizeAll#"],
+  organization: ["#charity#", "#company#", "#company# and #charity#", "#company# and #company#", "#charity# and #company#", "Big #industry.capitalizeAll#"],
   occupation: corpora.occupations,
   field: ["#iabCategory#", "#industry#", "#academicSubject#"],
   opinion: [
