@@ -62,8 +62,9 @@ const grammar = tracery.createGrammar({
     "#opinion# #opinionTarget#",
     "drives a #car#"
   ],
-
-  origin: ["originally from #city#"],
+  
+  originVerb: ["originally from", "grew up in", "lived in"],
+  origin: ["#originVerb# #city#", "#originVerb# #country#"],
 
   expertStatement: ["#expertPreposition.capitalize# #field#"],
 

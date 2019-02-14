@@ -7,7 +7,7 @@ async function getRandomAdvice() {
     const response = await axios.get('https://api.adviceslip.com/advice')
     return response.data.slip.advice
   } catch (err) {
-    return getAdvice()
+    return getRandomAdvice()
     //FIX this could be an infinite loop
   }
 }
@@ -17,7 +17,7 @@ async function getInspirationalQuote() {
     const response = await axios.get('http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en')
     return response.data.quote
   } catch (err) {
-    return getAdvice()
+    return getInspirationalQuote()
     //FIX this could be an infinite loop
   }
 }
@@ -27,7 +27,7 @@ async function getNumberTrivia() {
     const response = await axios.get('http://numbersapi.com/random/trivia')
     return response.data
   } catch (err) {
-    return getAdvice()
+    return getNumberTrivia()
     //FIX this could be an infinite loop
   }
 }
