@@ -17,97 +17,116 @@ function loadJsonFromCorporaFile(relativeFilePath) {
 }
 
 // ANIMALS
-const animals = loadJsonFromCorporaFile("animals/common.json").animals;
-const dogNames = loadJsonFromCorporaFile("animals/dog_names.json").dog_names;
+const animal = loadJsonFromCorporaFile("animals/common.json").animals;
+const dogName = loadJsonFromCorporaFile("animals/dog_names.json").dog_names;
 
 // ARCHETYPES
 const charactersJson = loadJsonFromCorporaFile("archetypes/character.json");
-const characterTypes = reduceToNameAndSynonymArray(charactersJson.characters)
-const characterQualities = charactersJson.characters.reduce( (accumulator, currentCharacter) => {
+const characterType = reduceToNameAndSynonymArray(charactersJson.characters)
+const characterQuality = charactersJson.characters.reduce( (accumulator, currentCharacter) => {
     return accumulator.concat(currentCharacter.qualities);
 }, []);
 
 const eventsJson = loadJsonFromCorporaFile("archetypes/event.json");
-const eventTypes = reduceToNameAndSynonymArray(eventsJson.events);
+const eventType = reduceToNameAndSynonymArray(eventsJson.events);
 
 const settingJson = loadJsonFromCorporaFile("archetypes/setting.json");
-const settingTypes = reduceToNameAndSynonymArray(settingJson.settings);
+const settingType = reduceToNameAndSynonymArray(settingJson.settings);
 
 // ARCHITECTURE
-const passages = loadJsonFromCorporaFile("architecture/passages.json").passages;
-const rooms = loadJsonFromCorporaFile("architecture/rooms.json").rooms;
+const passage = loadJsonFromCorporaFile("architecture/passages.json").passages;
+const room = loadJsonFromCorporaFile("architecture/rooms.json").rooms;
 
 // ART
-const artIsms = loadJsonFromCorporaFile("art/isms.json").isms;
+const artType = loadJsonFromCorporaFile("art/isms.json").isms;
 
 // ACADEMIC
-const academicSubjects = loadJsonFromCorporaFile("books/academic_subjects.json").subjects;
+const academicSubject = loadJsonFromCorporaFile("books/academic_subjects.json").subjects;
 
 // CORPORATE
-const cars = loadJsonFromCorporaFile("corporations/cars.json").cars;
-const charities = loadJsonFromCorporaFile("corporations/charities.json").charities;
-const companies = loadJsonFromCorporaFile("corporations/fortune500.json").companies;
-const industries = loadJsonFromCorporaFile("corporations/industries.json").industries;
-const newspapers = loadJsonFromCorporaFile("corporations/newspapers.json").newspapers;
+const car = loadJsonFromCorporaFile("corporations/cars.json").cars;
+const charity = loadJsonFromCorporaFile("corporations/charities.json").charities;
+const company = loadJsonFromCorporaFile("corporations/fortune500.json").companies;
+const industry = loadJsonFromCorporaFile("corporations/industries.json").industries;
+const newspaper = loadJsonFromCorporaFile("corporations/newspapers.json").newspapers;
 
 // TAROT
 const tarotJson = loadJsonFromCorporaFile("divination/tarot_interpretations.json");
-const tarotMeanings = tarotJson.tarot_interpretations.reduce( (accumulator, currentItem) => {
+const tarotMeaning = tarotJson.tarot_interpretations.reduce( (accumulator, currentItem) => {
         return accumulator.concat(currentItem.meanings.light).concat(currentItem.meanings.shadow)
     }, []);
-const tarotFortunes = tarotJson.tarot_interpretations.reduce( (accumulator, currentItem) => {
+const tarotFortune = tarotJson.tarot_interpretations.reduce( (accumulator, currentItem) => {
         return accumulator.concat(currentItem.fortune_telling)
     }, []);
 
 // FILM & TV
-const iabCategories = loadJsonFromCorporaFile("film-tv/iab_categories.json").iab
+const iabCategory = loadJsonFromCorporaFile("film-tv/iab_categories.json").iab
     .map( (category) => category.category_name)
-const netflixGenres = loadJsonFromCorporaFile("film-tv/netflix-categories.json").categories
+const netflixGenre = loadJsonFromCorporaFile("film-tv/netflix-categories.json").categories
 
 // GAMES
-const streetFighterMoves = loadJsonFromCorporaFile("games/street_fighter_ii.json").characters
+const streetFighterMove = loadJsonFromCorporaFile("games/street_fighter_ii.json").characters
 .reduce( (accumulator, currentItem) => {
     return accumulator.concat(currentItem.moves);
 },[])
-const wrestlingMoves = loadJsonFromCorporaFile("games/wrestling_moves.json").moves
-const fightingMoves = streetFighterMoves.concat(wrestlingMoves);
+const wrestlingMove = loadJsonFromCorporaFile("games/wrestling_moves.json").moves
 
 // GEOGRAPHY
-const countries = loadJsonFromCorporaFile("geography/countries.json").countries
-const environMentalHazards = loadJsonFromCorporaFile("geography/environmental_hazards.json").entries
-const usCities = loadJsonFromCorporaFile("geography/us_cities.json").cities.map( city => {
+const country = loadJsonFromCorporaFile("geography/countries.json").countries
+const environmentalHazard = loadJsonFromCorporaFile("geography/environmental_hazards.json").entries
+const city = loadJsonFromCorporaFile("geography/us_cities.json").cities.map( city => {
     return `${city.city}, ${city.state}`
 })
 
-// TODO Governments onward
-const occupations = loadJsonFromCorporaFile("humans/occupations.json").occupations
+// GOVERNMENT
+const usGovAgency = loadJsonFromCorporaFile("governments/us_federal_agencies.json").agencies
+
+// HUMANS
+const occupation = loadJsonFromCorporaFile("humans/occupations.json").occupations
+const mood = loadJsonFromCorporaFile("humans/moods.json").moods
+const humanAdjective = loadJsonFromCorporaFile("humans/descriptions.json").descriptions
+const humanPrefix = loadJsonFromCorporaFile("humans/prefixes.json").prefixes
+const honorific = loadJsonFromCorporaFile("humans/englishHonorifics.json").englishHonorifics
+
+// OBJECTS
+const object = loadJsonFromCorporaFile("objects/objects.json").objects
+const clothing = loadJsonFromCorporaFile("objects/clothing.json").clothes
+
+// TODO get more humans onward
 
 const corpora = {
-    animals,
-    dogNames,
-    characterTypes,
-    characterQualities,
-    eventTypes,
-    settingTypes,
-    passages,
-    rooms,
-    artIsms,
-    academicSubjects,
-    cars,
-    charities,
-    companies,
-    industries,
-    newspapers,
-    tarotMeanings,
-    tarotFortunes,
-    iabCategories,
-    netflixGenres,
-    fightingMoves,
-    countries,
-    environMentalHazards,
-    usCities,
-
-    occupations
+    animal,
+    dogName,
+    characterType,
+    characterQuality,
+    eventType,
+    settingType,
+    passage,
+    room,
+    artType,
+    academicSubject,
+    car,
+    charity,
+    company,
+    industry,
+    newspaper,
+    tarotMeaning,
+    tarotFortune,
+    iabCategory,
+    netflixGenre,
+    streetFighterMove,
+    wrestlingMove,
+    country,
+    environmentalHazard,
+    city,
+    usGovAgency,
+    occupation,
+    mood,
+    humanAdjective,
+    humanPrefix,
+    honorific,
+    object,
+    clothing
 };
 
 // Check to make sure I didn't mess anything up in the incredibly clumsy process above

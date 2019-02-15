@@ -3,7 +3,8 @@ const corpora = require("./corpora/corpora.js");
 
 // TODO ensure all these are not undefined somehow
 const grammar = tracery.createGrammar({
-  animal: corpora.animals,
+  ... corpora,
+
   petAnimal: [
     "dog",
     "cat",
@@ -14,21 +15,18 @@ const grammar = tracery.createGrammar({
     "gerbil",
     "rat"
   ],
-  city: corpora.usCities,
-  country: corpora.countries,
-  car: corpora.cars,
-  dogName: corpora.dogNames,
-  charity: corpora.charities,
-  characterType: corpora.characterTypes,
-  lifeEvent: corpora.eventTypes,
-  artType: corpora.artIsms,
-  iabCategory: corpora.iabCategories,
-  industry: corpora.industries,
-  academicSubject: corpora.academicSubjects,
-  company: corpora.companies,
-  organization: ["#charity#", "#company#", "#company# and #charity#", "#company# and #company#", "#charity# and #company#", "Big #industry.capitalizeAll#"],
-  occupation: corpora.occupations,
-  field: ["#iabCategory#", "#industry#", "#academicSubject#"],
+  organization: [
+    "#charity#",
+    "#company#",
+    "#company# and #charity#",
+    "#company# and #company#",
+    "#charity# and #company#",
+    "Big #industry.capitalizeAll#",
+    "#usGovAgency#",
+    "#newspaper#"
+  ],
+  fightingMove: ["#wrestlingMove#", "#streetFighterMove#"],
+  field: ["#iabCategory#", "#industry#", "#academicSubject#", "#artType#"],
   opinion: [
     "likes",
     "doesn't like",
@@ -40,7 +38,13 @@ const grammar = tracery.createGrammar({
     "I don't see the need for",
     "really enjoys"
   ],
-  opinionTarget: ["#field#", "#artType#", "#occupation.s#", "#charity#", "#lifeEvent#"],
+  opinionTarget: [
+    "#field#",
+    "#artType#",
+    "#occupation.s#",
+    "#charity#",
+    "#lifeEvent#"
+  ],
 
   expertPreposition: [
     "expert in",
@@ -54,21 +58,47 @@ const grammar = tracery.createGrammar({
     "#characterType# of"
   ],
 
-  qualification: ["#occupation.capitalizeAll# for #organization#"],
+  qualification: [
+    "#occupation.capitalizeAll# for #organization#",
+    "#expertStatement#"
+  ],
+  opinion: ["#opinion# #opinionTarget#", "#opinionTarget# makes me #mood#"],
+
+  nickname: [
+    "#honorific# #field.capitalizeAll#",
+    "#honorific# #mood.capitalizeAll#",
+    "#honorific# #iabCategory#"
+  ],
+  nicknameStatement: [
+    'you can call me "#nickname#"',
+    'I\'ve been called "#nickname#"',
+    'given the nickname "#nickname#"'
+  ],
 
   funFact: [
     "has a pet #petAnimal# named #dogName#",
     "befriended #animal.a# named #dogName#",
-    "#opinion# #opinionTarget#",
-    "drives a #car#"
+    "drives #car.a#",
+    "#opinion#",
+    "survived #environmentalHazard.a#",
+    "#nicknameStatement#",
+    "is capable of performing #fightingMove.a#",
+    "most prized possession is #object.a#",
+    "spent a lot of time in my #room#"
   ],
-  
+
   originVerb: ["originally from", "grew up in", "lived in"],
   origin: ["#originVerb# #city#", "#originVerb# #country#"],
 
   expertStatement: ["#expertPreposition.capitalize# #field#"],
 
-  aboutMe: ["#expertStatement#", "#qualification#", "#funFact#", "#origin#"]
+  aboutMe: [
+    "#expertStatement#",
+    "#qualification#",
+    "#funFact#",
+    "#origin#",
+    "#nicknameStatement#"
+  ]
 });
 
 grammar.addModifiers(tracery.baseEngModifiers);
@@ -80,9 +110,17 @@ grammar.addModifiers({
 });
 
 function aboutMe() {
-    return grammar.flatten("#aboutMe#");
+  return grammar.flatten("#aboutMe#");
 }
 
-module.exports = {
-    aboutMe
+function test(grammarName) {
+  for (let i = 0; i < 10; i++) {
+    console.log(grammar.flatten(grammarName));
+  }
 }
+
+// test("#aboutMe#")
+
+module.exports = {
+  aboutMe
+};
