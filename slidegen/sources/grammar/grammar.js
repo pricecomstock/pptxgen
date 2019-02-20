@@ -2,6 +2,7 @@ const tracery = require("tracery-grammar");
 const corpora = require("./corpora/corpora.js");
 
 // TODO ensure all these are not undefined somehow
+// TODO separate NSFW things into a different file and use spread syntax ...obj to overwrite into a second nsfw_corpora maybe?
 const grammar = tracery.createGrammar({
   ... corpora,
 
@@ -60,7 +61,8 @@ const grammar = tracery.createGrammar({
 
   qualification: [
     "#occupation.capitalizeAll# for #organization#",
-    "#expertStatement#"
+    "#expertStatement#",
+    "#integer# years of experience in #field"
   ],
   opinion: ["#opinion# #opinionTarget#", "#opinionTarget# makes me #mood#"],
 
@@ -75,6 +77,9 @@ const grammar = tracery.createGrammar({
     'given the nickname "#nickname#"'
   ],
 
+  integer35: Array(35).fill().map( (_v, i) => i.toString() ),
+  integer100: Array(100).fill().map( (_v, i) => i.toString() ),
+
   funFact: [
     "has a pet #petAnimal# named #dogName#",
     "befriended #animal.a# named #dogName#",
@@ -84,7 +89,9 @@ const grammar = tracery.createGrammar({
     "#nicknameStatement#",
     "is capable of performing #fightingMove.a#",
     "most prized possession is #object.a#",
-    "spent a lot of time in my #room#"
+    "spent a lot of time in my #room#",
+    "grew up in a #naturalMaterial# hut",
+    "always wearing at least one item made of #technicalFabric#"
   ],
 
   originVerb: ["originally from", "grew up in", "lived in"],
@@ -118,8 +125,8 @@ function test(grammarName) {
     console.log(grammar.flatten(grammarName));
   }
 }
-
-// test("#aboutMe#")
+// console.log(grammar.integer)
+// test("always wearing at least one item made of #technicalFabric#")
 
 module.exports = {
   aboutMe

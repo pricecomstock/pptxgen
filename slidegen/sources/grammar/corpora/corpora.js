@@ -88,11 +88,23 @@ const humanAdjective = loadJsonFromCorporaFile("humans/descriptions.json").descr
 const humanPrefix = loadJsonFromCorporaFile("humans/prefixes.json").prefixes
 const honorific = loadJsonFromCorporaFile("humans/englishHonorifics.json").englishHonorifics
 
+// MATERIALS
+const bodyFluid = loadJsonFromCorporaFile("materials/abridged-body-fluids.json")["abridged body fluids"]
+const buildingMaterial = loadJsonFromCorporaFile("materials/building-materials.json")["building materials"]
+const gemstone = loadJsonFromCorporaFile("materials/gemstones.json").gemstones
+const layMetal = loadJsonFromCorporaFile("materials/layperson-metals.json")["layperson metals"]
+const naturalMaterial = loadJsonFromCorporaFile("materials/natural-materials.json")["natural materials"]
+const technicalFabric = loadJsonFromCorporaFile("materials/technical-fabrics.json")["technical fabrics"]
+
+// MATH
+const primeNumber = loadJsonFromCorporaFile("mathematics/primes.json").primes
+
+
 // OBJECTS
 const object = loadJsonFromCorporaFile("objects/objects.json").objects
 const clothing = loadJsonFromCorporaFile("objects/clothing.json").clothes
 
-// TODO get more humans onward
+// TODO get more MEDICINE onward
 
 const corpora = {
     animal,
@@ -125,6 +137,15 @@ const corpora = {
     humanAdjective,
     humanPrefix,
     honorific,
+    bodyFluid,
+    gemstone,
+    buildingMaterial,
+    layMetal,
+    naturalMaterial,
+    technicalFabric,
+    primeNumber,
+
+    
     object,
     clothing
 };
