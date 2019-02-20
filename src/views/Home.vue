@@ -5,13 +5,13 @@
         <div class="box">
           <div class="field">
             <div class="control">
-              <label class="label is-medium">Presenter's Name</label>
+              <label class="label is-large">Presenter's Name</label>
               <input type="text" v-model="presenter" class="input is-medium" placeholder="An Expert">
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-medium">Number of slides</label>
+              <label class="label is-large">Number of slides</label>
               <div class="buttons has-addons is-centered are-medium">
                 <span
                   v-for="(option, index) in numSlidesOptions"
@@ -24,17 +24,15 @@
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-medium">Other Options</label>
-              <div class="buttons has-addons is-centered are-medium">
-                <span
-                  class="button"
-                  :class="{'is-selected': numSlides === questionPrompt, 'is-info': questionPrompt}"
-                  @click="questionPrompt = !questionPrompt">Questions</span>
-                <!-- <span
-                  class="button is-danger"
-                  :class="{'is-selected': numSlides === nsfw, 'is-outlined': !nsfw}"
-                  @click="nsfw = !nsfw">NSFW</span> -->
+              <label class="label is-large">Other Options</label>
+              <div class="field">
+                <input id="questionsinput" v-model="questionPrompt" type="checkbox" class="switch is-outlined is-rounded is-info">
+                <label for="questionsinput">Prompt for Questions</label>
               </div>
+              <!-- <div class="field">
+                <input id="nsfwinput" v-model="nsfw" type="checkbox" class="switch is-outlined is-rounded is-danger">
+                <label for="nsfwinput">Allow NSFW Content</label>
+              </div> -->
             </div>
           </div>
           <!-- <div class="field">

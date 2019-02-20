@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 // import store from "./store";
 import "./scss/pcstyles.scss";
+// import 'bulma-switch'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "animate.css";
