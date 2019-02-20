@@ -12,7 +12,7 @@
           <div class="field">
             <div class="control">
               <label class="label is-medium">Number of slides</label>
-              <div class="buttons has-addons is-centered">
+              <div class="buttons has-addons is-centered are-medium">
                 <span
                   v-for="(option, index) in numSlidesOptions"
                   class="button"
@@ -25,7 +25,7 @@
           <div class="field">
             <div class="control">
               <label class="label is-medium">Other Options</label>
-              <div class="buttons has-addons is-centered">
+              <div class="buttons has-addons is-centered are-medium">
                 <span
                   class="button"
                   :class="{'is-selected': numSlides === questionPrompt, 'is-info': questionPrompt}"
@@ -97,8 +97,8 @@ export default {
         }
       ],
       presenter: "",
-      numSlidesOptions: [6, 8, 10, 12, 14],
-      numSlides: 10,
+      numSlidesOptions: [6, 8, 10],
+      numSlides: 8,
       topic: "",
       slideshowLoaded: false,
       slideshowLoading: false,
