@@ -1,11 +1,25 @@
 const tracery = require("tracery-grammar");
 const corpora = require("./corpora/corpora.js");
+require("../../utils/array-flat-polyfill");
 
 // TODO ensure all these are not undefined somehow
 // TODO separate NSFW things into a different file and use spread syntax ...obj to overwrite into a second nsfw_corpora maybe?
 const grammar = tracery.createGrammar({
   ... corpora,
 
+  severityModifier: [
+    "a tiny bit",
+    "a bit",
+    "a little",
+    "somewhat",
+    "quite",
+    "pretty",
+    "very",
+    "super",
+    "unbelievably",
+    "really fuckin"
+  ],
+  currentTimeModifier: ["currently", "right now", "at the moment", "as we speak"],
   petAnimal: [
     "dog",
     "cat",
@@ -26,9 +40,28 @@ const grammar = tracery.createGrammar({
     "#usGovAgency#",
     "#newspaper#"
   ],
+  sportsTeam: [
+    "#nflTeam#",
+    "#nhlTeam#",
+    "#nbaTeam#",
+    "#mlbTeam#",
+    "#eplTeam#",
+    "#laligaTeam#"
+  ],
+  sportLevel: [
+    "childhood",
+    "middle school",
+    "high school",
+    "club",
+    "college",
+    "intramural",
+    "minor league",
+    "professional",
+    "over-30 league"
+  ],
   fightingMove: ["#wrestlingMove#", "#streetFighterMove#"],
   field: ["#iabCategory#", "#industry#", "#academicSubject#", "#artType#"],
-  opinion: [
+  opinionVerb: [
     "likes",
     "doesn't like",
     "doesn't care for",
@@ -44,7 +77,8 @@ const grammar = tracery.createGrammar({
     "#artType#",
     "#occupation.s#",
     "#charity#",
-    "#lifeEvent#"
+    "#eventType#",
+    "#appliance.s#",
   ],
 
   expertPreposition: [
@@ -64,7 +98,7 @@ const grammar = tracery.createGrammar({
     "#expertStatement#",
     "#integer# years of experience in #field"
   ],
-  opinion: ["#opinion# #opinionTarget#", "#opinionTarget# makes me #mood#"],
+  opinionPhrase: ["#opinionVerb# #opinionTarget#", "#opinionTarget# makes me #mood#"],
 
   nickname: [
     "#honorific# #field.capitalizeAll#",
@@ -84,14 +118,17 @@ const grammar = tracery.createGrammar({
     "has a pet #petAnimal# named #dogName#",
     "befriended #animal.a# named #dogName#",
     "drives #car.a#",
-    "#opinion#",
+    "#opinionPhrase#",
     "survived #environmentalHazard.a#",
     "#nicknameStatement#",
     "is capable of performing #fightingMove.a#",
     "most prized possession is #object.a#",
     "spent a lot of time in my #room#",
     "grew up in a #naturalMaterial# hut",
-    "always wearing at least one item made of #technicalFabric#"
+    "always wearing at least one item made of #technicalFabric#",
+    "#severityModifier# #stateOfInebriation# #currentTimeModifier#",
+    "#sportsTeam# fan",
+    "competitive in #sportLevel# #sport#"
   ],
 
   originVerb: ["originally from", "grew up in", "lived in"],
@@ -113,6 +150,9 @@ grammar.addModifiers({
   ing(s) {
     // Add -ing, replacing "e" if the word ends in it
     return s.replace(/e?$/, "ing");
+  },
+  lowercase(s) {
+    return s.toLowerCase();
   }
 });
 
@@ -126,7 +166,7 @@ function test(grammarName) {
   }
 }
 // console.log(grammar.integer)
-// test("always wearing at least one item made of #technicalFabric#")
+test("#opinionPhrase#")
 
 module.exports = {
   aboutMe
