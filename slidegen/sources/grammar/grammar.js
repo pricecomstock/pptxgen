@@ -1,6 +1,5 @@
 const tracery = require("tracery-grammar");
 const corpora = require("./corpora/corpora.js");
-require("../../utils/array-flat-polyfill");
 
 // TODO ensure all these are not undefined somehow
 // TODO separate NSFW things into a different file and use spread syntax ...obj to overwrite into a second nsfw_corpora maybe?
@@ -166,7 +165,7 @@ function test(grammarName) {
   }
 }
 // console.log(grammar.integer)
-test("#opinionPhrase#")
+// test("#opinionPhrase#")
 
 module.exports = {
   aboutMe
