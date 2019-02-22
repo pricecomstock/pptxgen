@@ -37,3 +37,7 @@ $family-sans-serif: "Open Sans", BlinkMacSystemFont, -apple-system, "Segoe UI", 
 @import "bulma-switch";
 $switch-focus: none;
 // @import "~bulma-slider/dist/css/bulma-slider.sass";
+
+
+// @import "_my-chartist-settings.scss";
+@import "chartist/dist/scss/chartist.scss";
