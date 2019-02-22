@@ -17,12 +17,13 @@
     "express": "^4.16.4",
     "tracery-grammar": "^2.7.3",
     "vue": "^2.5.17",
+    "vue-chartist": "^2.2.0",
     "vue-router": "^3.0.1",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
-    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-plugin-babel": "^3.4.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.2.2",
     "@vue/eslint-config-prettier": "^3.0.1",
