@@ -1,7 +1,11 @@
 <template>
   <div>
-    <button class="button" @click="renderChart">Chart</button>
+    <button
+      class="button"
+      @click="renderChart"
+    >Chart</button>
     <div
+      :style="{'max-width': chartData.maxWidth, 'max-height': chartData.maxHeight}"
       :id="chartId"
       :class="[chartData.aspect, 'ct-chart']"
     >
@@ -10,6 +14,8 @@
 </template>
 
 <script>
+const deepFlatten = arr =>
+  [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)));
 import Chartist from "chartist";
 export default {
   name: "chart",
@@ -22,11 +28,19 @@ export default {
       default() {
         return {
           aspect: "ct-octave",
-          chartType: "bar",
+          chartType: "pie",
           data: {
             labels: ["TEST", "DATA", "UH OH"],
-            series: [[2, 3, 1]]
-          }
+            series: [[2, 3, 1], [3, 5, 4]]
+          },
+          // options: {
+          //   axisX: {
+          //     showGrid: false
+          //   },
+          //   axisY: {
+          //   }
+          // },
+          maxWidth: "100%"
         };
       }
     }
@@ -54,18 +68,20 @@ export default {
           );
           break;
         case "pie":
-          // FIXME
+          // REQUIRES a one dimension data set
           this.chart = new Chartist.Pie(
             "#" + this.chartId,
-            this.chartData.data,
+            {
+              series: deepFlatten(this.chartData.data.series),
+              labels: this.chartData.data.labels
+            },
             this.chartData.options
           );
           break;
         case "donut":
           // FIXME
-          this.chart = new Chartist.Donut(
+          this.chart = new Chartist.Pie(
             "#" + this.chartId,
-            this.chartData.data,
             this.chartData.options
           );
           break;
