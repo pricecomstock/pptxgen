@@ -7,7 +7,7 @@
     <div
       :style="{'max-width': chartData.maxWidth, 'max-height': chartData.maxHeight}"
       :id="chartId"
-      :class="[chartData.aspect, 'ct-chart']"
+      :class="[chartData.aspect, 'ct-chart', {'ct-chart-donut': chartData.chartType == 'donut'}]"
     >
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
       default() {
         return {
           aspect: "ct-octave",
-          chartType: "pie",
+          chartType: "donut",
           data: {
             labels: ["TEST", "DATA", "UH OH"],
             series: [[2, 3, 1], [3, 5, 4]]
@@ -82,6 +82,10 @@ export default {
           // FIXME
           this.chart = new Chartist.Pie(
             "#" + this.chartId,
+            {
+              series: deepFlatten(this.chartData.data.series),
+              labels: this.chartData.data.labels
+            },
             this.chartData.options
           );
           break;
