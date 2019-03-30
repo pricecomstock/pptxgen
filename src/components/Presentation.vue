@@ -25,6 +25,7 @@
       <component 
       id="current-slide"
       :slide-options="currentSlide.options"
+      :slide-number="currentSlideIndex"
       :is="currentSlideComponent"></component>
     </keep-alive>
   </div>

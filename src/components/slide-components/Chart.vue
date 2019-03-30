@@ -1,11 +1,5 @@
 <template>
   <div>
-    <div class="buttons is-centered">
-      <button
-        class="button is-primary"
-        @click="renderChart()"
-      >Render</button>
-    </div>
     <div
       :style="{'max-width': chartData.maxWidth, 'max-height': chartData.maxHeight}"
       :id="chartId"
@@ -22,7 +16,7 @@ import Chartist from "chartist";
 export default {
   name: "chart",
   props: {
-    chartkey: {
+    chartKey: {
       default: 1234,
       required: true
     },
@@ -107,7 +101,7 @@ export default {
   },
   computed: {
     chartId() {
-      return "chart-" + this.chartkey;
+      return "chart-" + this.chartKey;
     }
   },
   watch: {

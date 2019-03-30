@@ -43,7 +43,7 @@ function getRandomBarChart() {
 function getRandomLineChart() {
     const aspect = getRandomAspectRatio();
     const data = {
-        labels: ['A', 'B', 'C', 'D'],
+        labels: ['A', 'B'],
         data: [
             [1,3,2,4],
             [5,3,1,0]
@@ -54,6 +54,9 @@ function getRandomLineChart() {
 }
 
 function getRandomChart() {
+    // DELETETHIS after testing
+    return getRandomLineChart();
+
     let chartType = randomChoice('bar', 'line', 'pie');
 
     if (chartType == 'bar') {

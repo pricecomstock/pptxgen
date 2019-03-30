@@ -49,6 +49,31 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
   };
 }
 
+
+function assembleChartSlide(title, bullets, chartData, pt, ol) {
+  const plaintext = pt || Math.random < 0.2;
+  const ordered = ol || false;
+  const imageWidth = randomInt(35,55)
+  return {
+    type: "Bullets",
+    options: {
+      title: title,
+      bullets: bullets,
+      plaintext: plaintext,
+      ordered: ordered,
+      maxWidth: `${87 - imageWidth}%`,
+      chart: {
+        data: chartData,
+        position: {
+          bottom: `${randomInt(2,12)}%`,
+          right: "2%"
+        },
+        width: `${imageWidth}%`
+      }
+    }
+  };
+}
+
 function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
   const imageLeft = il || Math.random() < 0.2
   const plaintext = pt || Math.random() < 0.2
@@ -67,6 +92,10 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
 
   return slide
 }
+
+
+// TODO use JS destructuring assignment to make these multi-await parameters work better?
+
 
 async function generateBodySlideWithGraph() {
   return assembleStandardSlide(
@@ -100,6 +129,14 @@ async function generateStockPhotoSlide() {
     await getBullets(randomNumBullets()),
     await randImg.stockPhoto()
   );
+}
+
+async function generateChartSlide() {
+  return assembleChartSlide(
+    await randString.compositeTitle(),
+    await getBullets(randomNumBullets()),
+    await chartGen.getRandomChart()
+  )
 }
 
 async function generateAboutMeSlide() {
@@ -170,5 +207,6 @@ module.exports = {
   generateQuoteHalfImage,
   generateExtractHalfImage,
   generateHalfBulletSlide,
-  generateWeirdThoughtSlide
+  generateWeirdThoughtSlide,
+  generateChartSlide
 };

@@ -95,7 +95,7 @@ const grammar = tracery.createGrammar({
   qualification: [
     "#occupation.capitalizeAll# for #organization#",
     "#expertStatement#",
-    "#integer# years of experience in #field"
+    "#integer35# years of experience in #field#"
   ],
   opinionPhrase: ["#opinionVerb# #opinionTarget#", "#opinionTarget# makes me #mood#"],
 

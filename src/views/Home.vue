@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <chart chartkey="asdfs"></chart>
+    <!-- <chart chartkey="asdfs"></chart> -->
     <hr v-if="slideshowLoaded">
     <div v-if="slideshowLoaded">
       <button class="button is-outlined is-primary" @click="fullScreenPresentation()">

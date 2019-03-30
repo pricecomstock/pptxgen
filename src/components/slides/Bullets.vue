@@ -25,10 +25,16 @@
     :style="imageStyles[index]"
     alt="Uh image"
     :key="index">
+    <chart v-if="slideOptions.chart"
+    :chart-key="`slide${slideNumber}`"
+    :chart-data="slideOptions.chart.data"
+    :style="chartStyles"
+    ></chart>
   </div>
 </template>
 
 <script>
+import chart from "../slide-components/Chart.vue"
 import scale from "../mixins/scale";
 export default {
   props: {
@@ -42,7 +48,6 @@ export default {
           plaintext: false,
           images: [
             {
-              // data: null, // TODO: This should maybe be URL,
               url: "https://i.redd.it/8ewex5he4k0y.jpg",
               position: {
                 top: "0px",
@@ -55,6 +60,10 @@ export default {
           ]
         };
       }
+    },
+    slideNumber: {
+      type: Number,
+      default: 0
     }
   },
   mixins: [scale],
@@ -73,6 +82,20 @@ export default {
           "max-width": img.maxWidth || "50%"
         };
       });
+    },
+    chartStyles() {
+      let chart = this.slideOptions.chart
+      return {
+        position: "absolute",
+        top: chart.position.top || null,
+        right: chart.position.right || null,
+        bottom: chart.position.bottom || null,
+        left: chart.position.left || null,
+        width: chart.width || "auto",
+        height: chart.height || "auto",
+        "max-height": chart.maxHeight || "75%",
+        "max-width": chart.maxWidth || "50%"
+      }
     },
     bulletStyles() {
       let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05);
@@ -93,6 +116,9 @@ export default {
         "font-size": `${4 + fontSizeModifier}vw`
       };
     }
+  },
+  components: {
+    chart
   }
 };
 </script>
