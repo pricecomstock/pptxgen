@@ -1,9 +1,11 @@
 <template>
   <div>
-    <button
-      class="button"
-      @click="renderChart"
-    >Chart</button>
+    <div class="buttons is-centered">
+      <button
+        class="button is-primary"
+        @click="renderChart()"
+      >Render</button>
+    </div>
     <div
       :style="{'max-width': chartData.maxWidth, 'max-height': chartData.maxHeight}"
       :id="chartId"
@@ -28,10 +30,10 @@ export default {
       default() {
         return {
           aspect: "ct-octave",
-          chartType: "donut",
+          chartType: "pie",
           data: {
             labels: ["TEST", "DATA", "UH OH"],
-            series: [[2, 3, 1], [3, 5, 4]]
+            series: [[2, 3, 1], [3, 5, 4], [1, 5, 9]]
           },
           // options: {
           //   axisX: {
