@@ -75,7 +75,7 @@ export default {
           );
           break;
         case "donut":
-          // FIXME
+          // FIXME donut chart
           this.chart = new Chartist.Pie(
             "#" + this.chartId,
             {
@@ -86,7 +86,7 @@ export default {
           );
           break;
         case "area":
-          // FIXME
+          // FIXME area chart
           this.chart = new Chartist.Area(
             "#" + this.chartId,
             this.chartData.data,

@@ -1,5 +1,7 @@
 const randomChoice = require('../utils/randUtils').randomChoice
 
+// TODO maybe have some state on if reddit isn't responding or is going slowly so we can redirect to wiki image sources
+
 const axios = require('axios').create({
   baseURL: 'https://reddit.com/',
   timeout: 5000,
