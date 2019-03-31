@@ -120,5 +120,9 @@ export default {
 .ct-chart {
   background-color: white;
 }
+
+.ct-label {
+  font-size: 2em !important;
+}
 </style>
 

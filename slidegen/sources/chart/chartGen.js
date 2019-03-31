@@ -15,11 +15,12 @@ const getRandomAspectRatio = getWeightedRandomFunction({
 
 const maxWidth = "100%"
 
-function createChart(chartType, aspect, data, maxWidth) {
+function createChart(chartType, aspect, data, options, maxWidth) {
     return {
         chartType,
         aspect,
         data,
+        options,
         maxWidth
     }
 }
@@ -29,15 +30,19 @@ function getRandomPieChart() {
     const data = {
 
     }
+
+    options = {}
     
-    return createChart('pie', aspect, data, maxWidth)
+    return createChart('pie', aspect, data, options, maxWidth)
 }
 
 function getRandomBarChart() {
     const aspect = getRandomAspectRatio();
+
+    options = {}
     
     
-    return createChart('bar', aspect, data, maxWidth)
+    return createChart('bar', aspect, data, options, maxWidth)
 }
 
 function getRandomLineChart() {
@@ -48,8 +53,15 @@ function getRandomLineChart() {
             ru.randomIntArray(6, 0, 10, ru.oneInN(2))
         ]
     }
+
+    options = {}
+
+    // const options = {
+    //     width: 300,
+    //     height:200
+    // }
     
-    return createChart('line', aspect, data, maxWidth)
+    return createChart('line', aspect, data, options, maxWidth)
 }
 
 function getRandomChart() {
