@@ -1,5 +1,5 @@
 const grammar = require('../grammar/grammar');
-const randUtils = require('../../utils/randUtils');
+const ru = require('../../utils/randUtils');
 const randomChoice = require('../../utils/randUtils').randomChoice
 const getWeightedRandomFunction = require('../../utils/randUtils').getWeightedRandomFunction
 
@@ -43,10 +43,9 @@ function getRandomBarChart() {
 function getRandomLineChart() {
     const aspect = getRandomAspectRatio();
     const data = {
-        labels: ['A', 'B'],
-        data: [
-            [1,3,2,4],
-            [5,3,1,0]
+        labels: ['A', 'B', 'C', 'D', 'E'],
+        series: [
+            ru.randomIntArray(6, 0, 10, ru.oneInN(2))
         ]
     }
     

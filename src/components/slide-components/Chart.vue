@@ -24,7 +24,7 @@ export default {
       default() {
         return {
           aspect: "ct-octave",
-          chartType: "pie",
+          chartType: "line",
           data: {
             labels: ["TEST", "DATA", "UH OH"],
             series: [[2, 3, 1], [3, 5, 4], [1, 5, 9]]
@@ -116,5 +116,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.ct-chart {
+  background-color: white;
+}
 </style>
+

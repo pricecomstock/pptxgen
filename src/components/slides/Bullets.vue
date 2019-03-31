@@ -27,6 +27,7 @@
     :key="index">
     <chart v-if="slideOptions.chart"
     :chart-key="`slide${slideNumber}`"
+    :key="`slide${slideNumber}`"
     :chart-data="slideOptions.chart.data"
     :style="chartStyles"
     ></chart>
@@ -93,8 +94,8 @@ export default {
         left: chart.position.left || null,
         width: chart.width || "auto",
         height: chart.height || "auto",
-        "max-height": chart.maxHeight || "75%",
-        "max-width": chart.maxWidth || "50%"
+        "max-height": "75%",
+        "max-width": "50%"
       }
     },
     bulletStyles() {

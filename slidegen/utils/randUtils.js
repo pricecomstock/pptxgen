@@ -22,6 +22,21 @@ function normInt(min, max) {
   return Math.floor(min + norm() * (max - min + 1));
 }
 
+function randomIntArray(len, min, max, normalDistributed) {
+  let arr = []
+
+  if (normalDistributed) {
+    for (let i = 0; i < len; i++) {
+      arr.push(normInt(min, max))
+    }
+  } else {
+    for (let i = 0; i < len; i++) {
+      arr.push(randomInt(min, max))
+    }
+  }
+
+  return arr
+}
 
 /* This function takes an object like
 { 'a': 10, 'b': 40, 'c': 50 }
@@ -48,6 +63,10 @@ function getWeightedRandomFunction(spec) {
   }
 }
 
+function oneInN(n) {
+  return Math.random() < (1/n);
+}
+
 // let testSpec = {
 //   a: 5,
 //   b: 25,
@@ -64,5 +83,7 @@ module.exports = {
   randomInt,
   norm,
   normInt,
-  getWeightedRandomFunction
+  getWeightedRandomFunction,
+  randomIntArray,
+  oneInN
 };
