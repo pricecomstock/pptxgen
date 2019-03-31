@@ -46,7 +46,7 @@ const weightedBodySlideGenFunctions = [
   },
   {
     generator: bodyGen.generateChartSlide,
-    weight: 100 // TODO reduce this to a normal value
+    weight: 0 // TODO reduce this to a normal value
   }
 ]
 
