@@ -46,8 +46,7 @@ export default {
     };
   },
   methods: {
-    renderChart() {
-    }
+    renderChart() {}
   },
   computed: {
     chartId() {
@@ -74,4 +73,3 @@ export default {
   font-size: 2em !important;
 }
 </style>
-

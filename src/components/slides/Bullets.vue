@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import chart from "../slide-components/Chart.vue"
+import chart from "../slide-components/Chart.vue";
 import scale from "../mixins/scale";
 export default {
   props: {
@@ -85,7 +85,7 @@ export default {
       });
     },
     chartStyles() {
-      let chart = this.slideOptions.chart
+      let chart = this.slideOptions.chart;
       return {
         position: "absolute",
         top: chart.position.top || null,
@@ -96,7 +96,7 @@ export default {
         height: chart.height || "auto",
         "max-height": "75%",
         "max-width": "50%"
-      }
+      };
     },
     bulletStyles() {
       let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05);
