@@ -165,7 +165,7 @@ function test(grammarName) {
   }
 }
 // console.log(grammar.integer)
-// test("#opinionPhrase#")
+// test("#origin#")
 
 module.exports = {
   aboutMe

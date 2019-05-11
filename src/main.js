@@ -7,7 +7,6 @@ import "./scss/pcstyles.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "animate.css";
-// import "vue-chartist"
 
 Vue.config.productionTip = false;
 
