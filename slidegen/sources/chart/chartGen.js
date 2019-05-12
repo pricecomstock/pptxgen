@@ -32,7 +32,7 @@ function getRandomBarChart() {
     const numberOfDatasets = 6;
 
 
-    const size = {x:100, y:100}
+    const size = {x:100, y:50}
     const chartJsData = {
         label: ['A', 'B', 'C', 'D', 'E', 'F'],
         // datasets: ru.randomIntArray(numberOfDatasets, 0, 15, ru.oneInN(2)),

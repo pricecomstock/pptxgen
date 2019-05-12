@@ -27,11 +27,7 @@ export default {
 </script>
 
 <style lang="scss">
-.ct-chart {
+#bar-chart {
   background-color: white;
-}
-
-.ct-label {
-  font-size: 2em !important;
 }
 </style>

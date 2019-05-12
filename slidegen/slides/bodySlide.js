@@ -69,6 +69,7 @@ function assembleChartSlide(title, bullets, chartData, pt, ol) {
           bottom: `${randomInt(2,12)}%`,
           right: "2%"
         },
+        size: chartData.size,
         width: `${imageWidth}%`
       }
     }

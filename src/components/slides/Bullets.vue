@@ -31,6 +31,7 @@
     :key="`slide${slideNumber}`"
     :chart-data="slideOptions.chart.chartJsData"
     :chart-options="slideOptions.chart.chartJsOptions"
+    :style="chartStyles"
     ></bar-chart>
   </div>
 </template>
@@ -81,7 +82,7 @@ export default {
           width: img.width || "auto",
           height: img.height || "auto",
           "max-height": img.maxHeight || "75%",
-          "max-width": img.maxWidth || "50%"
+          "max-width": img.maxWidth || "50%",
         };
       });
     },
@@ -93,8 +94,8 @@ export default {
         right: chart.position.right || null,
         bottom: chart.position.bottom || null,
         left: chart.position.left || null,
-        width: chart.width || "auto",
-        height: chart.height || "auto",
+        width: chart.size.x || "auto",
+        height: chart.size.y || "auto",
         "max-height": "75%",
         "max-width": "50%"
       };
@@ -155,4 +156,5 @@ export default {
     margin-bottom: 0.3em;
   }
 }
+
 </style>
