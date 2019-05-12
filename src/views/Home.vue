@@ -52,7 +52,6 @@
         </div>
       </div>
     </div>
-    <!-- <chart chart-key="asdfs"></chart> -->
     <hr v-if="slideshowLoaded">
     <div v-if="slideshowLoaded">
       <button class="button is-outlined is-primary" @click="fullScreenPresentation()">
@@ -79,7 +78,6 @@
 // @ is an alias to /src
 import Presentation from "@/components/Presentation.vue";
 import axios from "@/axios-backend";
-import Chart from "@/components/slide-components/Chart.vue";
 // import html2canvas from 'html2canvas';
 
 export default {
@@ -109,8 +107,7 @@ export default {
     };
   },
   components: {
-    Presentation,
-    Chart
+    Presentation
   },
   methods: {
     fullScreenElementWithId(id) {

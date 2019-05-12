@@ -38,6 +38,13 @@ function randomIntArray(len, min, max, normalDistributed) {
   return arr
 }
 
+function randomColor() {
+  let r = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+  let g = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+  let b = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+  return "#" + r + g + b;
+}
+
 /* This function takes an object like
 { 'a': 10, 'b': 40, 'c': 50 }
 and will create a function that when called, will return a random key weighted by its value.
@@ -67,6 +74,10 @@ function oneInN(n) {
   return Math.random() < (1/n);
 }
 
+function generatedArray(length, generatorFunction) {
+  return Array(length).fill().map(() => generatorFunction())
+}
+
 // let testSpec = {
 //   a: 5,
 //   b: 25,
@@ -85,5 +96,7 @@ module.exports = {
   normInt,
   getWeightedRandomFunction,
   randomIntArray,
-  oneInN
+  oneInN,
+  randomColor,
+  generatedArray
 };

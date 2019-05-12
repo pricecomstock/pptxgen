@@ -3,6 +3,7 @@ const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
 const randomInt = require("./utils/randUtils").randomInt;
 const randomChoice = require("./utils/randUtils").randomChoice;
+const randomColor = require("./utils/randUtils").randomColor;
 const getWeightedRandomFunction = require("./utils/randUtils").getWeightedRandomFunction;
 
 
@@ -50,13 +51,6 @@ const weightedBodySlideGenFunctions = [
   }
 ]
 
-function generateColor() {
-  let r = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
-  let g = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
-  let b = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
-  return "#" + r + g + b;
-}
-
 const numGradientStepsPicker = getWeightedRandomFunction({
   2: 14,
   3: 8,
@@ -99,7 +93,7 @@ function generateTheme() {
   let colors = []
   let numGradientSteps = numGradientStepsPicker()
   for (let i=0; i<numGradientSteps; i++) {
-    colors.push(generateColor())
+    colors.push(randomColor())
   }
 
   const gradientType = Math.random() < 0.5 ? "linear-gradient" : "radial-gradient";

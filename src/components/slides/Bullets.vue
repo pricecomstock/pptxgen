@@ -25,17 +25,18 @@
     :style="imageStyles[index]"
     alt="Uh image"
     :key="index">
-    <chart v-if="slideOptions.chart"
+
+    <bar-chart v-if="slideOptions.chart"
     :chart-key="`slide${slideNumber}`"
     :key="`slide${slideNumber}`"
-    :chart-data="slideOptions.chart.data"
-    :style="chartStyles"
-    ></chart>
+    :chart-data="slideOptions.chart.chartJsData"
+    :chart-options="slideOptions.chart.chartJsOptions"
+    ></bar-chart>
   </div>
 </template>
 
 <script>
-import chart from "../slide-components/Chart.vue";
+import barChart from "../slide-components/BarChart.vue";
 import scale from "../mixins/scale";
 export default {
   props: {
@@ -119,7 +120,7 @@ export default {
     }
   },
   components: {
-    chart
+    barChart
   }
 };
 </script>

@@ -3,24 +3,16 @@ const ru = require('../../utils/randUtils');
 const randomChoice = require('../../utils/randUtils').randomChoice
 const getWeightedRandomFunction = require('../../utils/randUtils').getWeightedRandomFunction
 
-const getRandomAspectRatio = getWeightedRandomFunction({
-    'ct-square': 5,
-    'ct-octave': 5,
-    'ct-golden-section': 5,
-    'ct-perfect-fifth': 5,
-    'ct-perfect-fourth': 5,
-    'ct-major-sixth': 5,
-    'ct-double-octave': 1
-})
+
 
 const maxWidth = "100%"
 
-function createChart(chartType, aspect, data, options, maxWidth) {
+function createChart(chartType, size, chartJsData, chartJsOptions, maxWidth) {
     return {
         chartType,
-        aspect,
-        data,
-        options,
+        size,
+        chartJsData,
+        chartJsOptions,
         maxWidth
     }
 }
@@ -37,12 +29,26 @@ function getRandomPieChart() {
 }
 
 function getRandomBarChart() {
-    const aspect = getRandomAspectRatio();
+    const numberOfDatasets = 6;
 
-    options = {}
-    
-    
-    return createChart('bar', aspect, data, options, maxWidth)
+
+    const size = {x:100, y:100}
+    const chartJsData = {
+        label: ['A', 'B', 'C', 'D', 'E', 'F'],
+        // datasets: ru.randomIntArray(numberOfDatasets, 0, 15, ru.oneInN(2)),
+        datasets: [
+            {
+                label: '# of votes',
+                data: ru.randomIntArray(numberOfDatasets, 0, 15, ru.oneInN(2)),
+                backgroundColor: ru.generatedArray(numberOfDatasets, ru.randomColor),
+                borderColor: ru.generatedArray(numberOfDatasets, ru.randomColor)
+            }
+        ],
+    };
+    // console.log(data);
+    const chartJsOptions = {}
+
+    return createChart('bar', size, chartJsData, chartJsOptions, maxWidth)
 }
 
 function getRandomLineChart() {
@@ -66,7 +72,7 @@ function getRandomLineChart() {
 
 function getRandomChart() {
     // DELETETHIS after testing
-    return getRandomLineChart();
+    return getRandomBarChart();
 
     let chartType = randomChoice('bar', 'line', 'pie');
 
