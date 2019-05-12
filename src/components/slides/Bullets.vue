@@ -82,7 +82,7 @@ export default {
           width: img.width || "auto",
           height: img.height || "auto",
           "max-height": img.maxHeight || "75%",
-          "max-width": img.maxWidth || "50%",
+          "max-width": img.maxWidth || "50%"
         };
       });
     },
@@ -156,5 +156,4 @@ export default {
     margin-bottom: 0.3em;
   }
 }
-
 </style>

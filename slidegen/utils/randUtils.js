@@ -75,7 +75,7 @@ function oneInN(n) {
 }
 
 function generatedArray(length, generatorFunction) {
-  return Array(length).fill().map(() => generatorFunction())
+  return Array(length).fill().map((_value, index) => generatorFunction(index))
 }
 
 // let testSpec = {

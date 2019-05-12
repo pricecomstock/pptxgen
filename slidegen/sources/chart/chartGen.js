@@ -29,65 +29,93 @@ function getRandomPieChart() {
 }
 
 function getRandomBarChart() {
-    const numberOfDatasets = 6;
+    const barDatasetGenerator = (dataPointCount) => {
+        return {
+            // label: grammar.flatten('#field#'),
+            // data: ru.randomIntArray(dataPointCount,1,5,false),
+            data: ru.randomIntArray(dataPointCount, 1, 10, false),
+            backgroundColor: ru.generatedArray(dataPointCount, ru.randomColor),
+            // borderSkipped: true
+        }
+    }
+
+    
+    const numData = 6;
 
 
     const size = {x:100, y:50}
     const chartJsData = {
-        label: ['A', 'B', 'C', 'D', 'E', 'F'],
-        // datasets: ru.randomIntArray(numberOfDatasets, 0, 15, ru.oneInN(2)),
-        datasets: [
-            {
-                label: '# of votes',
-                data: ru.randomIntArray(numberOfDatasets, 0, 15, ru.oneInN(2)),
-                backgroundColor: ru.generatedArray(numberOfDatasets, ru.randomColor),
-                borderColor: ru.generatedArray(numberOfDatasets, ru.randomColor)
-            }
-        ],
+        labels: ru.generatedArray(numData, () => grammar.flatten('#field#')),
+        datasets: [barDatasetGenerator(numData)],
     };
     // console.log(data);
-    const chartJsOptions = {}
-
-    return createChart('bar', size, chartJsData, chartJsOptions, maxWidth)
-}
-
-function getRandomLineChart() {
-    const aspect = getRandomAspectRatio();
-    const data = {
-        labels: ['A', 'B', 'C', 'D', 'E'],
-        series: [
-            ru.randomIntArray(6, 0, 10, ru.oneInN(2))
-        ]
+    const chartJsOptions = {
+        legend: {display: false},
+        title: {
+            display: true,
+            text: grammar.flatten('#aboutMe#'),
+            fontSize: 20,
+            padding: 20
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    fontSize: 24
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontSize: 16
+                }
+            }]
+        },
+        layout: {
+            padding: {
+                left: 25,
+                right: 25,
+                top: 0,
+                bottom: 15
+            }
+        }
     }
 
-    options = {}
-
-    // const options = {
-    //     width: 300,
-    //     height:200
-    // }
-    
-    return createChart('line', aspect, data, options, maxWidth)
+    return createChart('bar', size, chartJsData, chartJsOptions, maxWidth)
 }
 
 function getRandomChart() {
     // DELETETHIS after testing
     return getRandomBarChart();
 
-    let chartType = randomChoice('bar', 'line', 'pie');
+    // let chartType = randomChoice('bar', 'line', 'pie');
 
-    if (chartType == 'bar') {
-        return getRandomPieChart();
-    } else if (chartType == 'line') {
-        return getRandomBarChart();
-    } else {
-        return getRandomLineChart();
+    // if (chartType == 'bar') {
+    //     return getRandomPieChart();
+    // } else if (chartType == 'line') {
+    //     return getRandomBarChart();
+    // } else {
+    //     return getRandomLineChart();
+    // }
+}
+
+function getRandomLineChart() {
+    // TODO this is just copy pasted because I'll need something like it
+    const lineDatasetGenerator = (index) => {
+        return {
+            label: grammar.flatten('#field#'),
+            data: [ru.randomInt, index],
+            backgroundColor: ru.randomColor(),
+            borderSkipped: true
+        }
     }
 }
 
 module.exports = {
-    getRandomPieChart,
-    getRandomBarChart,
-    getRandomLineChart,
+    // getRandomPieChart,
+    // getRandomBarChart,
+    // getRandomLineChart,
     getRandomChart
 }
+
+
+// TODO WOW THIS HELPS https://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/

@@ -167,6 +167,11 @@ function test(grammarName) {
 // console.log(grammar.integer)
 // test("#origin#")
 
+function fullGrammarFlatten(stringToFlatten) {
+  return grammar.flatten(stringToFlatten)
+}
+
 module.exports = {
-  aboutMe
+  aboutMe,
+  flatten: fullGrammarFlatten
 };
