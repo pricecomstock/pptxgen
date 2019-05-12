@@ -1,4 +1,7 @@
-# pc-web-boilerplate
+# Powerpoint Generator
+A random powerpoint generator for Improvised Powerpoint Presentations (Powerpoint Karaoke).
+
+# Developing
 
 ## Project setup
 ```
@@ -19,3 +22,4 @@ npm run build
 ```
 npm run lint
 ```
+
