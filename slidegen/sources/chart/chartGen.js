@@ -38,8 +38,10 @@ function getRandomBarChart() {
 
   const numData = 6;
 
-  let sideLength = ru.randomInt(35, 45);
-  const size = { x: sideLength, y: sideLength };
+  let widthVw = ru.randomInt(37, 40);
+  let heightVw = ru.randomInt(47, 50);
+  const size = { x: widthVw, y: heightVw };
+  
   const chartJsData = {
     labels: ru.generatedArray(numData, () => grammar.flatten("#field#")),
     datasets: [barDatasetGenerator(numData)]
@@ -49,8 +51,8 @@ function getRandomBarChart() {
     legend: { display: false },
     title: {
       display: true,
-      text: grammar.flatten("#aboutMe#"),
-      fontSize: 20,
+      text: grammar.flatten("#aboutMe#").match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+      fontSize: 56,
       padding: 20
     },
     scales: {
@@ -58,14 +60,14 @@ function getRandomBarChart() {
         {
           ticks: {
             suggestedMin: 0,
-            fontSize: 24
+            fontSize: 36
           }
         }
       ],
       xAxes: [
         {
           ticks: {
-            fontSize: 16
+            fontSize: 48
           }
         }
       ]

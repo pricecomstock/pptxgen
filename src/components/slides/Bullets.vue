@@ -1,36 +1,65 @@
 <template>
   <div class="slide">
-    <div class="pres-title slide-title has-text-left" :style="titleStyles">
+    <div
+      class="pres-title slide-title has-text-left"
+      :style="titleStyles"
+    >
       {{slideOptions.title}}
     </div>
     <div class="has-text-left">
-      <ul v-if="!slideOptions.ordered && !slideOptions.plaintext" class="bullet-bullets pres-body" :style="bulletStyles">
-        <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
+      <ul
+        v-if="!slideOptions.ordered && !slideOptions.plaintext"
+        class="bullet-bullets pres-body"
+        :style="bulletStyles"
+      >
+        <li
+          v-for="(bullet, index) in slideOptions.bullets"
+          :key="index"
+        >
           {{ bullet }}
         </li>
       </ul>
-      <ol v-if="slideOptions.ordered" class="bullet-numbers pres-body" :style="bulletStyles">
-        <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
+      <ol
+        v-if="slideOptions.ordered"
+        class="bullet-numbers pres-body"
+        :style="bulletStyles"
+      >
+        <li
+          v-for="(bullet, index) in slideOptions.bullets"
+          :key="index"
+        >
           {{ bullet }}
         </li>
       </ol>
-      <ul v-if="slideOptions.plaintext" class="bullet-plain pres-body" :style="bulletStyles">
-        <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
+      <ul
+        v-if="slideOptions.plaintext"
+        class="bullet-plain pres-body"
+        :style="bulletStyles"
+      >
+        <li
+          v-for="(bullet, index) in slideOptions.bullets"
+          :key="index"
+        >
           {{ bullet }}
         </li>
       </ul>
     </div>
-    <img v-for="(image, index) in slideOptions.contentImages"
-    :src="image.url"
-    :style="imageStyles[index]"
-    alt="Uh image"
-    :key="index">
+    <img
+      v-for="(image, index) in slideOptions.contentImages"
+      :src="image.url"
+      :style="imageStyles[index]"
+      alt="Uh image"
+      :key="index"
+    >
 
-    <chart v-if="slideOptions.chart"
-    :chart=slideOptions.chart
-    :style="chartStyles"
-    :vwWidth="slideOptions.chart.size.x"
-    :vwHeight="slideOptions.chart.size.y">
+    <chart
+      v-if="slideOptions.chart"
+      :key="`chart-${slideNumber}`"
+      :chart=slideOptions.chart
+      :style="chartStyles"
+      :vwWidth="slideOptions.chart.size.x"
+      :vwHeight="slideOptions.chart.size.y"
+    >
     </chart>
   </div>
 </template>
