@@ -36,12 +36,12 @@ function getRandomBarChart() {
     };
   };
 
-  const numData = 6;
+  const numData = ru.randomInt(2, 3);
 
-  let widthVw = ru.randomInt(37, 40);
-  let heightVw = ru.randomInt(47, 50);
+  let widthVw = ru.randomInt(33, 36);
+  let heightVw = ru.randomInt(34, 42);
   const size = { x: widthVw, y: heightVw };
-  
+
   const chartJsData = {
     labels: ru.generatedArray(numData, () => grammar.flatten("#field#")),
     datasets: [barDatasetGenerator(numData)]

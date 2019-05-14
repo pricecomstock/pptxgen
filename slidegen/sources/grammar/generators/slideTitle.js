@@ -2,21 +2,15 @@ const tracery = require("tracery-grammar");
 
 const grammar = tracery.createGrammar({
   exploreVerb: [
-      "go deeper",
-      "explore further",
-      "learn more",
-      "continue",
-      "take a closer look"
+    "go deeper",
+    "explore further",
+    "learn more",
+    "continue",
+    "take a closer look"
   ],
-  verbSubject: [
-      "let's",
-      "we must",
-      "time to"
-  ],
+  verbSubject: ["let's", "we must", "time to"],
 
-  genericContinue: [
-      "#verbSubject# #exploreVerb#"
-  ]
+  genericContinue: ["#verbSubject# #exploreVerb#"]
 });
 
 grammar.addModifiers(tracery.baseEngModifiers);
@@ -27,4 +21,4 @@ grammar.addModifiers({
   }
 });
 
-console.log(grammar.flatten("#genericContinue#"))
+console.log(grammar.flatten("#genericContinue#"));

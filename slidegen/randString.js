@@ -1,139 +1,139 @@
-const randomChoice = require('./utils/randUtils').randomChoice
-const getWeightedRandomFunction = require('./utils/randUtils').getWeightedRandomFunction
-const wikipedia = require('./sources/wikipedia')
-const reddit = require('./sources/reddit')
-const jargonCreator = require('./sources/grammar/jargon')
-const misc = require('./sources/miscApi')
-const fs = require('fs');
-const csvParse = require('csv-parse/lib/sync')
-const stringLists = require('./sources/stringLists')
-const grammars = require('./sources/grammar/grammar')
+const randomChoice = require("./utils/randUtils").randomChoice;
+const getWeightedRandomFunction = require("./utils/randUtils")
+  .getWeightedRandomFunction;
+const wikipedia = require("./sources/wikipedia");
+const reddit = require("./sources/reddit");
+const jargonCreator = require("./sources/grammar/generators/jargon");
+const misc = require("./sources/miscApi");
+const fs = require("fs");
+const csvParse = require("csv-parse/lib/sync");
+const stringLists = require("./sources/stringLists");
+const aboutMeGenerator = require("./sources/grammar/generators/aboutMe");
 
 function titleCase(s) {
-  return s.replace(/\w*/g, (txt) => {
+  return s.replace(/\w*/g, txt => {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
 
-var books = []
-fs.readFile('slidegen/sources/txt/books.csv', 'utf8', (err, data) => {
+var books = [];
+fs.readFile("slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   if (err) throw err;
   books = csvParse(data, {
     columns: true,
     cast: true
-  })
-  .map( record => {
+  }).map(record => {
     return {
-        title: record.original_title,
-        authors: record.authors
-      }
-  })
-})
+      title: record.original_title,
+      authors: record.authors
+    };
+  });
+});
 
-var jeopardy = []
-fs.readFile('slidegen/sources/txt/jeopardy.csv', 'utf8', (err, data) => {
+var jeopardy = [];
+fs.readFile("slidegen/sources/txt/jeopardy.csv", "utf8", (err, data) => {
   if (err) throw err;
   jeopardy = csvParse(data, {
     columns: true
   })
-  .map( record => {
-    return {
+    .map(record => {
+      return {
         category: titleCase(record.category),
         question: record.question,
         answer: record.answer
-      }
-  })
-  .filter( record => {
-    return !record.question.includes("<a href") // filter out image based jeopardy questions
-  })
-})
+      };
+    })
+    .filter(record => {
+      return !record.question.includes("<a href"); // filter out image based jeopardy questions
+    });
+});
 
-var quotes = []
-fs.readFile('slidegen/sources/txt/author-quote.txt', 'utf8', (err, data) => {
+var quotes = [];
+fs.readFile("slidegen/sources/txt/author-quote.txt", "utf8", (err, data) => {
   if (err) throw err;
-  let lines = data.split('\n')
+  let lines = data.split("\n");
 
-  quotes = lines.map( line => {
-    let splitILine = line.split('\t')
-    let author = splitILine[0]
-    let quote = splitILine[1]
+  quotes = lines.map(line => {
+    let splitILine = line.split("\t");
+    let author = splitILine[0];
+    let quote = splitILine[1];
     return {
       author: author,
       quote: quote
-    }
-  })
-})
+    };
+  });
+});
 
 async function wikiTitle() {
-  let article = await wikipedia.getRandomWikipediaArticle()
+  let article = await wikipedia.getRandomWikipediaArticle();
   return article.title;
 }
 
 async function wikiExtract() {
-  let article = await wikipedia.getRandomWikipediaArticle()
+  let article = await wikipedia.getRandomWikipediaArticle();
   return article.extract;
 }
 
 async function wikiExtractExcerpt() {
   // Gets one sentence from an extract
-  let article = await wikipedia.getRandomWikipediaArticle()
+  let article = await wikipedia.getRandomWikipediaArticle();
   let extractSentences = article.extract.split(".").filter(sentence => {
-    return !(sentence.trim() == "")
-  })
-  return randomChoice(extractSentences) + "."
+    return !(sentence.trim() == "");
+  });
+  return randomChoice(extractSentences) + ".";
 }
 
 async function wikiDescription() {
-  let article = await wikipedia.getRandomWikipediaArticle()
+  let article = await wikipedia.getRandomWikipediaArticle();
   return article.description;
 }
 
 async function wikiAll() {
-  return await wikipedia.getRandomWikipediaArticle()
+  return await wikipedia.getRandomWikipediaArticle();
 }
 
 function jargon() {
-  return jargonCreator.generateJargonPhrase()
+  return jargonCreator.generateJargonPhrase();
 }
 
 function shortJargon() {
-  return jargonCreator.generateShortJargonPhrase()
+  return jargonCreator.generateShortJargonPhrase();
 }
 
 function quoteAndAuthor() {
-  return randomChoice(quotes)
+  return randomChoice(quotes);
 }
 
 function quote() {
-  return randomChoice(quotes).quote
+  return randomChoice(quotes).quote;
 }
 
 function quoteAuthor() {
-  return randomChoice(quotes).author
+  return randomChoice(quotes).author;
 }
 
 function bookTitle() {
-  return randomChoice(books).title
+  return randomChoice(books).title;
 }
 
 function bookAuthor() {
-  return randomChoice(books).authors
+  return randomChoice(books).authors;
 }
 
 function jeopardyAnswer() {
-  return randomChoice(jeopardy).answer
+  return randomChoice(jeopardy).answer;
 }
 
 function jeopardyQuestion() {
-  return randomChoice(jeopardy).question
+  return randomChoice(jeopardy).question;
 }
 
 function jeopardyCategory() {
-  return randomChoice(jeopardy).category
+  return randomChoice(jeopardy).category;
 }
 
 async function redditNoContext() {
-  return await reddit.randomTitleFromSubreddit("nocontext")
+  return await reddit.randomTitleFromSubreddit("nocontext");
 }
 
 async function redditStrange() {
@@ -145,7 +145,7 @@ async function redditStrange() {
     "nosleep",
     "shittyadvice",
     "enlightenedbirdmen"
-  ])
+  ]);
 }
 
 async function redditAdvice() {
@@ -162,25 +162,25 @@ async function redditAdvice() {
     "writing",
     "christianity",
     "aspergers"
-  ])
+  ]);
 }
 async function redditPhrases() {
   return await reddit.randomTitleFromMultireddit([
     "showerthoughts",
     "pointlessstories"
-  ])
+  ]);
 }
 
 async function redditQuestion() {
-  return await reddit.randomTitleFromSubreddit("nostupidquestions")
+  return await reddit.randomTitleFromSubreddit("nostupidquestions");
 }
 
 function getToKnowQuestion() {
-  return randomChoice(stringLists.questionsToGetToKnowSomeone)
+  return randomChoice(stringLists.questionsToGetToKnowSomeone);
 }
 
 function philisophicalQuestion() {
-  return randomChoice(stringLists.philisophicalQuestions)
+  return randomChoice(stringLists.philisophicalQuestions);
 }
 
 async function compositeQuestion() {
@@ -238,13 +238,13 @@ async function compositeTopic() {
 
 async function compositeTitle() {
   const chooser = getWeightedRandomFunction({
-    "wiki": 10,
-    "book": 20,
-    "jeopardyAnswer": 50,
-    "jeopardyCategory": 20
-  })
+    wiki: 10,
+    book: 20,
+    jeopardyAnswer: 50,
+    jeopardyCategory: 20
+  });
 
-  const choice = chooser()
+  const choice = chooser();
 
   if (choice === "wiki") {
     return await wikiTitle();
@@ -296,7 +296,7 @@ async function compositeBullet() {
 }
 
 function aboutMe() {
-  return grammars.aboutMe();
+  return aboutMeGenerator.aboutMe();
 }
 
 // setTimeout(async () => {
@@ -338,4 +338,4 @@ module.exports = {
   compositeProfound,
   compositeTitle,
   aboutMe
-}
+};
