@@ -3,6 +3,8 @@ const tracery = require("tracery-grammar");
 // grammar sets
 const corpora = require("./corpora/corpora");
 const aboutMe = require("./composites/aboutMe");
+const chartText = require("./composites/chartText");
+const jargon = require("./composites/jargon");
 const specificNounSets = require("./composites/specificNounSets");
 const specificVerbSets = require("./composites/specificVerbSets");
 const specificAdjectiveSets = require("./composites/specificAdjectiveSets");
@@ -13,12 +15,16 @@ const utility = require("./composites/utility");
 // TODO separate NSFW things
 const grammar = tracery.createGrammar({
   ...corpora,
+
   ...aboutMe,
+  ...chartText,
+
   ...specificNounSets,
   ...specificVerbSets,
   ...specificAdjectiveSets,
   ...specificModifierSets,
-  ...utility
+  ...utility,
+  ...jargon
 });
 
 grammar.addModifiers(tracery.baseEngModifiers);

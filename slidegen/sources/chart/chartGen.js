@@ -1,8 +1,5 @@
-const grammar = require("../grammar/grammar");
 const ru = require("../../utils/randUtils");
-const randomChoice = require("../../utils/randUtils").randomChoice;
-const getWeightedRandomFunction = require("../../utils/randUtils")
-  .getWeightedRandomFunction;
+const chartTextGenerator = require("../grammar/generators/chartText");
 
 const maxWidth = "100%";
 
@@ -39,11 +36,11 @@ function getRandomBarChart() {
   const numData = ru.randomInt(2, 3);
 
   let widthVw = ru.randomInt(33, 36);
-  let heightVw = ru.randomInt(34, 42);
+  let heightVw = ru.randomInt(33, 36);
   const size = { x: widthVw, y: heightVw };
 
   const chartJsData = {
-    labels: ru.generatedArray(numData, () => grammar.flatten("#field#")),
+    labels: chartTextGenerator.barChartXAxisArray(numData),
     datasets: [barDatasetGenerator(numData)]
   };
   // console.log(data);
@@ -51,7 +48,7 @@ function getRandomBarChart() {
     legend: { display: false },
     title: {
       display: true,
-      text: grammar.flatten("#aboutMe#").match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+      text: chartTextGenerator.chartTitle().match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
       padding: 20
     },
@@ -89,7 +86,7 @@ function getRandomChart() {
   // DELETETHIS after testing
   return getRandomBarChart();
 
-  // let chartType = randomChoice('bar', 'line', 'pie');
+  // let chartType = ru.randomChoice('bar', 'line', 'pie');
 
   // if (chartType == 'bar') {
   //     return getRandomPieChart();

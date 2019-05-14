@@ -19,8 +19,8 @@ const deepClone = obj => {
   return Array.isArray(obj) && obj.length
     ? (clone.length = obj.length) && Array.from(clone)
     : Array.isArray(obj)
-      ? Array.from(obj)
-      : clone;
+    ? Array.from(obj)
+    : clone;
 };
 
 const mapNumRange = (num, inMin, inMax, outMin, outMax) =>
@@ -54,7 +54,8 @@ export default {
       const viewWidth = window.innerWidth;
 
       return {
-        title: mapNumRange(viewWidth, 400, 3840, 24, 56),
+        // TODO maybe rerender size without leaving the slide
+        title: mapNumRange(viewWidth, 400, 3840, 24, 72),
         barX: mapNumRange(viewWidth, 400, 3840, 8, 48),
         barY: mapNumRange(viewWidth, 400, 3840, 12, 36)
       };
