@@ -28,7 +28,9 @@
 
     <chart v-if="slideOptions.chart"
     :chart=slideOptions.chart
-    :style="chartStyles">
+    :style="chartStyles"
+    :vwWidth="slideOptions.chart.size.x"
+    :vwHeight="slideOptions.chart.size.y">
     </chart>
   </div>
 </template>
@@ -91,8 +93,8 @@ export default {
         right: chart.position.right || null,
         bottom: chart.position.bottom || null,
         left: chart.position.left || null,
-        width: chart.size.x || "auto",
-        height: chart.size.y || "auto",
+        height: `${chart.size.y}vw`,
+        width: `${chart.size.x}vw`,
         "max-height": "75%",
         "max-width": "50%"
       };

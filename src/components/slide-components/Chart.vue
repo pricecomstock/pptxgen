@@ -1,5 +1,5 @@
 <template>
-    <div class="chart-container" :style="containerStyles">
+    <div class="chart-container">
     <bar-chart v-if="chart"
         :chart-data="chart.chartJsData"
         :chart-options="chart.chartJsOptions"
