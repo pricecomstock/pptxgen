@@ -16,6 +16,7 @@
     "bulma-switch": "^2.0.0",
     "chart.js": "^2.8.0",
     "csv": "^5.0.1",
+    "eslint-plugin-jest": "^22.5.1",
     "express": "^4.16.4",
     "tracery-grammar": "^2.7.3",
     "vue": "^2.5.17",
@@ -39,7 +40,8 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "jest/globals": true
     },
     "extends": [
       "plugin:vue/essential",
@@ -48,7 +50,10 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
-    }
+    },
+    "plugins": [
+      "jest"
+    ]
   },
   "postcss": {
     "plugins": {
