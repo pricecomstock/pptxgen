@@ -1,9 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const basePath = "";
-
-console.time("loaded corpora");
+// console.time("loaded corpora");
 
 function reduceToNameAndSynonymArray(list) {
   return list.reduce((accumulator, currentItem) => {
@@ -144,7 +142,9 @@ const technicalFabric = loadJsonFromCorporaFile(
 )["technical fabrics"];
 
 // MATH
-const primeNumber = loadJsonFromCorporaFile("mathematics/primes.json").primes;
+const primeNumber = loadJsonFromCorporaFile(
+  "mathematics/primes.json"
+).primes.map(num => num.toString());
 
 // MEDICINE
 const disease = flat(
@@ -289,7 +289,16 @@ const oprahQuote = loadJsonFromCorporaFile("words/oprah_quotes.json")
   .oprahQuotes;
 const proverb = loadJsonFromCorporaFile("words/proverbs.json").proverbs;
 
-const harryPotterSpell = loadJsonFromCorporaFile("words/spells.json").spells;
+const harryPotterSpellName = loadJsonFromCorporaFile(
+  "words/spells.json"
+).spells.map(spell => spell.incantation);
+const harryPotterSpellEffect = loadJsonFromCorporaFile(
+  "words/spells.json"
+).spells.map(spell => spell.effect);
+const harryPotterSpell = loadJsonFromCorporaFile(
+  "words/spells.json"
+).spells.map(spell => `${spell.incantation} (${spell.type}): ${spell.effect}`);
+
 const stateOfInebriation = loadJsonFromCorporaFile(
   "words/states_of_drunkenness.json"
 ).states_of_drunkenness;
@@ -385,6 +394,8 @@ const corpora = {
   oprahQuote,
   proverb,
   harryPotterSpell,
+  harryPotterSpellName,
+  harryPotterSpellEffect,
   stateOfInebriation,
 
   object,
@@ -400,6 +411,6 @@ for (const key in corpora) {
   }
 }
 
-console.timeEnd("loaded corpora");
+// console.timeEnd("loaded corpora");
 
 module.exports = corpora;

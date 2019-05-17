@@ -28,6 +28,24 @@ const specificNounSets = {
     "#charity#",
     "#eventType#",
     "#appliance.s#"
+  ],
+  petAnimal: [
+    "dog",
+    "cat",
+    "fish",
+    "iguana",
+    "pig",
+    "puppy",
+    "kitty",
+    "rat",
+    "mouse",
+    "gerbil",
+    "hamster",
+    "snake",
+    "parrot",
+    "parakeet",
+    "millipede",
+    "bunny"
   ]
 };
 
