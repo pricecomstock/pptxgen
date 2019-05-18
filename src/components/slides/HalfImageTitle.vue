@@ -1,7 +1,13 @@
 <template>
   <div class="columns is-gapless center-parent">
-    <div v-if="slideOptions.imageLeft" class="column is-half fill-img-container half-image-image-container">
-      <img :src="slideOptions.imageUrl" alt="uh there should be an image here sorry">
+    <div
+      v-if="slideOptions.imageLeft"
+      class="column is-half fill-img-container half-image-image-container"
+    >
+      <img
+        :src="slideOptions.imageUrl"
+        alt="uh there should be an image here sorry"
+      />
     </div>
     <div class="column is-half half-image-text-container">
       <div class="container is-fluid center-parent">
@@ -13,8 +19,14 @@
         </p>
       </div>
     </div>
-    <div v-if="!slideOptions.imageLeft" class="column is-half fill-img-container half-image-image-container">
-      <img :src="slideOptions.imageUrl" alt="uh there should be an image here sorry">
+    <div
+      v-if="!slideOptions.imageLeft"
+      class="column is-half fill-img-container half-image-image-container"
+    >
+      <img
+        :src="slideOptions.imageUrl"
+        alt="uh there should be an image here sorry"
+      />
     </div>
   </div>
 </template>

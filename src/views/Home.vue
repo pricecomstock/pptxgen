@@ -6,7 +6,12 @@
           <div class="field">
             <div class="control">
               <label class="label is-large">Presenter's Name</label>
-              <input type="text" v-model="presenter" class="input is-medium" placeholder="An Expert">
+              <input
+                type="text"
+                v-model="presenter"
+                class="input is-medium"
+                placeholder="An Expert"
+              />
             </div>
           </div>
           <div class="field">
@@ -16,9 +21,14 @@
                 <span
                   v-for="(option, index) in numSlidesOptions"
                   class="button"
-                  :class="{'is-selected': numSlides === option, 'is-info': numSlides === option}"
+                  :class="{
+                    'is-selected': numSlides === option,
+                    'is-info': numSlides === option
+                  }"
                   @click="numSlides = option"
-                  :key="index">{{ option }}</span>
+                  :key="index"
+                  >{{ option }}</span
+                >
               </div>
             </div>
           </div>
@@ -26,7 +36,12 @@
             <div class="control">
               <label class="label is-large">Other Options</label>
               <div class="field">
-                <input id="questionsinput" v-model="questionPrompt" type="checkbox" class="switch is-outlined is-rounded is-info">
+                <input
+                  id="questionsinput"
+                  v-model="questionPrompt"
+                  type="checkbox"
+                  class="switch is-outlined is-rounded is-info"
+                />
                 <label for="questionsinput">Prompt for Questions</label>
               </div>
               <!-- <div class="field">
@@ -43,7 +58,11 @@
           </div> -->
         </div>
         <div class="buttons is-centered">
-          <a class="button is-info is-large" @click="loadSlides()" :class="{'is-loading':slideshowLoading}">
+          <a
+            class="button is-info is-large"
+            @click="loadSlides()"
+            :class="{ 'is-loading': slideshowLoading }"
+          >
             <span class="icon is-medium">
               <i class="fas fa-comment-alt"></i>
             </span>
@@ -52,16 +71,24 @@
         </div>
       </div>
     </div>
-    <hr v-if="slideshowLoaded">
+    <hr v-if="slideshowLoaded" />
     <div v-if="slideshowLoaded">
-      <button class="button is-outlined is-primary" @click="fullScreenPresentation()">
+      <button
+        class="button is-outlined is-primary"
+        @click="fullScreenPresentation()"
+      >
         <span class="icon is-medium">
           <i class="fas fa-expand"></i>
         </span>
         <span>Fullscreen (recommended)</span>
       </button>
       <div class="section columns is-centered">
-        <presentation @fullscreen="fullScreenPresentation()" id="presentation-window" :slideshow="slides" :theme="theme"></presentation>
+        <presentation
+          @fullscreen="fullScreenPresentation()"
+          id="presentation-window"
+          :slideshow="slides"
+          :theme="theme"
+        ></presentation>
       </div>
       <!-- <button class="button is-info is-outlined" @click="exportSlide()">Export Slide as Image</button>
       <a :href="downloadableImage" v-if="downloadableImage != ''" class="button is-success" @click="exportSlide()">

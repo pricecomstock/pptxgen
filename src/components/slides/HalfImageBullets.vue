@@ -1,6 +1,10 @@
 <template>
   <div class="columns is-gapless center-parent">
-    <div v-if="slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo" :style="[backgroundStyles]">
+    <div
+      v-if="slideOptions.imageLeft"
+      class="column is-half has-bg-img center-parent darken-pseudo"
+      :style="[backgroundStyles]"
+    >
       <div class="container is-fluid center-parent">
         <p class="half-image-title" :style="titleStyles">
           {{ slideOptions.title }}
@@ -11,7 +15,12 @@
       </div>
     </div>
     <div class="column is-half pres-body">
-      <ul v-if="!slideOptions.ordered" class="has-text-left" :class="listClasses" :style="bulletStyles">
+      <ul
+        v-if="!slideOptions.ordered"
+        class="has-text-left"
+        :class="listClasses"
+        :style="bulletStyles"
+      >
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
@@ -22,7 +31,11 @@
         </li>
       </ol>
     </div>
-    <div v-if="!slideOptions.imageLeft" class="column is-half has-bg-img center-parent darken-pseudo" :style="[backgroundStyles]">
+    <div
+      v-if="!slideOptions.imageLeft"
+      class="column is-half has-bg-img center-parent darken-pseudo"
+      :style="[backgroundStyles]"
+    >
       <div class="container is-fluid center-parent">
         <div>
           <p class="half-image-title" :style="titleStyles">

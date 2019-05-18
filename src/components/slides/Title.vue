@@ -1,5 +1,8 @@
 <template>
-  <div class="slide center-parent has-bg-img darken-pseudo" :style="[backgroundStyles]">
+  <div
+    class="slide center-parent has-bg-img darken-pseudo"
+    :style="[backgroundStyles]"
+  >
     <div class="title-body">
       <div class="container is-fluid">
         <p class="pres-title title-title">

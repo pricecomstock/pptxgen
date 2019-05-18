@@ -1,10 +1,7 @@
 <template>
   <div class="slide">
-    <div
-      class="pres-title slide-title has-text-left"
-      :style="titleStyles"
-    >
-      {{slideOptions.title}}
+    <div class="pres-title slide-title has-text-left" :style="titleStyles">
+      {{ slideOptions.title }}
     </div>
     <div class="has-text-left">
       <ul
@@ -12,10 +9,7 @@
         class="bullet-bullets pres-body"
         :style="bulletStyles"
       >
-        <li
-          v-for="(bullet, index) in slideOptions.bullets"
-          :key="index"
-        >
+        <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
       </ul>
@@ -24,10 +18,7 @@
         class="bullet-numbers pres-body"
         :style="bulletStyles"
       >
-        <li
-          v-for="(bullet, index) in slideOptions.bullets"
-          :key="index"
-        >
+        <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
       </ol>
@@ -36,10 +27,7 @@
         class="bullet-plain pres-body"
         :style="bulletStyles"
       >
-        <li
-          v-for="(bullet, index) in slideOptions.bullets"
-          :key="index"
-        >
+        <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
         </li>
       </ul>
@@ -50,12 +38,12 @@
       :style="imageStyles[index]"
       alt="Uh image"
       :key="index"
-    >
+    />
 
     <chart
       v-if="slideOptions.chart"
       :key="`chart-${slideNumber}`"
-      :chart=slideOptions.chart
+      :chart="slideOptions.chart"
       :style="chartStyles"
       :vwWidth="slideOptions.chart.size.x"
       :vwHeight="slideOptions.chart.size.y"

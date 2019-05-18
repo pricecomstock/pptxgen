@@ -2,7 +2,7 @@
   <div id="app">
     <pcnav></pcnav>
     <div class="section">
-      <router-view/>
+      <router-view />
     </div>
     <!-- <pcfoot></pcfoot> -->
   </div>
