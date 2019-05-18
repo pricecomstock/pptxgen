@@ -1,11 +1,15 @@
 const chartText = {
+  pollGroup: ["#occupation.s#", "experts in #field#"],
   chartTitle: [
     "",
     "",
     "#noun# comparison",
     "#adjective# comparison",
     "#field#",
-    "#environmentalHazard#"
+    "#environmentalHazard#",
+    "What's better?",
+    "I polled a group of #pollGroup#",
+    "What #pollGroup# prefer"
   ],
   barChartXAxis1: [
     "#noun#",
@@ -19,13 +23,15 @@ const chartText = {
     "#bodyFluid#",
     "#city#",
     "#sportsTeam#",
-    "#computerTechnology#"
+    "#computerTechnology#",
+    "#netflixGenre#"
   ],
   barChartXAxis2: [
     "#verb.ing#",
     "#ergativeVerb#",
     "#infinitiveVerb#",
-    "#emoji#"
+    "#emoji#",
+    "#mood#"
   ]
 };
 

@@ -20,7 +20,13 @@ const specificNounSets = {
   ],
 
   fightingMove: ["#wrestlingMove#", "#streetFighterMove#"],
-  field: ["#iabCategory#", "#industry#", "#academicSubject#", "#artType#"],
+  field: [
+    "#iabCategory#",
+    "#industry#",
+    "#academicSubject#",
+    "#artType#",
+    "#netflixGenre"
+  ],
   opinionTarget: [
     "#field#",
     "#artType#",
