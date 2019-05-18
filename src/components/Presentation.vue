@@ -5,12 +5,21 @@
     :style="themeStyles"
     @keyup.left="previousSlide()"
     @keyup.right="nextSlide()"
-    @keypress.enter="nextSlide()">
+    @keypress.enter="nextSlide()"
+  >
     <div
       class="tag slide-counter"
-      :class="{'is-dark': currentSlideIndex != (this.slideshow.length - 1), 'is-danger': currentSlideIndex === (this.slideshow.length - 1)}"
-      v-if="currentSlideIndex !== 0"
-      >{{currentSlideIndex + 1}}/{{this.slideshow.length}}</div>
+      :class="{
+        'is-dark': currentSlideIndex != this.slideshow.length - 2,
+        'is-danger': currentSlideIndex === this.slideshow.length - 2
+      }"
+      v-if="
+        currentSlideIndex !== 0 &&
+          currentSlideIndex !== this.slideshow.length - 1
+      "
+    >
+      {{ currentSlideIndex + 1 }}/{{ this.slideshow.length - 1 }}
+    </div>
     <div @click="previousSlide()" v-if="isMobile" class="slide-mover left">
       <span class="icon is-large">
         <i class="fas fa-2x fa-arrow-left"></i>
@@ -22,11 +31,12 @@
       </span>
     </div>
     <keep-alive>
-      <component 
-      id="current-slide"
-      :slide-options="currentSlide.options"
-      :slide-number="currentSlideIndex"
-      :is="currentSlideComponent"></component>
+      <component
+        id="current-slide"
+        :slide-options="currentSlide.options"
+        :slide-number="currentSlideIndex"
+        :is="currentSlideComponent"
+      ></component>
     </keep-alive>
   </div>
 </template>
