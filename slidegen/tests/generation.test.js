@@ -1,5 +1,5 @@
 const grammar = require("../sources/grammar/grammar");
-const fs = require("fs");
+// const fs = require("fs");
 // console.log(Object.keys(grammar.raw));
 test("No generations get ((unresolved))", () => {
   let keys = Object.keys(grammar.raw);
@@ -47,9 +47,9 @@ test("Every #template# has a corresponding template in grammar", () => {
       });
     }
   }
-  fs.writeFileSync(
-    "./slidegen/tests/output/grammar.json",
-    JSON.stringify(grammarRaw),
-    "utf8"
-  );
+  // fs.writeFileSync(
+  //   "./slidegen/tests/output/grammar.json",
+  //   JSON.stringify(grammarRaw),
+  //   "utf8"
+  // );
 });
