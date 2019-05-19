@@ -21,7 +21,24 @@
     </div>
     <div class="navbar-menu" :class="{ 'is-active': showNav }" id="navMenu">
       <div class="navbar-start">
-        <!-- <router-link class="navbar-item" to="/home" exact-active-class="is-active">Home</router-link> -->
+        <router-link
+          class="navbar-item"
+          to="/present"
+          exact-active-class="is-active"
+          >Present</router-link
+        >
+        <router-link
+          class="navbar-item"
+          to="/about"
+          exact-active-class="is-active"
+          >About</router-link
+        >
+        <router-link
+          class="navbar-item"
+          to="/tips"
+          exact-active-class="is-active"
+          >Tips</router-link
+        >
         <!-- <div class="navbar-item has-dropdown is-hoverable" @mouseover="showTopDropdown = true" @mouseout="showTopDropdown = false">
           <router-link class="navbar-link" to="/about" :class="{'is-active': inAbout }">About</router-link>
           <div class="navbar-dropdown">

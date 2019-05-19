@@ -1,10 +1,10 @@
-var reddit = require('./sources/reddit')
-const wikipedia = require('./sources/wikipedia')
+var reddit = require("./sources/reddit");
+const wikipedia = require("./sources/wikipedia");
 
 const imageFunctions = {
   async landscape() {
-    let url = await reddit.randomImageFromSubreddit("earthporn")
-    return url
+    let url = await reddit.randomImageFromSubreddit("earthporn");
+    return url;
   },
   async background() {
     return await reddit.randomImageFromMultireddit([
@@ -22,27 +22,23 @@ const imageFunctions = {
       "cityporn",
       "ruralporn",
       "spaceporn"
-    ])
+    ]);
   },
   async animal() {
-    return await reddit.randomImageFromMultireddit([
-      "aww",
-      "doggos",
-      "cats"
-    ])
+    return await reddit.randomImageFromMultireddit(["aww", "doggos", "cats"]);
   },
   async gif() {
     return await reddit.randomImageOrGifFromMultireddit([
       "gifs",
       "highqualitygifs"
-    ]) 
+    ]);
   },
   async interesting() {
     return await reddit.randomImageOrGifFromMultireddit([
       "crappydesign",
       "design",
       "graffiti"
-    ]) 
+    ]);
   },
   async graph() {
     return await reddit.randomImageOrGifFromMultireddit([
@@ -52,22 +48,24 @@ const imageFunctions = {
       "mapporn",
       "wordcloud",
       "redactedcharts"
-    ])
+    ]);
   },
   async stockPhoto() {
-    return await reddit.randomImageFromSubreddit([
-      "wtfstockphotos"
-    ])
+    return await reddit.randomImageFromSubreddit(["wtfstockphotos"]);
   },
   async wiki() {
     let imageUrl = null;
 
     while (!imageUrl) {
       let article = await wikipedia.getRandomWikipediaArticle();
-      imageUrl = article.originalimage.source;
+      try {
+        imageUrl = article.originalimage.source;
+      } catch (error) {
+        imageUrl = null;
+      }
     }
-    
-    return imageUrl
+
+    return imageUrl;
   }
 };
 
