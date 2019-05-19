@@ -81,3 +81,11 @@ test("No unclosed ## in grammar", () => {
     }
   }
 });
+
+test("Grammar correctly adds -ing", () => {
+  grammar.pushRules("stepTest", ["step"]);
+  expect(grammar.flatten("#stepTest.ing#")).toBe("stepping");
+
+  grammar.pushRules("nameTest", ["name"]);
+  expect(grammar.flatten("#nameTest.ing#")).toBe("naming");
+});

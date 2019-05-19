@@ -33,8 +33,11 @@ const grammar = tracery.createGrammar(grammarSpec);
 grammar.addModifiers(tracery.baseEngModifiers);
 grammar.addModifiers({
   ing(s) {
-    // Add -ing, replacing "e" if the word ends in it
-    return s.replace(/e?$/, "ing");
+    if (s.match(/[aeiou][^0-9aeiou]$/gi)) {
+      return s.replace(/(\w)$/, "$1$1ing");
+    } else {
+      return s.replace(/e?$/, "ing");
+    }
   },
   lowercase(s) {
     return s.toLowerCase();
