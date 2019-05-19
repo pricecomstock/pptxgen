@@ -3,7 +3,7 @@ const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
 const randomInt = require("./utils/randUtils").randomInt;
 // const randomChoice = require("./utils/randUtils").randomChoice;
-const randomColor = require("./utils/randUtils").randomColor;
+const randomDarkHexColor = require("./utils/randUtils").randomDarkHexColor;
 const getWeightedRandomFunction = require("./utils/randUtils")
   .getWeightedRandomFunction;
 
@@ -91,7 +91,7 @@ function generateTheme() {
   let colors = [];
   let numGradientSteps = numGradientStepsPicker();
   for (let i = 0; i < numGradientSteps; i++) {
-    colors.push(randomColor());
+    colors.push(randomDarkHexColor());
   }
 
   const gradientType =

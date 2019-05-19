@@ -2,7 +2,7 @@ const grammar = require("../grammar");
 const ru = require("../../../utils/randUtils");
 
 function chartTitle() {
-  return grammar.flatten("#chartTitle#");
+  return grammar.flatten("#chartTitle.capitalize#");
 }
 
 const chooseBarXGenerationTemplate = ru.getWeightedRandomFunction({
@@ -10,18 +10,24 @@ const chooseBarXGenerationTemplate = ru.getWeightedRandomFunction({
   barChartXAxis2: 1
 });
 function barChartXAxisArray(count) {
-  generationTemplate = chooseBarXGenerationTemplate();
+  const generationTemplate = chooseBarXGenerationTemplate();
   return ru.generatedArray(count, () =>
     grammar.flatten(`#${generationTemplate}#`)
   );
 }
-function barChartXAxisSingle(count) {
-  generationTemplate = chooseBarXGenerationTemplate();
+function barChartXAxisSingle() {
+  const generationTemplate = chooseBarXGenerationTemplate();
   return grammar.flatten(`#${generationTemplate}#`);
+}
+
+function lineChartLabel() {
+  // generationTemplate = chooseBarXGenerationTemplate();
+  return grammar.flatten(`#lineChartLabel#`);
 }
 
 module.exports = {
   chartTitle,
   barChartXAxisSingle,
-  barChartXAxisArray
+  barChartXAxisArray,
+  lineChartLabel
 };

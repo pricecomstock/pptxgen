@@ -1,10 +1,11 @@
 <template>
   <div class="chart-container">
-    <bar-chart
+    <component
+      :is="chartComponent"
       v-if="chart"
       :chart-data="chart.chartJsData"
       :chart-options="modifiedChartJsOptions"
-    ></bar-chart>
+    ></component>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ const mapNumRange = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
 import barChart from "./BarChart.vue";
+import lineChart from "./LineChart.vue";
 export default {
   props: {
     vwHeight: {
@@ -43,6 +45,16 @@ export default {
     }
   },
   computed: {
+    chartComponent() {
+      const type = this.chart.chartType;
+      if (type == "bar") {
+        return "bar-chart";
+      } else if (type == "line") {
+        return "line-chart";
+      } else {
+        return null;
+      }
+    },
     containerStyles() {
       return {
         position: "relative",
@@ -77,7 +89,8 @@ export default {
     }
   },
   components: {
-    barChart
+    barChart,
+    lineChart
   }
 };
 </script>

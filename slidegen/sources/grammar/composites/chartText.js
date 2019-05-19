@@ -11,6 +11,8 @@ const chartText = {
     "I polled a group of #pollGroup#",
     "What #pollGroup# prefer"
   ],
+
+  // Bar Charts
   barChartXAxis1: [
     "#noun#",
     "#fightingMove#",
@@ -32,6 +34,11 @@ const chartText = {
     "#infinitiveVerb#",
     "#emoji#",
     "#mood#"
+  ],
+
+  // Line Charts
+  lineChartLabel: [
+    "#barChartXAxis1#" // TODO shhhh this is fine it doesn't need it's own data
   ]
 };
 

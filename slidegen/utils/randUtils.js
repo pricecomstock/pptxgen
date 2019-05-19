@@ -5,17 +5,17 @@ function randomChoice(array) {
 function randomInt(min, max) {
   let exMax = max + 1;
   let range = exMax - min;
-  return Math.floor(Math.random()*range) + min;
+  return Math.floor(Math.random() * range) + min;
 }
 
 function norm() {
-  const precision = 6 // the higher this goes, the better approx of norm we get
+  const precision = 6; // the higher this goes, the better approx of norm we get
   let rand = 0;
-  for (let i=0; i<precision; i++) {
+  for (let i = 0; i < precision; i++) {
     rand += Math.random();
   }
 
-  return rand / precision
+  return rand / precision;
 }
 
 function normInt(min, max) {
@@ -23,35 +23,72 @@ function normInt(min, max) {
 }
 
 function randomIntArray(len, min, max, normalDistributed) {
-  let arr = []
+  let arr = [];
 
   if (normalDistributed) {
     for (let i = 0; i < len; i++) {
-      arr.push(normInt(min, max))
+      arr.push(normInt(min, max));
     }
   } else {
     for (let i = 0; i < len; i++) {
-      arr.push(randomInt(min, max))
+      arr.push(randomInt(min, max));
     }
   }
 
-  return arr
+  return arr;
 }
 
-function randomColor() {
-  let r = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
-  let g = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
-  let b = (Math.random()*0xBB<<0).toString(16).padStart(2, '0')
+function randomDarkHexColor() {
+  let r = ((Math.random() * 0xbb) << 0).toString(16).padStart(2, "0");
+  let g = ((Math.random() * 0xbb) << 0).toString(16).padStart(2, "0");
+  let b = ((Math.random() * 0xbb) << 0).toString(16).padStart(2, "0");
   return "#" + r + g + b;
 }
 
+class rbgaColor {
+  constructor(r, g, b, a) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.a = a || 1;
+  }
+
+  toString() {
+    return `rgba(${this.r},${this.g},${this.b},${this.a})`;
+  }
+
+  withAlpha(cloneAlpha) {
+    return new rbgaColor(this.r, this.g, this.b, cloneAlpha);
+  }
+
+  toStringHex(includeAlpha) {
+    let intTo2DigitHex = val255 => val255.toString(16).padStart(2, "0");
+
+    return `#${intTo2DigitHex(this.r)}${intTo2DigitHex(this.g)}${intTo2DigitHex(
+      this.b
+    )}${includeAlpha ? intTo2DigitHex(Math.floor(this.a * 255)) : ""}`;
+  }
+}
+
+function randomAnyRBGAColor(min, max, alpha) {
+  const minColorValue = min || 0;
+  const maxColorValue = max || 255;
+  return new rbgaColor(
+    randomInt(minColorValue, maxColorValue),
+    randomInt(minColorValue, maxColorValue),
+    randomInt(minColorValue, maxColorValue),
+    alpha || Math.random()
+  );
+}
 /* This function takes an object like
 { 'a': 10, 'b': 40, 'c': 50 }
 and will create a function that when called, will return a random key weighted by its value.
 Easiest way is to treat the weight as a percentage
 */
 function getWeightedRandomFunction(spec) {
-  var i, j, table=[];
+  var i,
+    j,
+    table = [];
   // const totalWeight = Object.keys(spec).reduce( (prev, cur) => {
   //   return prev + cur;
   // });
@@ -60,22 +97,24 @@ function getWeightedRandomFunction(spec) {
     // The constant 10 below should be computed based on the
     // weights in the spec for a correct and optimal table size.
     // E.g. the spec {0:0.999, 1:0.001} will break this impl.
-    for (j=0; j<spec[i]; j++) {
+    for (j = 0; j < spec[i]; j++) {
       table.push(i);
     }
   }
 
   return function() {
     return table[Math.floor(Math.random() * table.length)];
-  }
+  };
 }
 
 function oneInN(n) {
-  return Math.random() < (1/n);
+  return Math.random() < 1 / n;
 }
 
 function generatedArray(length, generatorFunction) {
-  return Array(length).fill().map((_value, index) => generatorFunction(index))
+  return Array(length)
+    .fill()
+    .map((_value, index) => generatorFunction(index));
 }
 
 // let testSpec = {
@@ -97,6 +136,7 @@ module.exports = {
   getWeightedRandomFunction,
   randomIntArray,
   oneInN,
-  randomColor,
-  generatedArray
+  randomDarkHexColor: randomDarkHexColor,
+  generatedArray,
+  randomAnyRBGAColor
 };

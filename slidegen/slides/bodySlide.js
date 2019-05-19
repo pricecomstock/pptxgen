@@ -1,24 +1,24 @@
 const randImg = require("../randImage");
 const randString = require("../randString");
-const randomChoice = require('../utils/randUtils').randomChoice
-const randomInt = require('../utils/randUtils').randomInt
-const normInt = require('../utils/randUtils').normInt
-const getWeightedRandomFunction = require('../utils/randUtils').getWeightedRandomFunction
-const stringLists = require('../sources/stringLists')
+const randomChoice = require("../utils/randUtils").randomChoice;
+const randomInt = require("../utils/randUtils").randomInt;
+const getWeightedRandomFunction = require("../utils/randUtils")
+  .getWeightedRandomFunction;
+const stringLists = require("../sources/stringLists");
 const chartGen = require("../sources/chart/chartGen");
 
 const randomNumBullets = getWeightedRandomFunction({
   1: 45,
   2: 53,
   3: 2
-})
+});
 
 async function getBullets(numBullets) {
-  let bullets = []
-  for (let i=0; i<numBullets; i++) {
-    bullets.push(randString.compositeBullet())
+  let bullets = [];
+  for (let i = 0; i < numBullets; i++) {
+    bullets.push(randString.compositeBullet());
   }
-  let bulletStrings = await Promise.all(bullets)
+  let bulletStrings = await Promise.all(bullets);
   // console.debug(bulletStrings)
   return bulletStrings;
 }
@@ -26,7 +26,7 @@ async function getBullets(numBullets) {
 function assembleStandardSlide(title, bullets, image_url, pt, ol) {
   const plaintext = pt || Math.random < 0.2;
   const ordered = ol || false;
-  const imageWidth = randomInt(35,55)
+  const imageWidth = randomInt(35, 55);
   return {
     type: "Bullets",
     options: {
@@ -35,11 +35,11 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
       plaintext: plaintext,
       ordered: ordered,
       maxWidth: `${87 - imageWidth}%`,
-      contentImages:[
+      contentImages: [
         {
           url: image_url,
           position: {
-            bottom: `${randomInt(2,12)}%`,
+            bottom: `${randomInt(2, 12)}%`,
             right: "2%"
           },
           width: `${imageWidth}%`
@@ -49,11 +49,10 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
   };
 }
 
-
 function assembleChartSlide(title, bullets, chartData, pt, ol) {
   const plaintext = pt || Math.random < 0.2;
   const ordered = ol || false;
-  const imageWidth = randomInt(35,55)
+  const imageWidth = randomInt(35, 55);
   return {
     type: "Bullets",
     options: {
@@ -63,11 +62,12 @@ function assembleChartSlide(title, bullets, chartData, pt, ol) {
       ordered: ordered,
       maxWidth: `${87 - imageWidth}%`,
       chart: {
+        chartType: chartData.chartType,
         chartJsData: chartData.chartJsData,
         chartJsOptions: chartData.chartJsOptions,
         position: {
-          bottom: `${randomInt(2,12)}%`,
-          right: `${randomInt(2,6)}%`
+          bottom: `${randomInt(2, 12)}%`,
+          right: `${randomInt(2, 6)}%`
         },
         size: chartData.size,
         width: `${imageWidth}%`
@@ -77,9 +77,9 @@ function assembleChartSlide(title, bullets, chartData, pt, ol) {
 }
 
 function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
-  const imageLeft = il || Math.random() < 0.2
-  const plaintext = pt || Math.random() < 0.2
-  const ordered = ol || Math.random() < 0.3
+  const imageLeft = il || Math.random() < 0.2;
+  const plaintext = pt || Math.random() < 0.2;
+  const ordered = ol || Math.random() < 0.3;
   let slide = {
     type: "HalfImageBullets",
     options: {
@@ -90,21 +90,19 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
       plaintext: plaintext,
       ordered: ordered
     }
-  }
+  };
 
-  return slide
+  return slide;
 }
-
 
 // TODO use JS destructuring assignment to make these multi-await parameters work better?
 
-
 async function generateBodySlideWithGraph() {
   return assembleStandardSlide(
-      await randString.compositeTitle(),
-      await getBullets(randomNumBullets()),
-      await randImg.graph()
-    );
+    await randString.compositeTitle(),
+    await getBullets(randomNumBullets()),
+    await randImg.graph()
+  );
 }
 
 async function generateWikiImageSlide() {
@@ -136,26 +134,26 @@ async function generateStockPhotoSlide() {
 async function generateChartSlide() {
   return assembleChartSlide(
     await randString.compositeTitle(),
-    await getBullets(randomNumBullets()),
+    await getBullets(1),
     await chartGen.getRandomChart()
-  )
+  );
 }
 
 async function generateAboutMeSlide() {
   const bulletCount = randomInt(2, 4);
-  let bullets = []
+  let bullets = [];
   for (let i = 0; i < bulletCount; i++) {
-    bullets.push(randString.aboutMe())
-  }  
-  let bulletStrings = await Promise.all(bullets)
+    bullets.push(randString.aboutMe());
+  }
+  let bulletStrings = await Promise.all(bullets);
   return {
     type: "Bullets",
     options: {
       title: randomChoice(stringLists.aboutMeTitles),
       bullets: bulletStrings
-    }  
-  }  
-}  
+    }
+  };
+}
 
 async function generateQuoteHalfImage() {
   return {
@@ -165,7 +163,7 @@ async function generateQuoteHalfImage() {
       imageUrl: await randImg.background(),
       imageLeft: Math.random() < 0.5
     }
-  }
+  };
 }
 
 async function generateExtractHalfImage() {
@@ -176,7 +174,7 @@ async function generateExtractHalfImage() {
       imageUrl: await randImg.background(),
       imageLeft: Math.random() < 0.5
     }
-  }
+  };
 }
 
 async function generateHalfBulletSlide() {
@@ -184,7 +182,7 @@ async function generateHalfBulletSlide() {
     await randString.compositeTitle(),
     await getBullets(randomNumBullets()),
     await randImg.background()
-  )
+  );
 }
 
 async function generateWeirdThoughtSlide() {
@@ -195,7 +193,7 @@ async function generateWeirdThoughtSlide() {
     true,
     false,
     true
-  )
+  );
 }
 
 module.exports = {
