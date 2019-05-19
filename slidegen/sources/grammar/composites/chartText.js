@@ -1,6 +1,6 @@
 const chartText = {
   pollGroup: ["#occupation.s#", "experts in #field#"],
-  chartTitle: [
+  barChartTitle: [
     "",
     "",
     "#noun# comparison",
@@ -37,8 +37,32 @@ const chartText = {
   ],
 
   // Line Charts
+
   lineChartLabel: [
     "#barChartXAxis1#" // TODO shhhh this is fine it doesn't need it's own data
+  ],
+
+  trendable: [
+    "#adjective#",
+    "#verb.ing#",
+    "#ergativeVerb#",
+    "#mood#",
+    "#netflixGenre#",
+    "#musicGenre#",
+    "#noun.s#",
+    "#personalNoun.s#",
+    "#organization#",
+    "#instrument.s#",
+    "#stateOfInebriation#",
+    "#toxicChemical#",
+    "#disease#"
+  ],
+
+  trendLineChartTitle: [
+    "#trendable# over time",
+    "popularity of #trendable#",
+    "#trendable# trends",
+    "history of #trendable#"
   ]
 };
 

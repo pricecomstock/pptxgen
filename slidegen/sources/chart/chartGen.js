@@ -15,12 +15,19 @@ function createChart(chartType, size, chartJsData, chartJsOptions, maxWidth) {
 
 function getRandomBarChart() {
   const barDatasetGenerator = dataPointCount => {
+    const colors = ru.generatedArray(dataPointCount, () =>
+      ru.randomAnyRBGAColor(0, 150, 1)
+    );
+    const transparent = ru.oneInN(3);
     return {
       // label: grammar.flatten('#field#'),
       // data: ru.randomIntArray(dataPointCount,1,5,false),
       data: ru.randomIntArray(dataPointCount, 1, 10, false),
-      backgroundColor: ru.generatedArray(dataPointCount, ru.randomDarkHexColor)
-      // borderSkipped: true
+      backgroundColor: colors.map(
+        color => color.withAlpha(0.3).toStringHex(transparent) // only include alpha if transparent
+      ),
+      borderColor: colors.map(color => color.toStringHex()),
+      borderWidth: transparent ? 4 : 0
     };
   };
 
@@ -36,10 +43,15 @@ function getRandomBarChart() {
   };
   // console.log(data);
   const chartJsOptions = {
-    legend: { display: false },
+    legend: {
+      display: false,
+      labels: {
+        fontSize: 36
+      }
+    },
     title: {
       display: true,
-      text: chartTextGenerator.chartTitle().match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+      text: chartTextGenerator.barChartTitle().match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
       padding: 20
     },
@@ -67,6 +79,11 @@ function getRandomBarChart() {
         top: 0,
         bottom: 15
       }
+    },
+    elements: {
+      rectangle: {
+        borderWidth: 8
+      }
     }
   };
 
@@ -74,11 +91,27 @@ function getRandomBarChart() {
 }
 
 function getRandomLineChart() {
-  const lineDatasetGenerator = (dataPointCount, isAreaChart) => {
+  // TOOLS
+  const lineChartTypes = {
+    TREND: "trend",
+    MULTILINE: "multiline"
+  };
+  const pickLineChartType = ru.getWeightedRandomFunction({
+    [lineChartTypes.TREND]: 3
+    // TODO Uncomment and add multiline charts
+    // [lineChartTypes.MULTILINE]: 1
+  });
+
+  // Yes this scope is wonky and it would be great if this was a Class for better
+  // State Management instead but this is where we are
+  const lineDatasetGenerator = (dataPointCount, isAreaChart, lineChartType) => {
     const isDashed = ru.oneInN(3);
-    const color = ru.randomAnyRBGAColor(0, 170, 1);
+    const color = ru.randomAnyRBGAColor(0, 150, 1);
     return {
-      label: chartTextGenerator.lineChartLabel(),
+      label:
+        lineChartType !== lineChartTypes.TREND
+          ? chartTextGenerator.lineChartLabel()
+          : "",
 
       borderColor: color.toStringHex(),
       borderDash: isDashed ? ru.randomIntArray(4, 5, 25, false) : [],
@@ -86,36 +119,58 @@ function getRandomLineChart() {
       fill: isAreaChart ? "origin" : false,
       backgroundColor: color.withAlpha(0.3).toStringHex(true),
 
-      data: ru.randomIntArray(dataPointCount, 1, 10, false)
+      data: ru.randomIntArray(dataPointCount, 1, 100, false)
     };
   };
 
   const getRandomDatasetCount = ru.getWeightedRandomFunction({
-    1: 30,
     2: 60,
-    3: 7,
+    3: 37,
     40: 3
   });
 
+  const getRandomYearArray = numberOfDataPoints => {
+    const endYear = new Date().getFullYear(); //- ru.randomInt(-10, 20);
+    const interval = ru.randomInt(1, 12);
+    const years = ru.generatedArray(numberOfDataPoints, index => {
+      return endYear - interval * (numberOfDataPoints - index - 1);
+    });
+
+    return years;
+  };
+
+  const lineChartType = pickLineChartType();
   const dataPointCount = ru.randomInt(4, 8);
-  const datasetCount = getRandomDatasetCount();
+  const datasetCount =
+    lineChartType === lineChartTypes.TREND ? 1 : getRandomDatasetCount();
 
   let widthVw = ru.randomInt(33, 36);
   let heightVw = ru.randomInt(33, 36);
   const size = { x: widthVw, y: heightVw };
 
   const chartJsData = {
-    labels: ru.randomIntArray(dataPointCount, 1, 10),
+    labels: getRandomYearArray(dataPointCount),
     datasets: ru.generatedArray(datasetCount, () =>
-      lineDatasetGenerator(dataPointCount, ru.oneInN(5))
+      lineDatasetGenerator(dataPointCount, ru.oneInN(5), lineChartType)
     )
   };
   // console.log(data);
   const chartJsOptions = {
-    legend: { display: true }, // Line chart needs this
+    legend: {
+      display: lineChartType !== lineChartTypes.TREND,
+      position: "bottom",
+      labels: {
+        fontSize: 36
+      }
+    }, // Line chart needs this
     title: {
       display: true,
-      text: chartTextGenerator.chartTitle().match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+      text:
+        (lineChartType === lineChartTypes.TREND
+          ? chartTextGenerator.trendLineChartTitle()
+          : chartTextGenerator.barChartTitle()
+        ) // TODO implement multiline charts
+          .match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
       padding: 20
     },
@@ -142,6 +197,11 @@ function getRandomLineChart() {
         right: 25,
         top: 0,
         bottom: 15
+      }
+    },
+    elements: {
+      line: {
+        borderWidth: 10
       }
     }
   };

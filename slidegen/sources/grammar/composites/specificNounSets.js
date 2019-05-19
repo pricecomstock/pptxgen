@@ -25,7 +25,7 @@ const specificNounSets = {
     "#industry#",
     "#academicSubject#",
     "#artType#",
-    "#netflixGenre"
+    "#netflixGenre#"
   ],
   opinionTarget: [
     "#field#",

@@ -62,28 +62,58 @@ export default {
         width: `${this.vwWidth}vw`
       };
     },
-    chartFontSizes() {
+    chartScaledOptions() {
       const viewWidth = window.innerWidth;
 
       return {
-        // TODO maybe rerender size without leaving the slide
-        title: mapNumRange(viewWidth, 400, 3840, 24, 72),
-        barX: mapNumRange(viewWidth, 400, 3840, 8, 48),
-        barY: mapNumRange(viewWidth, 400, 3840, 12, 36)
+        fontSizes: {
+          title: mapNumRange(viewWidth, 400, 3840, 24, 72),
+          legend: mapNumRange(viewWidth, 400, 3840, 12, 36),
+          barX: mapNumRange(viewWidth, 400, 3840, 8, 48),
+          barY: mapNumRange(viewWidth, 400, 3840, 12, 36)
+        },
+        lineBorderWidth: mapNumRange(viewWidth, 400, 3840, 1, 15),
+        rectangleBorderWidth: mapNumRange(viewWidth, 400, 3840, 1, 15)
       };
     },
     modifiedChartJsOptions() {
       let modifiedOptions = deepClone(this.chart.chartJsOptions);
 
-      modifiedOptions.title.fontSize = this.chartFontSizes.title;
-      modifiedOptions.scales.yAxes = modifiedOptions.scales.yAxes.map(axis => {
-        axis.ticks.fontSize = this.chartFontSizes.barY;
-        return axis;
-      });
-      modifiedOptions.scales.xAxes = modifiedOptions.scales.xAxes.map(axis => {
-        axis.ticks.fontSize = this.chartFontSizes.barX;
-        return axis;
-      });
+      if (modifiedOptions.title) {
+        modifiedOptions.title.fontSize = this.chartScaledOptions.fontSizes.title;
+      }
+
+      if (modifiedOptions.legend.labels) {
+        modifiedOptions.legend.labels.fontSize = this.chartScaledOptions.fontSizes.legend;
+      }
+
+      if (modifiedOptions.scales.yAxes) {
+        modifiedOptions.scales.yAxes = modifiedOptions.scales.yAxes.map(
+          axis => {
+            if (axis.ticks) {
+              axis.ticks.fontSize = this.chartScaledOptions.fontSizes.barY;
+              return axis;
+            }
+          }
+        );
+      }
+      if (modifiedOptions.scales.xAxes) {
+        modifiedOptions.scales.xAxes = modifiedOptions.scales.xAxes.map(
+          axis => {
+            if (axis.ticks) {
+              axis.ticks.fontSize = this.chartScaledOptions.fontSizes.barX;
+              return axis;
+            }
+          }
+        );
+      }
+
+      if (modifiedOptions.elements.line) {
+        modifiedOptions.elements.line.borderWidth = this.chartScaledOptions.lineBorderWidth;
+      }
+      if (modifiedOptions.elements.rectangle) {
+        modifiedOptions.elements.rectangle.borderWidth = this.chartScaledOptions.rectangleBorderWidth;
+      }
 
       return modifiedOptions;
     }

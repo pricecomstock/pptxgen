@@ -15,15 +15,11 @@ test("No generations get ((unresolved))", () => {
 });
 
 test("Every item in grammar is a string", () => {
-  for (const key in grammar.raw) {
-    if (grammar.raw.hasOwnProperty(key)) {
-      const resolvedStringList = grammar.raw[key];
-      resolvedStringList.forEach(str => {
-        // if (typeof str !== "string") {
-        //   console.log(str);
-        // }
-        expect(typeof str).toBe("string");
-      });
+  const grammarRaw = grammar.raw;
+  for (const key in grammarRaw) {
+    if (grammarRaw.hasOwnProperty(key)) {
+      const resolvedStringList = grammarRaw[key];
+      expect(resolvedStringList.every(str => typeof str === "string"));
     }
   }
 });
@@ -52,4 +48,36 @@ test("Every #template# has a corresponding template in grammar", () => {
   //   JSON.stringify(grammarRaw),
   //   "utf8"
   // );
+});
+
+test("No unclosed ## in grammar", () => {
+  const grammarRaw = grammar.raw;
+  for (const key in grammarRaw) {
+    if (grammarRaw.hasOwnProperty(key)) {
+      const resolvedStringList = grammarRaw[key];
+      expect(
+        resolvedStringList.every(
+          // No odd numbers of # in a template
+          // This will break if I ever put an escaped # in
+          resolvedString => {
+            let withoutNumberSigns = resolvedString.replace(/#\d+/g, "");
+
+            let exceptions = ["C#", "F#", /^#$/];
+            if (exceptions.some(ex => withoutNumberSigns.match(ex))) {
+              return true;
+            } else {
+              let justHashes = withoutNumberSigns.replace(/[^#]/g, "");
+              let hasEvenNumberOfHashes = justHashes.length % 2 !== 1;
+              if (hasEvenNumberOfHashes) {
+                return true;
+              } else {
+                // console.log(resolvedString);
+                return false;
+              }
+            }
+          }
+        )
+      ).toBe(true);
+    }
+  }
 });
