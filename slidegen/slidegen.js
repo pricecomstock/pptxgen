@@ -18,10 +18,6 @@ const weightedBodySlideGenFunctions = [
     weight: 6
   },
   {
-    generator: bodyGen.generateBodySlideWithGraph,
-    weight: 10
-  },
-  {
     generator: bodyGen.generateWikiImageSlide,
     weight: 12
   },
@@ -47,7 +43,7 @@ const weightedBodySlideGenFunctions = [
   },
   {
     generator: bodyGen.generateChartSlide,
-    weight: 200 // TODO reduce this to a normal value
+    weight: 10
   }
 ];
 
