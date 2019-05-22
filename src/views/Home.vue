@@ -5,7 +5,7 @@
         <div class="box">
           <div class="field">
             <div class="control">
-              <label class="label is-large">Presenter's Name</label>
+              <label class="label is-large">Presenter's name</label>
               <input
                 type="text"
                 v-model="presenter"
@@ -16,7 +16,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-large">Number of slides</label>
+              <label class="label is-large">Number of body slides</label>
               <div class="buttons has-addons is-centered are-medium">
                 <span
                   v-for="(option, index) in numSlidesOptions"
@@ -34,7 +34,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-large">Other Options</label>
+              <label class="label is-large">Other options</label>
               <div class="field">
                 <input
                   id="questionsinput"
@@ -121,7 +121,7 @@ export default {
         }
       ],
       presenter: "",
-      numSlidesOptions: [6, 8, 10],
+      numSlidesOptions: [4, 5, 6, 7, 8],
       numSlides: 8,
       topic: "",
       slideshowLoaded: false,

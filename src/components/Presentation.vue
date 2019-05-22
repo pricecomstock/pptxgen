@@ -18,7 +18,7 @@
           currentSlideIndex !== this.slideshow.length - 1
       "
     >
-      {{ currentSlideIndex + 1 }}/{{ this.slideshow.length - 1 }}
+      {{ currentSlideIndex }}/{{ this.slideshow.length - 2 }}
     </div>
     <div @click="previousSlide()" v-if="isMobile" class="slide-mover left">
       <span class="icon is-large">

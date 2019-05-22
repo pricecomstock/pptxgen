@@ -164,7 +164,6 @@ async function generateSlideshow(presenter, desiredSlideCount, questions) {
   } else {
     slidePromises.push(titleGen.generateFullRandomTitleSlide());
   }
-  currentSlideCount++;
 
   // ABOUT ME SLIDE
   slidePromises.push(bodyGen.generateAboutMeSlide());
