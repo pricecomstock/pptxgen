@@ -1,7 +1,7 @@
 <template>
   <div
     tabindex="0"
-    class="presentation"
+    class="new-presentation"
     :style="themeStyles"
     @keyup.left="previousSlide()"
     @keyup.right="nextSlide()"
@@ -190,6 +190,83 @@ export default {
 </script>
 
 <style lang="scss">
+.new-presentation {
+  color: #eee;
+  height: 45vw;
+  width: 80vw;
+  overflow: hidden;
+  position: relative;
+
+  .slide-counter {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.5em; // TODO javascript font scaling
+    border-radius: 0 0 0 1vw;
+    min-width: 8%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 5;
+  }
+
+  slide-mover {
+    position: absolute;
+    bottom: 0px;
+    min-width: 14%;
+    font-size: 1.4vw;
+    padding-top: 1.6%;
+    padding-bottom: 0.8%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    z-index: 5;
+  }
+}
+
+.grid-slide {
+  display: grid;
+  grid-template-columns: [h-begin content-begin] 60% [content-end visual-begin] 40% [image-end h-end];
+  grid-template-rows: [v-begin title-begin] 15% [title-end body-begin] auto [body-end foot-begin] 3% [foot-end v-end];
+  justify-items: stretch;
+  align-items: start;
+  margin-top: 5%;
+  row-gap: 15%;
+
+  .slide-title {
+    padding-left: 5%;
+    grid-row: title-begin / title-end;
+    grid-column: content-begin / image-end;
+    justify-self: start;
+    align-self: center;
+  }
+
+  .slide-content {
+    text-align: left;
+    grid-column: content-begin / content-end;
+    grid-row: body-begin / body-end;
+    align-self: start;
+    padding-left: 7%;
+    padding-right: 3%;
+  }
+
+  .slide-content-no-visual {
+    text-align: left;
+    grid-column: h-begin / h-end;
+    grid-row: body-begin / body-end;
+    align-self: start;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .slide-image {
+    grid-row: body-begin/v-end;
+    grid-column: visual-begin / visual-end;
+  }
+  .slide-chart {
+    grid-row: body-begin/v-end;
+    grid-column: visual-begin / visual-end;
+  }
+}
+
 .presentation {
   color: #eee;
   height: 45vw;
@@ -207,15 +284,8 @@ export default {
     font-size: 3vw;
   }
 
-  .slide-title {
-    padding-left: 4vw;
-    // margin-top: 4vh;
-    padding-top: 4vh;
-    margin-bottom: 2vh;
-  }
-
   .slide-counter {
-    font-family: "Rubik", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 1.5em;
     border-radius: 0 0 0 1vw;
     min-width: 8%;
@@ -247,10 +317,6 @@ export default {
     left: 0px;
     border-radius: 0 1vw 0 0;
   }
-}
-
-.slide {
-  height: 100%;
 }
 
 .presentation:focus {

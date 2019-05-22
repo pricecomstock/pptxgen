@@ -1,12 +1,17 @@
 <template>
-  <div class="slide">
-    <div class="pres-title slide-title has-text-left" :style="titleStyles">
+  <div class="grid-slide">
+    <div class="slide-title" :style="titleStyles">
       {{ slideOptions.title }}
     </div>
-    <div class="has-text-left">
+    <div
+      :class="{
+        'slide-content': chartOrImageOnSlide,
+        'slide-content-no-visual': !chartOrImageOnSlide
+      }"
+    >
       <ul
         v-if="!slideOptions.ordered && !slideOptions.plaintext"
-        class="bullet-bullets pres-body"
+        class="bullet-bullets"
         :style="bulletStyles"
       >
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
@@ -15,7 +20,7 @@
       </ul>
       <ol
         v-if="slideOptions.ordered"
-        class="bullet-numbers pres-body"
+        class="bullet-numbers"
         :style="bulletStyles"
       >
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
@@ -24,7 +29,7 @@
       </ol>
       <ul
         v-if="slideOptions.plaintext"
-        class="bullet-plain pres-body"
+        class="bullet-plain"
         :style="bulletStyles"
       >
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
@@ -33,6 +38,7 @@
       </ul>
     </div>
     <img
+      class="slide-image"
       v-for="(image, index) in slideOptions.contentImages"
       :src="image.url"
       :style="imageStyles[index]"
@@ -41,6 +47,7 @@
     />
 
     <chart
+      class="slide-chart"
       v-if="slideOptions.chart"
       :key="`chart-${slideNumber}`"
       :chart="slideOptions.chart"
@@ -119,9 +126,12 @@ export default {
     bulletStyles() {
       let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05);
       return {
-        "font-size": `${3 + fontSizeModifier}vh`,
-        "max-width": this.slideOptions.maxWidth
+        "font-size": `${3 + fontSizeModifier}vh`
+        // "max-width": this.slideOptions.maxWidth
       };
+    },
+    chartOrImageOnSlide() {
+      return this.slideOptions.contentImages || this.slideOptions.chart;
     },
     titleStyles() {
       let fontSizeModifier = this.scale(
@@ -145,12 +155,11 @@ export default {
 <style lang="scss">
 .bullet-bullets {
   margin-left: 8%;
-  margin-right: 8%;
-  margin-top: 0;
   list-style: disc;
 
   li {
     margin-bottom: 0.3em;
+    text-align: left;
   }
 }
 
@@ -161,6 +170,7 @@ export default {
 
   li {
     margin-bottom: 0.3em;
+    text-align: left;
   }
 }
 
@@ -170,6 +180,7 @@ export default {
 
   li {
     margin-bottom: 0.3em;
+    text-align: left;
   }
 }
 </style>
