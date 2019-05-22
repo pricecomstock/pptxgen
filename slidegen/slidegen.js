@@ -15,7 +15,7 @@ const weightedBodySlideGenFunctions = [
   // },
   {
     generator: bodyGen.generateStockPhotoSlide,
-    weight: 6
+    weight: 4
   },
   {
     generator: bodyGen.generateWikiImageSlide,
@@ -39,11 +39,11 @@ const weightedBodySlideGenFunctions = [
   // },
   {
     generator: bodyGen.generateStrategySlide,
-    weight: 3
+    weight: 4
   },
   {
     generator: bodyGen.generateChartSlide,
-    weight: 10
+    weight: 9
   }
 ];
 
