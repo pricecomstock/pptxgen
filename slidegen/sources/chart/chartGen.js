@@ -1,4 +1,5 @@
 const ru = require("../../utils/randUtils");
+const su = require("../../utils/stringUtils");
 const chartTextGenerator = require("../grammar/generators/chartText");
 
 const maxWidth = "100%";
@@ -37,6 +38,8 @@ function getRandomBarChart() {
   let heightVw = ru.randomInt(33, 36);
   const size = { x: widthVw, y: heightVw };
 
+  const chartTitle = chartTextGenerator.barChartTitle();
+
   const chartJsData = {
     labels: chartTextGenerator.barChartXAxisArray(numData),
     datasets: [barDatasetGenerator(numData)]
@@ -51,7 +54,7 @@ function getRandomBarChart() {
     },
     title: {
       display: true,
-      text: chartTextGenerator.barChartTitle().match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+      text: su.titleCase(chartTitle).match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
       padding: 20
     },
@@ -144,6 +147,11 @@ function getRandomLineChart() {
   const datasetCount =
     lineChartType === lineChartTypes.TREND ? 1 : getRandomDatasetCount();
 
+  const chartTitle =
+    lineChartType === lineChartTypes.TREND
+      ? chartTextGenerator.trendLineChartTitle()
+      : chartTextGenerator.barChartTitle(); // TODO implement multiline chart specific method
+
   let widthVw = ru.randomInt(33, 36);
   let heightVw = ru.randomInt(33, 36);
   const size = { x: widthVw, y: heightVw };
@@ -165,12 +173,7 @@ function getRandomLineChart() {
     }, // Line chart needs this
     title: {
       display: true,
-      text:
-        (lineChartType === lineChartTypes.TREND
-          ? chartTextGenerator.trendLineChartTitle()
-          : chartTextGenerator.barChartTitle()
-        ) // TODO implement multiline charts
-          .match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+      text: su.titleCase(chartTitle).match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
       padding: 20
     },
