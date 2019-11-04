@@ -2,6 +2,16 @@ function randomChoice(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+// Like randomChoice but actually removes chosen object!
+function randomPop(array) {
+  if (array.length === 0) {
+    return undefined;
+  }
+  let index = Math.floor(Math.random() * array.length);
+  let chosen = array.splice(index, 1)[0];
+  return chosen;
+}
+
 function randomInt(min, max) {
   let exMax = max + 1;
   let range = exMax - min;
@@ -89,14 +99,8 @@ function getWeightedRandomFunction(spec) {
   var i,
     j,
     table = [];
-  // const totalWeight = Object.keys(spec).reduce( (prev, cur) => {
-  //   return prev + cur;
-  // });
 
   for (i in spec) {
-    // The constant 10 below should be computed based on the
-    // weights in the spec for a correct and optimal table size.
-    // E.g. the spec {0:0.999, 1:0.001} will break this impl.
     for (j = 0; j < spec[i]; j++) {
       table.push(i);
     }
@@ -104,6 +108,23 @@ function getWeightedRandomFunction(spec) {
 
   return function() {
     return table[Math.floor(Math.random() * table.length)];
+  };
+}
+
+// Format of spec is different than above function in order to
+// support object
+function getNonReplacingRandomDeckFunction(spec) {
+  let deck = [];
+
+  spec.forEach(item => {
+    item.value;
+    for (let j = 0; j < item.count; j++) {
+      deck.push(item.value);
+    }
+  });
+
+  return function() {
+    return randomPop(deck);
   };
 }
 
@@ -117,15 +138,11 @@ function generatedArray(length, generatorFunction) {
     .map((_value, index) => generatorFunction(index));
 }
 
-// let testSpec = {
-//   a: 5,
-//   b: 25,
-//   c: 70
-// }
+// let testSpec = [{ value: "hello", count: 3 }, { value: "wow", count: 2 }];
 
-// let testSpecFunction = getWeightedRandomFunction(testSpec)
-// for (let i=0; i<10; i++) {
-//   console.log(testSpecFunction(20,50))
+// let testSpecFunction = getNonReplacingRandomDeckFunction(testSpec);
+// for (let i = 0; i < 10; i++) {
+//   console.log(testSpecFunction(20, 50));
 // }
 
 module.exports = {
@@ -134,6 +151,7 @@ module.exports = {
   norm,
   normInt,
   getWeightedRandomFunction,
+  getNonReplacingRandomDeckFunction,
   randomIntArray,
   oneInN,
   randomDarkHexColor: randomDarkHexColor,
