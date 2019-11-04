@@ -142,7 +142,7 @@ function generatedArray(length, generatorFunction) {
 
 // let testSpecFunction = getNonReplacingRandomDeckFunction(testSpec);
 // for (let i = 0; i < 10; i++) {
-//   console.log(testSpecFunction(20, 50));
+//   console.log(testSpecFunction());
 // }
 
 module.exports = {

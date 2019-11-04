@@ -1,53 +1,49 @@
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
-const randomInt = require("./utils/randUtils").randomInt;
-// const randomChoice = require("./utils/randUtils").randomChoice;
-const randomDarkHexColor = require("./utils/randUtils").randomDarkHexColor;
-const getWeightedRandomFunction = require("./utils/randUtils")
-  .getWeightedRandomFunction;
+const ru = require("./utils/randUtils");
 
-const weightedBodySlideGenFunctions = [
+const bodySlideGenFunctionWeightSpec = [
   // {
   //   // Notice this is a reference to the function and NOT an invocation
-  //   generator: titleGen.generateFullRandomTitleSlide,
-  //   weight: 8
+  //   value: titleGen.generateFullRandomTitleSlide,
+  //   count: 8
   // },
   {
-    generator: bodyGen.generateStockPhotoSlide,
-    weight: 4
+    value: bodyGen.generateStockPhotoSlide,
+    count: 4
   },
   {
-    generator: bodyGen.generateWikiImageSlide,
-    weight: 12
+    value: bodyGen.generateWikiImageSlide,
+    count: 5
   },
   {
-    generator: bodyGen.generateQuoteHalfImage,
-    weight: 6
+    value: bodyGen.generateQuoteHalfImage,
+    count: 3
   },
   {
-    generator: bodyGen.generateExtractHalfImage,
-    weight: 1
+    value: bodyGen.generateExtractHalfImage,
+    count: 1
   },
   {
-    generator: bodyGen.generateHalfBulletSlide,
-    weight: 5
+    value: bodyGen.generateHalfBulletSlide,
+    count: 1
   },
   // {
-  //   generator: bodyGen.generateWeirdThoughtSlide,
-  //   weight: 3
+  //   value: bodyGen.generateWeirdThoughtSlide,
+  //   count: 3
   // },
   {
-    generator: bodyGen.generateStrategySlide,
-    weight: 4
+    value: bodyGen.generateStrategySlide,
+    count: 1
   },
   {
-    generator: bodyGen.generateChartSlide,
-    weight: 9
+    value: bodyGen.generateChartSlide,
+    count: 2
   }
 ];
 
-const numGradientStepsPicker = getWeightedRandomFunction({
+const numGradientStepsPicker = ru.getWeightedRandomFunction({
   2: 14,
   3: 8,
   4: 3,
@@ -55,7 +51,7 @@ const numGradientStepsPicker = getWeightedRandomFunction({
   6: 1
 });
 
-const fontPicker = getWeightedRandomFunction({
+const fontPicker = ru.getWeightedRandomFunction({
   // Normal 70%
   Rubik: 15,
   Aleo: 15,
@@ -87,7 +83,7 @@ function generateTheme() {
   let colors = [];
   let numGradientSteps = numGradientStepsPicker();
   for (let i = 0; i < numGradientSteps; i++) {
-    colors.push(randomDarkHexColor());
+    colors.push(ru.randomDarkHexColor());
   }
 
   const gradientType =
@@ -95,65 +91,27 @@ function generateTheme() {
 
   return {
     colors: colors,
-    texture: randomInt(1, 41),
+    texture: ru.randomInt(1, 41),
     gradientType: gradientType,
     gradientDirection:
-      gradientType == "linear-gradient" ? `${randomInt(-179, 180)}deg` : "",
+      gradientType == "linear-gradient" ? `${ru.randomInt(-179, 180)}deg` : "",
     font: fontPicker()
   };
 }
 
-function getRandomBodySlideGenFunction() {
-  const generators = weightedBodySlideGenFunctions.map(generator => {
-    return generator.generator;
-  });
-  const weights = weightedBodySlideGenFunctions.map(generator => {
-    return generator.weight;
-  });
-  const totalWeight = weights.reduce((a, b) => {
-    return a + b;
-  }, 0);
-
-  const randomNum = Math.random() * totalWeight;
-
-  let checkedWeight = 0;
-  for (let i = 0; i < weights.length; i++) {
-    checkedWeight += weights[i];
-    if (randomNum <= checkedWeight) {
-      return generators[i];
-    }
-  }
-}
-
-// function getBodySlideGenerators(count) {
-//   let bodySlideGenerators = [];
-//   for (let i = 0; i < count; i++) {
-//     bodySlideGenerators.push(getRandomBodySlideGenFunction());
-//   }
-
-//   console.log(bodySlideGenerators);
-
-//   return bodySlideGenerators;
-// }
-
-// function generateSlideshow(length, title, subtitle) {
 async function generateSlideshow(presenter, desiredSlideCount, questions) {
   let currentSlideCount = 0;
 
-  // let slideGenerators = []
-  // These are function references, not invocations
-  // slideGenerators.push(titleGen.generateFullRandomTitleSlide)
-  // slideGenerators.concat(getBodySlideGenerators(6))
-  // console.log(slideGenerators)
-  // slideGenerators.push(titleGen.generateFullRandomTitleSlide) // TODO End slide
-
-  // let slidePromises = slideGenerators.map( generator => {
-  //   return generator() // invoke to get a promise
-  // })
   let slidePromises = [];
 
+  // Generate new random slide picker without replacement
+  // It will return a slide generator function!
+  const getBodySlideGenerator = ru.getNonReplacingRandomDeckFunction(
+    bodySlideGenFunctionWeightSpec
+  );
+
   function addBodySlide() {
-    slidePromises.push(getRandomBodySlideGenFunction()());
+    slidePromises.push(getBodySlideGenerator()());
     currentSlideCount++;
   }
 
