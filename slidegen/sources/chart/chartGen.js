@@ -190,8 +190,9 @@ function getRandomLineChart() {
             fontSize: 48
           },
           gridLines: {
-            display: false
-          }
+            display: false // don't show vertical lines
+          },
+          display: !ru.oneInN(5) // don't show axis 1/5 times
         }
       ]
     },
