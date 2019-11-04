@@ -208,93 +208,6 @@ export default {
     z-index: 5;
   }
 
-  slide-mover {
-    position: absolute;
-    bottom: 0px;
-    min-width: 14%;
-    font-size: 1.4vw;
-    padding-top: 1.6%;
-    padding-bottom: 0.8%;
-    background-color: rgba(0, 0, 0, 0.2);
-    color: rgba(255, 255, 255, 0.55);
-    cursor: pointer;
-    z-index: 5;
-  }
-}
-
-.grid-slide {
-  display: grid;
-  grid-template-columns: [h-begin content-begin] 60% [content-end visual-begin] 40% [image-end h-end];
-  grid-template-rows: [v-begin title-begin] 15% [title-end body-begin] auto [body-end foot-begin] 3% [foot-end v-end];
-  justify-items: stretch;
-  align-items: start;
-  margin-top: 5%;
-  row-gap: 15%;
-
-  .slide-title {
-    padding-left: 5%;
-    grid-row: title-begin / title-end;
-    grid-column: content-begin / image-end;
-    justify-self: start;
-    align-self: center;
-  }
-
-  .slide-content {
-    text-align: left;
-    grid-column: content-begin / content-end;
-    grid-row: body-begin / body-end;
-    align-self: start;
-    padding-left: 7%;
-    padding-right: 3%;
-  }
-
-  .slide-content-no-visual {
-    text-align: left;
-    grid-column: h-begin / h-end;
-    grid-row: body-begin / body-end;
-    align-self: start;
-    padding-left: 3%;
-    padding-right: 3%;
-  }
-
-  .slide-image {
-    grid-row: body-begin/v-end;
-    grid-column: visual-begin / visual-end;
-  }
-  .slide-chart {
-    grid-row: body-begin/v-end;
-    grid-column: visual-begin / visual-end;
-  }
-}
-
-.presentation {
-  color: #eee;
-  height: 45vw;
-  width: 80vw;
-  position: relative;
-  overflow: hidden;
-  // background-color: #8a0027;
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-
-  .pres-title {
-    font-size: 5vw;
-  }
-
-  .pres-body {
-    font-size: 3vw;
-  }
-
-  .slide-counter {
-    font-family: "Open Sans", sans-serif;
-    font-size: 1.5em;
-    border-radius: 0 0 0 1vw;
-    min-width: 8%;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: 5;
-  }
-
   .slide-mover {
     position: absolute;
     bottom: 0px;
@@ -307,7 +220,6 @@ export default {
     cursor: pointer;
     z-index: 5;
   }
-
   .right {
     right: 0px;
     border-radius: 1vw 0 0 0;
@@ -318,6 +230,105 @@ export default {
     border-radius: 0 1vw 0 0;
   }
 }
+
+.grid-slide {
+  display: grid;
+  grid-template-columns: [h-begin content-begin] 24fr [content-end visual-begin] 16fr [image-end h-end];
+  grid-template-rows: [v-begin title-begin] 1fr [title-end body-begin] 10fr [body-end v-end];
+  // justify-items: stretch;
+  align-items: start;
+  gap: 0.5vw;
+  height: 100%;
+  max-height: 100%;
+  padding: 2% 1% 1% 1%;
+
+  .slide-title {
+    // margin-top: 10%;
+    padding-left: 2%;
+    grid-row: title-begin / title-end;
+    grid-column: content-begin / image-end;
+    justify-self: start;
+    align-self: end;
+    text-align: left;
+  }
+
+  .slide-content {
+    text-align: left;
+    grid-column: content-begin / content-end;
+    grid-row: body-begin / body-end;
+    align-self: start;
+    padding-left: 5%;
+  }
+
+  .slide-content-no-visual {
+    text-align: left;
+    grid-column: h-begin / h-end;
+    grid-row: body-begin / body-end;
+    align-self: start;
+  }
+
+  .slide-image {
+    grid-row: body-begin/v-end;
+    grid-column: visual-begin / visual-end;
+    width: 100%;
+    height: auto;
+  }
+  .slide-chart {
+    grid-row: body-begin/v-end;
+    grid-column: visual-begin / visual-end;
+  }
+}
+
+.pres-title {
+  font-size: 5vw;
+}
+
+.pres-body {
+  font-size: 3vw;
+}
+// .presentation {
+//   color: #eee;
+//   height: 45vw;
+//   width: 80vw;
+//   position: relative;
+//   overflow: hidden;
+//   // background-color: #8a0027;
+//   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+//   .slide-counter {
+//     font-family: "Open Sans", sans-serif;
+//     font-size: 1.5em;
+//     border-radius: 0 0 0 1vw;
+//     min-width: 8%;
+//     position: absolute;
+//     right: 0px;
+//     top: 0px;
+//     z-index: 5;
+//   }
+
+//   .slide-mover {
+//     position: absolute;
+//     bottom: 0px;
+//     min-width: 14%;
+//     font-size: 1.4vw;
+//     padding-top: 1.6%;
+//     padding-bottom: 0.8%;
+//     background-color: rgba(0, 0, 0, 0.2);
+//     color: rgba(255, 255, 255, 0.55);
+//     cursor: pointer;
+//     z-index: 5;
+//   }
+
+//   .right {
+//     right: 0px;
+//     border-radius: 1vw 0 0 0;
+//   }
+
+//   .left {
+//     left: 0px;
+//     border-radius: 0 1vw 0 0;
+//   }
+// }
 
 .presentation:focus {
   outline: none;

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="slide center-parent has-bg-img darken-pseudo"
+    class="grid-slide center-parent has-bg-img darken-pseudo"
     :style="[backgroundStyles]"
   >
     <div class="title-body">

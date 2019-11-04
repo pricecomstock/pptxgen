@@ -41,7 +41,6 @@
       class="slide-image"
       v-for="(image, index) in slideOptions.contentImages"
       :src="image.url"
-      :style="imageStyles[index]"
       alt="Uh image"
       :key="index"
     />
@@ -51,7 +50,6 @@
       v-if="slideOptions.chart"
       :key="`chart-${slideNumber}`"
       :chart="slideOptions.chart"
-      :style="chartStyles"
       :vwWidth="slideOptions.chart.size.x"
       :vwHeight="slideOptions.chart.size.y"
     >
