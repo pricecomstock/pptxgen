@@ -130,8 +130,8 @@ function getRandomLineChart() {
   });
 
   const getRandomYearArray = numberOfDataPoints => {
-    const endYear = new Date().getFullYear() + ru.randomInt(-10, 20);
-    const interval = ru.randomInt(1, 12);
+    const interval = ru.randomInt(2, 12);
+    const endYear = new Date().getFullYear() + ru.randomInt(-5, 10);
     const years = ru.generatedArray(numberOfDataPoints, index => {
       return endYear - interval * (numberOfDataPoints - index - 1);
     });
@@ -180,13 +180,17 @@ function getRandomLineChart() {
           ticks: {
             suggestedMin: 0,
             fontSize: 36
-          }
+          },
+          display: false
         }
       ],
       xAxes: [
         {
           ticks: {
             fontSize: 48
+          },
+          gridLines: {
+            display: false
           }
         }
       ]
