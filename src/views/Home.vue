@@ -122,7 +122,7 @@ export default {
       ],
       presenter: "",
       numSlidesOptions: [4, 5, 6, 7, 8],
-      numSlides: 8,
+      numSlides: 6,
       topic: "",
       slideshowLoaded: false,
       slideshowLoading: false,
