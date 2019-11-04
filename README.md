@@ -8,6 +8,11 @@ A random powerpoint generator for Improvised Powerpoint Presentations (Powerpoin
 npm install
 ```
 
+Also add .env.local with the correct dev backend address, like
+```
+VUE_APP_BACKEND_URL="http://localhost:5000"
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
