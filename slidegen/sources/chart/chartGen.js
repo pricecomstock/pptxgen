@@ -31,7 +31,7 @@ function getRandomBarChart() {
     };
   };
 
-  const numData = ru.randomInt(2, 3);
+  const numData = 2; // TODO Increase when I can make items in chart more related
 
   let widthVw = ru.randomInt(33, 36);
   let heightVw = ru.randomInt(33, 36);
@@ -124,13 +124,13 @@ function getRandomLineChart() {
   };
 
   const getRandomDatasetCount = ru.getWeightedRandomFunction({
-    2: 60,
-    3: 37,
+    2: 80,
+    3: 17,
     40: 3
   });
 
   const getRandomYearArray = numberOfDataPoints => {
-    const endYear = new Date().getFullYear(); //- ru.randomInt(-10, 20);
+    const endYear = new Date().getFullYear() + ru.randomInt(-10, 20);
     const interval = ru.randomInt(1, 12);
     const years = ru.generatedArray(numberOfDataPoints, index => {
       return endYear - interval * (numberOfDataPoints - index - 1);
