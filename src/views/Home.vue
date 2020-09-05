@@ -2,6 +2,7 @@
   <div class="home">
     <div class="columns is-centered">
       <div class="column is-one-third">
+        <img class="logo" src="forgotmyslides.png" alt="logo" />
         <div class="box">
           <div class="field">
             <div class="control">
@@ -187,5 +188,11 @@ export default {
 :fullscreen {
   width: 100%;
   height: 100%;
+}
+
+img.logo {
+  height: auto;
+  width: 250px;
+  margin: 2rem;
 }
 </style>

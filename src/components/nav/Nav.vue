@@ -2,10 +2,8 @@
   <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link class="navbar-item placeholder-logo" to="/" disabled>
-        <span class="icon is-medium">
-          <i class="fas fa-lg fa-chalkboard-teacher"></i>
-        </span>
-        <span>{{ appName }}</span>
+        <img src="fms-icon.png" height="100" alt="FMS" />
+        <span>&nbsp;{{ appName }}</span>
       </router-link>
       <div
         class="navbar-burger"
