@@ -3,7 +3,7 @@
     <section class="section has-text-left content">
       <h1>
         <i>Forgot My Slides</i> is a procedural PowerPoint generator by
-        <a href="http://pricecomstock.com">Price Comstock</a>
+        <a href="http://pc.codes">Price Comstock</a>
       </h1>
       <hr />
       <h1>What is this?</h1>
