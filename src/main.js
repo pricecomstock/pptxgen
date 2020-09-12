@@ -6,8 +6,6 @@ import "./scss/pcstyles.scss";
 // import 'bulma-switch'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import "animate.css";
-
 Vue.config.productionTip = false;
 
 new Vue({
