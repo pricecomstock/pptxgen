@@ -9,7 +9,18 @@ const stringLists = {
     "Let me tell you about myself",
     "First, let me introduce myself",
     "Let me introduce myself",
-    "About the presenter"
+    "About the presenter",
+  ],
+  aboutUsTitles: [
+    "About us",
+    "Our Qualifications",
+    "Who Are We?",
+    "About the team",
+    "Who we are...",
+    "All about us",
+    "First, let's introduce ourselves",
+    "Let us introduce ourselves",
+    "About the presenters",
   ],
   strategyTitles: [
     "Our Strategy",
@@ -20,7 +31,7 @@ const stringLists = {
     "Our Proposal",
     "Our Solution",
     "The Fix",
-    "The Pitch"
+    "The Pitch",
   ],
   endTitles: [
     "The End",
@@ -31,7 +42,7 @@ const stringLists = {
     "That's all, folks!",
     "That's it!",
     "Thanks for coming!",
-    "Hope you learned something!"
+    "Hope you learned something!",
   ],
   questionPrompts: [
     "Any questions?",
@@ -39,7 +50,7 @@ const stringLists = {
     "I would be happy to answer any questions",
     "Questions are welcome",
     "We have time for a few questions",
-    "Comments, questions, concerns?"
+    "Comments, questions, concerns?",
   ],
   //FIX Coyrights lol
   questionsToGetToKnowSomeone: [
@@ -246,7 +257,7 @@ const stringLists = {
     "What are you most insecure about?",
     "How do you get in the way of your own success?",
     "What’s one thing you did that you really wish you could go back and undo?",
-    "What are you afraid people see when they look at you?"
+    "What are you afraid people see when they look at you?",
   ],
   //FIX Coyrights lol
   philisophicalQuestions: [
@@ -451,8 +462,8 @@ const stringLists = {
     "Has the invention of the atomic bomb made the world a more peaceful place?",
     "Do you think the singularity will occur? If so, what time frame do you think it will happen in?",
     "If emotions are the product of biochemical reactions, then in the future we will be theoretically able to control them. If we could control emotions through technology, should we?",
-    "Is there a limit to what humans can create through technology and science?"
-  ]
+    "Is there a limit to what humans can create through technology and science?",
+  ],
 };
 
 module.exports = stringLists;

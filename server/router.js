@@ -26,7 +26,8 @@ router.get("/slides", async (req, res) => {
       .max(100)
       .allow("", null)
       .default(""),
-    questionPrompt: joi.boolean().default(true),
+    questionPrompt: joi.boolean().default(false),
+    isGroupPresentation: joi.boolean().default(false),
   });
 
   const { value: slideShowSpec } = querySpec.validate(req.query);

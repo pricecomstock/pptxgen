@@ -10,7 +10,7 @@ const chartGen = require("../sources/chart/chartGen");
 const randomNumBullets = getWeightedRandomFunction({
   1: 45,
   2: 53,
-  3: 2
+  3: 2,
 });
 
 async function getBullets(numBullets) {
@@ -40,12 +40,12 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
           url: image_url,
           position: {
             bottom: `${randomInt(2, 12)}%`,
-            right: "2%"
+            right: "2%",
           },
-          width: `${imageWidth}%`
-        }
-      ]
-    }
+          width: `${imageWidth}%`,
+        },
+      ],
+    },
   };
 }
 
@@ -67,12 +67,12 @@ function assembleChartSlide(title, bullets, chartData, pt, ol) {
         chartJsOptions: chartData.chartJsOptions,
         position: {
           bottom: `${randomInt(2, 12)}%`,
-          right: `${randomInt(2, 6)}%`
+          right: `${randomInt(2, 6)}%`,
         },
         size: chartData.size,
-        width: `${imageWidth}%`
-      }
-    }
+        width: `${imageWidth}%`,
+      },
+    },
   };
 }
 
@@ -88,8 +88,8 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
       imageUrl: imageUrl,
       imageLeft: imageLeft,
       plaintext: plaintext,
-      ordered: ordered
-    }
+      ordered: ordered,
+    },
   };
 
   return slide;
@@ -139,19 +139,22 @@ async function generateChartSlide() {
   );
 }
 
-async function generateAboutMeSlide() {
+async function generateAboutMeSlide(isGroupPresentation) {
   const bulletCount = randomInt(2, 4);
-  let bullets = [];
+  const bullets = [];
   for (let i = 0; i < bulletCount; i++) {
     bullets.push(randString.aboutMe());
   }
-  let bulletStrings = await Promise.all(bullets);
+  const bulletStrings = await Promise.all(bullets);
+  const title = randomChoice(
+    isGroupPresentation ? stringLists.aboutUsTitles : stringLists.aboutMeTitles
+  );
   return {
     type: "Bullets",
     options: {
-      title: randomChoice(stringLists.aboutMeTitles),
-      bullets: bulletStrings
-    }
+      title,
+      bullets: bulletStrings,
+    },
   };
 }
 
@@ -161,8 +164,8 @@ async function generateQuoteHalfImage() {
     options: {
       title: await randString.compositeProfound(),
       imageUrl: await randImg.background(),
-      imageLeft: Math.random() < 0.5
-    }
+      imageLeft: Math.random() < 0.5,
+    },
   };
 }
 
@@ -172,8 +175,8 @@ async function generateExtractHalfImage() {
     options: {
       title: await randString.wikiExtractExcerpt(),
       imageUrl: await randImg.background(),
-      imageLeft: Math.random() < 0.5
-    }
+      imageLeft: Math.random() < 0.5,
+    },
   };
 }
 
@@ -208,5 +211,5 @@ module.exports = {
   generateExtractHalfImage,
   generateHalfBulletSlide,
   generateWeirdThoughtSlide,
-  generateChartSlide
+  generateChartSlide,
 };

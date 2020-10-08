@@ -103,6 +103,7 @@ async function generateSlideshow({
   presenterName,
   slideCount,
   questionPrompt,
+  isGroupPresentation,
 }) {
   let currentSlideCount = 0;
 
@@ -128,7 +129,7 @@ async function generateSlideshow({
   }
 
   // ABOUT ME SLIDE
-  slidePromises.push(bodyGen.generateAboutMeSlide());
+  slidePromises.push(bodyGen.generateAboutMeSlide(isGroupPresentation));
   currentSlideCount++;
 
   // BODY SLIDES

@@ -45,6 +45,15 @@
                 />
                 <label for="questionsinput">Prompt for Questions</label>
               </div>
+              <div class="field">
+                <input
+                  id="isGroupPresentation"
+                  v-model="isGroupPresentation"
+                  type="checkbox"
+                  class="switch is-outlined is-rounded is-info"
+                />
+                <label for="isGroupPresentation">Group Presentation</label>
+              </div>
               <!-- <div class="field">
                 <input id="nsfwinput" v-model="nsfw" type="checkbox" class="switch is-outlined is-rounded is-danger">
                 <label for="nsfwinput">Allow NSFW Content</label>
@@ -128,6 +137,7 @@ export default {
       slideshowLoaded: false,
       slideshowLoading: false,
       questionPrompt: false,
+      isGroupPresentation: false,
       nsfw: false,
       theme: {},
       imageReadyToDownload: false,
@@ -162,6 +172,7 @@ export default {
         presenterName: this.presenter,
         slideCount: this.numSlides,
         questionPrompt: this.questionPrompt,
+        isGroupPresentation: this.isGroupPresentation,
       };
       return `/slides?${Object.entries(query)
         .map(
@@ -172,7 +183,6 @@ export default {
     },
     loadSlides() {
       this.slideshowLoading = true;
-      console.log(this.slideShowRequestUrl());
 
       axios.get(this.slideShowRequestUrl()).then((res) => {
         // console.log(res.data);
