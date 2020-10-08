@@ -1,4 +1,5 @@
 var express = require("express");
+const joi = require("joi");
 
 const slidegen = require("./slidegen/slidegen");
 
@@ -13,27 +14,29 @@ router.get("/", function(req, res) {
 //-----//
 // GET //
 //-----//
-router.get("/slides", (req, res) => {
-  // console.log(req.query)
-  let slideCount = req.query.count || 10;
-  let presenter = req.query.presenter || "";
+router.get("/slides", async (req, res) => {
+  const querySpec = joi.object().keys({
+    slideCount: joi
+      .number()
+      .max(8)
+      .default(6),
+    presenterName: joi
+      .string()
+      .optional()
+      .max(100)
+      .allow("", null)
+      .default(""),
+    questionPrompt: joi.boolean().default(true),
+  });
 
-  let questions = false;
-  if (req.query.questions) {
-    questions = req.query.questions == "true";
-  }
-  // console.log(req.query)
-  // console.log("Generating Title Slide with", title, subtitle)
-  slidegen
-    .generateSlideshow(presenter, slideCount, questions)
-    .then(slideshow => {
-      // console.log(slideshow);
-      res.json({
-        message: "Here are some slides",
-        slides: slideshow.slides,
-        theme: slideshow.theme
-      });
-    });
+  const { value: slideShowSpec } = querySpec.validate(req.query);
+
+  const slideshow = await slidegen.generateSlideshow(slideShowSpec);
+  res.json({
+    message: "Here are some slides",
+    slides: slideshow.slides,
+    theme: slideshow.theme,
+  });
 });
 
 //------//

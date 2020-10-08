@@ -11,23 +11,23 @@ const bodySlideGenFunctionWeightSpec = [
   // },
   {
     value: bodyGen.generateStockPhotoSlide,
-    count: 4
+    count: 4,
   },
   {
     value: bodyGen.generateWikiImageSlide,
-    count: 5
+    count: 5,
   },
   {
     value: bodyGen.generateQuoteHalfImage,
-    count: 3
+    count: 3,
   },
   {
     value: bodyGen.generateExtractHalfImage,
-    count: 1
+    count: 1,
   },
   {
     value: bodyGen.generateHalfBulletSlide,
-    count: 1
+    count: 1,
   },
   // {
   //   value: bodyGen.generateWeirdThoughtSlide,
@@ -35,12 +35,12 @@ const bodySlideGenFunctionWeightSpec = [
   // },
   {
     value: bodyGen.generateStrategySlide,
-    count: 1
+    count: 1,
   },
   {
     value: bodyGen.generateChartSlide,
-    count: 2
-  }
+    count: 2,
+  },
 ];
 
 const numGradientStepsPicker = ru.getWeightedRandomFunction({
@@ -48,7 +48,7 @@ const numGradientStepsPicker = ru.getWeightedRandomFunction({
   3: 8,
   4: 3,
   5: 1,
-  6: 1
+  6: 1,
 });
 
 const fontPicker = ru.getWeightedRandomFunction({
@@ -76,7 +76,7 @@ const fontPicker = ru.getWeightedRandomFunction({
   "Dancing Script": 1,
   "Reenie Beanie": 1,
   Condiment: 1,
-  Orbitron: 1
+  Orbitron: 1,
 });
 
 function generateTheme() {
@@ -95,11 +95,15 @@ function generateTheme() {
     gradientType: gradientType,
     gradientDirection:
       gradientType == "linear-gradient" ? `${ru.randomInt(-179, 180)}deg` : "",
-    font: fontPicker()
+    font: fontPicker(),
   };
 }
 
-async function generateSlideshow(presenter, desiredSlideCount, questions) {
+async function generateSlideshow({
+  presenterName,
+  slideCount,
+  questionPrompt,
+}) {
   let currentSlideCount = 0;
 
   let slidePromises = [];
@@ -116,9 +120,9 @@ async function generateSlideshow(presenter, desiredSlideCount, questions) {
   }
 
   // TITLE SLIDE
-  if (presenter != "") {
+  if (presenterName != "") {
     // both exist
-    slidePromises.push(titleGen.generateTitleSlideForPresenter(presenter));
+    slidePromises.push(titleGen.generateTitleSlideForPresenter(presenterName));
   } else {
     slidePromises.push(titleGen.generateFullRandomTitleSlide());
   }
@@ -128,16 +132,16 @@ async function generateSlideshow(presenter, desiredSlideCount, questions) {
   currentSlideCount++;
 
   // BODY SLIDES
-  while (currentSlideCount < desiredSlideCount) {
+  while (currentSlideCount < slideCount) {
     addBodySlide();
   }
 
-  slidePromises.push(titleGen.generateEndSlide(questions));
+  slidePromises.push(titleGen.generateEndSlide(questionPrompt));
   currentSlideCount++;
 
   let slideshow = {
     slides: await Promise.all(slidePromises),
-    theme: generateTheme()
+    theme: generateTheme(),
   };
 
   return slideshow;
