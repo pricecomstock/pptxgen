@@ -1,7 +1,7 @@
 const randImg = require("../randImage");
-const randString = require("../randString")
-const randomChoice = require('../utils/randUtils').randomChoice
-const stringLists = require('../sources/stringLists')
+const randString = require("../randString");
+const randomChoice = require("../utils/randUtils").randomChoice;
+const stringLists = require("../sources/stringLists");
 
 // const sample = {
 //   type: "Title",
@@ -29,14 +29,14 @@ const titleSlideFunctions = {
   async generateFullRandomTitleSlide() {
     return await this.generateTitleSlide(
       await randString.wikiTitle(),
-      await randString.wikiDescription(),
-    )
+      await randString.wikiDescription()
+    );
   },
   async generateTitleSlideForPresenter(presenter) {
     return await this.generateTitleSlide(
       await randString.compositeTopic(),
       "by " + presenter
-    )
+    );
   },
   async generateEndSlide(questions) {
     return {
@@ -46,7 +46,7 @@ const titleSlideFunctions = {
         subtitle: questions ? randomChoice(stringLists.questionPrompts) : "",
         imageUrl: await randImg.background()
       }
-    }
+    };
   }
 };
 

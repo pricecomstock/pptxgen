@@ -12,7 +12,7 @@ const stringLists = require("./sources/stringLists");
 const aboutMeGenerator = require("./sources/grammar/generators/aboutMe");
 
 function titleCase(s) {
-  return s.replace(/\w*/g, (txt) => {
+  return s.replace(/\w*/g, txt => {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
@@ -25,11 +25,11 @@ fs.readFile(
     if (err) throw err;
     books = csvParse(data, {
       columns: true,
-      cast: true,
-    }).map((record) => {
+      cast: true
+    }).map(record => {
       return {
         title: record.original_title,
-        authors: record.authors,
+        authors: record.authors
       };
     });
   }
@@ -42,16 +42,16 @@ fs.readFile(
   (err, data) => {
     if (err) throw err;
     jeopardy = csvParse(data, {
-      columns: true,
+      columns: true
     })
-      .map((record) => {
+      .map(record => {
         return {
           category: titleCase(record.category),
           question: record.question,
-          answer: record.answer,
+          answer: record.answer
         };
       })
-      .filter((record) => {
+      .filter(record => {
         return !record.question.includes("<a href"); // filter out image based jeopardy questions
       });
   }
@@ -65,13 +65,13 @@ fs.readFile(
     if (err) throw err;
     let lines = data.split("\n");
 
-    quotes = lines.map((line) => {
+    quotes = lines.map(line => {
       let splitILine = line.split("\t");
       let author = splitILine[0];
       let quote = splitILine[1];
       return {
         author: author,
-        quote: quote,
+        quote: quote
       };
     });
   }
@@ -90,7 +90,7 @@ async function wikiExtract() {
 async function wikiExtractExcerpt() {
   // Gets one sentence from an extract
   let article = await wikipedia.getRandomWikipediaArticle();
-  let extractSentences = article.extract.split(".").filter((sentence) => {
+  let extractSentences = article.extract.split(".").filter(sentence => {
     return !(sentence.trim() == "");
   });
   return randomChoice(extractSentences) + ".";
@@ -157,7 +157,7 @@ async function redditStrange() {
     "totallynotrobots",
     "nosleep",
     "shittyadvice",
-    "enlightenedbirdmen",
+    "enlightenedbirdmen"
   ]);
 }
 
@@ -173,13 +173,13 @@ async function redditAdvice() {
     "socialskills",
     "fitness",
     "writing",
-    "christianity",
+    "christianity"
   ]);
 }
 async function redditPhrases() {
   return await reddit.randomTitleFromMultireddit([
     "showerthoughts",
-    "pointlessstories",
+    "pointlessstories"
   ]);
 }
 
@@ -253,7 +253,7 @@ async function compositeTitle() {
     wiki: 10,
     book: 20,
     jeopardyAnswer: 50,
-    jeopardyCategory: 20,
+    jeopardyCategory: 20
   });
 
   const choice = chooser();
@@ -349,5 +349,5 @@ module.exports = {
   compositeBullet,
   compositeProfound,
   compositeTitle,
-  aboutMe,
+  aboutMe
 };

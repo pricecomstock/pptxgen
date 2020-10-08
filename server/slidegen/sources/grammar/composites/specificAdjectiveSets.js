@@ -1,5 +1,3 @@
-const specificAdjectiveSets = {
+const specificAdjectiveSets = {};
 
-}
-
-module.exports = specificAdjectiveSets
+module.exports = specificAdjectiveSets;

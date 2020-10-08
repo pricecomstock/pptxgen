@@ -26,12 +26,12 @@ router.get("/slides", (req, res) => {
   // console.log("Generating Title Slide with", title, subtitle)
   slidegen
     .generateSlideshow(presenter, slideCount, questions)
-    .then((slideshow) => {
+    .then(slideshow => {
       // console.log(slideshow);
       res.json({
         message: "Here are some slides",
         slides: slideshow.slides,
-        theme: slideshow.theme,
+        theme: slideshow.theme
       });
     });
 });
