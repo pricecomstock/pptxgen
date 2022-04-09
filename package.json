@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "alloyfinger": "^0.1.16",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
+    "animate.css": "^4.1.1",
     "bulma": "^0.7.4",
     "bulma-switch": "^2.0.0",
     "chart.js": "^2.8.0",
