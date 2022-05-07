@@ -1,7 +1,7 @@
 <script>
 import { Line } from "vue-chartjs";
-const deepFlatten = arr =>
-  [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)));
+// const deepFlatten = arr =>
+//   [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)));
 export default {
   extends: Line,
   name: "line-chart",
