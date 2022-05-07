@@ -10,32 +10,34 @@
   },
   "dependencies": {
     "alloyfinger": "^0.1.16",
-    "axios": "^0.21.1",
     "animate.css": "^4.1.1",
-    "bulma": "^0.7.4",
-    "bulma-switch": "^2.0.0",
-    "chart.js": "^2.8.0",
-    "csv": "^5.0.1",
-    "eslint-plugin-jest": "^22.5.1",
-    "express": "^4.16.4",
+    "axios": "^0.21.4",
+    "bulma": "^0.7.5",
+    "bulma-switch": "^2.0.4",
+    "chart.js": "^2.9.4",
+    "csv": "^5.5.3",
+    "eslint-plugin-jest": "^22.21.0",
+    "eslint-plugin-vue": "^8.7.1",
+    "express": "^4.18.1",
     "tracery-grammar": "^2.7.3",
-    "vue": "^2.5.17",
-    "vue-chartjs": "^3.4.2",
-    "vue-router": "^3.0.1",
+    "vue": "^2.6.14",
+    "vue-chartjs": "^3.5.1",
+    "vue-router": "^3.5.3",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.3.1",
-    "@vue/cli-plugin-babel": "^3.4.1",
-    "@vue/cli-plugin-eslint": "^3.0.1",
-    "@vue/cli-plugin-unit-jest": "^3.7.0",
-    "@vue/cli-service": "^3.2.2",
+    "@babel/eslint-parser": "^7.17.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@vue/cli-plugin-babel": "^5.0.4",
+    "@vue/cli-plugin-eslint": "^5.0.4",
+    "@vue/cli-service": "^5.0.4",
     "@vue/eslint-config-prettier": "^3.0.1",
-    "jest": "^24.8.0",
+    "eslint": "^8.15.0",
+    "jest": "^28.1.0",
     "lint-staged": "^7.2.2",
-    "node-sass": "^4.14.1",
-    "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "sass": "^1.51.0",
+    "sass-loader": "^7.3.1",
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
@@ -47,9 +49,12 @@
       "plugin:vue/essential",
       "@vue/prettier"
     ],
-    "rules": {},
+    "rules": {
+      "vue/multi-word-component-names": 0
+    },
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser",
+      "requireConfigFile": false
     },
     "plugins": [
       "jest"
