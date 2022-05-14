@@ -20,6 +20,7 @@
     "eslint-plugin-jest": "^22.21.0",
     "eslint-plugin-vue": "^8.7.1",
     "express": "^4.18.1",
+    "pluralize": "git+https://github.com/plurals/pluralize.git",
     "tracery-grammar": "^2.7.3",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.5.1",
@@ -73,7 +74,6 @@
     "not ie <= 8"
   ],
   "gitHooks": {
-    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [

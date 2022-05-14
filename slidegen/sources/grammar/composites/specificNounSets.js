@@ -2,9 +2,6 @@ const specificNounSets = {
   organization: [
     "#charity#",
     "#company#",
-    "#company# and #charity#",
-    "#company# and #company#",
-    "#charity# and #company#",
     "Big #industry.capitalizeAll#",
     "#usGovAgency#",
     "#newspaper#"
@@ -52,6 +49,23 @@ const specificNounSets = {
     "parakeet",
     "millipede",
     "bunny"
+  ],
+  authorityFigure: [
+    "mother",
+    "father",
+    "parent",
+    "aunt",
+    "uncle",
+    "grandfather",
+    "grandmother",
+    "grandparent",
+    "teacher",
+    "guru",
+    "therapist",
+    "life coach",
+    "#sportLevel# #sport.lowercase# coach",
+    "president",
+    "prophet"
   ]
 };
 
