@@ -1,3 +1,5 @@
+import { PresentationOptions } from "./presentationOptions";
+
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
@@ -11,23 +13,23 @@ const bodySlideGenFunctionWeightSpec = [
   // },
   {
     value: bodyGen.generateStockPhotoSlide,
-    count: 4
+    count: 4,
   },
   {
     value: bodyGen.generateWikiImageSlide,
-    count: 5
+    count: 5,
   },
   {
     value: bodyGen.generateQuoteHalfImage,
-    count: 3
+    count: 3,
   },
   {
     value: bodyGen.generateExtractHalfImage,
-    count: 1
+    count: 1,
   },
   {
     value: bodyGen.generateHalfBulletSlide,
-    count: 1
+    count: 1,
   },
   // {
   //   value: bodyGen.generateWeirdThoughtSlide,
@@ -35,12 +37,12 @@ const bodySlideGenFunctionWeightSpec = [
   // },
   {
     value: bodyGen.generateStrategySlide,
-    count: 1
+    count: 1,
   },
   {
     value: bodyGen.generateChartSlide,
-    count: 2
-  }
+    count: 2,
+  },
 ];
 
 const numGradientStepsPicker = ru.getWeightedRandomFunction({
@@ -48,7 +50,7 @@ const numGradientStepsPicker = ru.getWeightedRandomFunction({
   3: 8,
   4: 3,
   5: 1,
-  6: 1
+  6: 1,
 });
 
 const fontPicker = ru.getWeightedRandomFunction({
@@ -76,7 +78,7 @@ const fontPicker = ru.getWeightedRandomFunction({
   "Dancing Script": 1,
   "Reenie Beanie": 1,
   Condiment: 1,
-  Orbitron: 1
+  Orbitron: 1,
 });
 
 function generateTheme() {
@@ -95,11 +97,12 @@ function generateTheme() {
     gradientType: gradientType,
     gradientDirection:
       gradientType == "linear-gradient" ? `${ru.randomInt(-179, 180)}deg` : "",
-    font: fontPicker()
+    font: fontPicker(),
   };
 }
 
-async function generateSlideshow(presenter, desiredSlideCount, questions) {
+async function generateSlideshow(options: PresentationOptions) {
+  const { presenter, slideCount: desiredSlideCount, questions } = options;
   let currentSlideCount = 0;
 
   let slidePromises = [];
@@ -137,7 +140,7 @@ async function generateSlideshow(presenter, desiredSlideCount, questions) {
 
   let slideshow = {
     slides: await Promise.all(slidePromises),
-    theme: generateTheme()
+    theme: generateTheme(),
   };
 
   return slideshow;
