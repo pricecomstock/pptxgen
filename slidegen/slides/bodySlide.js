@@ -8,9 +8,9 @@ const stringLists = require("../sources/stringLists");
 const chartGen = require("../sources/chart/chartGen");
 
 const randomNumBullets = getWeightedRandomFunction({
-  1: 45,
-  2: 53,
-  3: 2
+  1: 60,
+  2: 38,
+  3: 2,
 });
 
 async function getBullets(numBullets) {
@@ -40,12 +40,12 @@ function assembleStandardSlide(title, bullets, image_url, pt, ol) {
           url: image_url,
           position: {
             bottom: `${randomInt(2, 12)}%`,
-            right: "2%"
+            right: "2%",
           },
-          width: `${imageWidth}%`
-        }
-      ]
-    }
+          width: `${imageWidth}%`,
+        },
+      ],
+    },
   };
 }
 
@@ -67,12 +67,12 @@ function assembleChartSlide(title, bullets, chartData, pt, ol) {
         chartJsOptions: chartData.chartJsOptions,
         position: {
           bottom: `${randomInt(2, 12)}%`,
-          right: `${randomInt(2, 6)}%`
+          right: `${randomInt(2, 6)}%`,
         },
         size: chartData.size,
-        width: `${imageWidth}%`
-      }
-    }
+        width: `${imageWidth}%`,
+      },
+    },
   };
 }
 
@@ -88,8 +88,8 @@ function assembleHalfImageBulletSlide(title, bullets, imageUrl, pt, ol, il) {
       imageUrl: imageUrl,
       imageLeft: imageLeft,
       plaintext: plaintext,
-      ordered: ordered
-    }
+      ordered: ordered,
+    },
   };
 
   return slide;
@@ -150,8 +150,8 @@ async function generateAboutMeSlide() {
     type: "Bullets",
     options: {
       title: randomChoice(stringLists.aboutMeTitles),
-      bullets: bulletStrings
-    }
+      bullets: bulletStrings,
+    },
   };
 }
 
@@ -161,8 +161,8 @@ async function generateQuoteHalfImage() {
     options: {
       title: await randString.compositeProfound(),
       imageUrl: await randImg.background(),
-      imageLeft: Math.random() < 0.5
-    }
+      imageLeft: Math.random() < 0.5,
+    },
   };
 }
 
@@ -172,8 +172,8 @@ async function generateExtractHalfImage() {
     options: {
       title: await randString.wikiExtractExcerpt(),
       imageUrl: await randImg.background(),
-      imageLeft: Math.random() < 0.5
-    }
+      imageLeft: Math.random() < 0.5,
+    },
   };
 }
 
@@ -208,5 +208,5 @@ module.exports = {
   generateExtractHalfImage,
   generateHalfBulletSlide,
   generateWeirdThoughtSlide,
-  generateChartSlide
+  generateChartSlide,
 };

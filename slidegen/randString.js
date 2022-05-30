@@ -9,9 +9,10 @@ const fs = require("fs");
 const csvParse = require("csv-parse/lib/sync");
 const stringLists = require("./sources/stringLists");
 const aboutMeGenerator = require("./sources/grammar/generators/aboutMe");
+const boldClaimGenerator = require("./sources/grammar/generators/boldClaim");
 
 function titleCase(s) {
-  return s.replace(/\w*/g, txt => {
+  return s.replace(/\w*/g, (txt) => {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
@@ -21,11 +22,11 @@ fs.readFile("slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   if (err) throw err;
   books = csvParse(data, {
     columns: true,
-    cast: true
-  }).map(record => {
+    cast: true,
+  }).map((record) => {
     return {
       title: record.original_title,
-      authors: record.authors
+      authors: record.authors,
     };
   });
 });
@@ -34,16 +35,16 @@ var jeopardy = [];
 fs.readFile("slidegen/sources/txt/jeopardy.csv", "utf8", (err, data) => {
   if (err) throw err;
   jeopardy = csvParse(data, {
-    columns: true
+    columns: true,
   })
-    .map(record => {
+    .map((record) => {
       return {
         category: titleCase(record.category),
         question: record.question,
-        answer: record.answer
+        answer: record.answer,
       };
     })
-    .filter(record => {
+    .filter((record) => {
       return !record.question.includes("<a href"); // filter out image based jeopardy questions
     });
 });
@@ -53,13 +54,13 @@ fs.readFile("slidegen/sources/txt/author-quote.txt", "utf8", (err, data) => {
   if (err) throw err;
   let lines = data.split("\n");
 
-  quotes = lines.map(line => {
+  quotes = lines.map((line) => {
     let splitILine = line.split("\t");
     let author = splitILine[0];
     let quote = splitILine[1];
     return {
       author: author,
-      quote: quote
+      quote: quote,
     };
   });
 });
@@ -77,7 +78,7 @@ async function wikiExtract() {
 async function wikiExtractExcerpt() {
   // Gets one sentence from an extract
   let article = await wikipedia.getRandomWikipediaArticle();
-  let extractSentences = article.extract.split(".").filter(sentence => {
+  let extractSentences = article.extract.split(".").filter((sentence) => {
     return !(sentence.trim() == "");
   });
   return randomChoice(extractSentences) + ".";
@@ -144,7 +145,7 @@ async function redditStrange() {
     "totallynotrobots",
     "nosleep",
     "shittyadvice",
-    "enlightenedbirdmen"
+    "enlightenedbirdmen",
   ]);
 }
 
@@ -161,13 +162,12 @@ async function redditAdvice() {
     "fitness",
     "writing",
     "christianity",
-    "aspergers"
   ]);
 }
 async function redditPhrases() {
   return await reddit.randomTitleFromMultireddit([
     "showerthoughts",
-    "pointlessstories"
+    "pointlessstories",
   ]);
 }
 
@@ -200,15 +200,17 @@ async function compositePhrase() {
 
   if (choice <= 0.25) {
     return jeopardyQuestion();
-  } else if (choice <= 0.5) {
+  } else if (choice <= 0.4) {
+    return boldClaimGenerator.boldClaim();
+  } else if (choice <= 0.55) {
     return quote();
-  } else if (choice <= 0.6) {
+  } else if (choice <= 0.65) {
     return await misc.getRandomAdvice();
-  } else if (choice <= 0.68) {
+  } else if (choice <= 0.71) {
     return await misc.getNumberTrivia();
-  } else if (choice <= 0.7) {
-    return jargon();
   } else if (choice <= 0.73) {
+    return jargon();
+  } else if (choice <= 0.76) {
     return shortJargon();
   } else {
     const redditChoice = Math.random();
@@ -241,7 +243,7 @@ async function compositeTitle() {
     wiki: 10,
     book: 20,
     jeopardyAnswer: 50,
-    jeopardyCategory: 20
+    jeopardyCategory: 20,
   });
 
   const choice = chooser();
@@ -337,5 +339,5 @@ module.exports = {
   compositeBullet,
   compositeProfound,
   compositeTitle,
-  aboutMe
+  aboutMe,
 };
