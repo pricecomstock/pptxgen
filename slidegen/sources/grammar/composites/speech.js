@@ -10,9 +10,7 @@ const SpeechGrammar = {
     "super",
     "unbelievably",
     "really fuckin"
-  ],
-
-
+  ]
 };
 
 module.exports = SpeechGrammar;

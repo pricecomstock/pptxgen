@@ -1,33 +1,35 @@
-const axios = require('axios').create({
-  timeout: 3000,
-})
+const axios = require("axios").create({
+  timeout: 3000
+});
 
 async function getRandomAdvice() {
   try {
-    const response = await axios.get('https://api.adviceslip.com/advice')
-    return response.data.slip.advice
+    const response = await axios.get("https://api.adviceslip.com/advice");
+    return response.data.slip.advice;
   } catch (err) {
-    return getRandomAdvice()
+    return getRandomAdvice();
     //FIX this could be an infinite loop
   }
 }
 
 async function getInspirationalQuote() {
   try {
-    const response = await axios.get('http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en')
-    return response.data.quote
+    const response = await axios.get(
+      "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en"
+    );
+    return response.data.quote;
   } catch (err) {
-    return getInspirationalQuote()
+    return getInspirationalQuote();
     //FIX this could be an infinite loop
   }
 }
 
 async function getNumberTrivia() {
   try {
-    const response = await axios.get('http://numbersapi.com/random/trivia')
-    return response.data
+    const response = await axios.get("http://numbersapi.com/random/trivia");
+    return response.data;
   } catch (err) {
-    return getNumberTrivia()
+    return getNumberTrivia();
     //FIX this could be an infinite loop
   }
 }
@@ -36,4 +38,4 @@ module.exports = {
   getRandomAdvice,
   getInspirationalQuote,
   getNumberTrivia
-}
+};

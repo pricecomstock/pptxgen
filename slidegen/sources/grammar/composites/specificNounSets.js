@@ -65,7 +65,9 @@ const specificNounSets = {
     "life coach",
     "#sportLevel# #sport.lowercase# coach",
     "president",
-    "prophet"
+    "prophet",
+    "spiritual guide",
+    "priest"
   ]
 };
 
