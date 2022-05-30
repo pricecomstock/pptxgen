@@ -1,16 +1,16 @@
 import { PresentationOptions } from "./presentationOptions";
+import {
+  DeckRandomizer,
+  getWeightedRandomFunction,
+  randomDarkHexColor,
+  randomInt,
+} from "./utils/randUtils";
 
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
-const ru = require("./utils/randUtils");
 
 const bodySlideGenFunctionWeightSpec = [
-  // {
-  //   // Notice this is a reference to the function and NOT an invocation
-  //   value: titleGen.generateFullRandomTitleSlide,
-  //   count: 8
-  // },
   {
     value: bodyGen.generateStockPhotoSlide,
     count: 4,
@@ -45,7 +45,7 @@ const bodySlideGenFunctionWeightSpec = [
   },
 ];
 
-const numGradientStepsPicker = ru.getWeightedRandomFunction({
+const numGradientStepsPicker = getWeightedRandomFunction({
   2: 14,
   3: 8,
   4: 3,
@@ -53,7 +53,7 @@ const numGradientStepsPicker = ru.getWeightedRandomFunction({
   6: 1,
 });
 
-const fontPicker = ru.getWeightedRandomFunction({
+const fontPicker = getWeightedRandomFunction({
   // Normal 70%
   Rubik: 15,
   Aleo: 15,
@@ -85,7 +85,7 @@ function generateTheme() {
   let colors = [];
   let numGradientSteps = numGradientStepsPicker();
   for (let i = 0; i < numGradientSteps; i++) {
-    colors.push(ru.randomDarkHexColor());
+    colors.push(randomDarkHexColor());
   }
 
   const gradientType =
@@ -93,10 +93,10 @@ function generateTheme() {
 
   return {
     colors: colors,
-    texture: ru.randomInt(1, 41),
+    texture: randomInt(1, 41),
     gradientType: gradientType,
     gradientDirection:
-      gradientType == "linear-gradient" ? `${ru.randomInt(-179, 180)}deg` : "",
+      gradientType == "linear-gradient" ? `${randomInt(-179, 180)}deg` : "",
     font: fontPicker(),
   };
 }
@@ -107,14 +107,13 @@ async function generateSlideshow(options: PresentationOptions) {
 
   let slidePromises = [];
 
-  // Generate new random slide picker without replacement
-  // It will return a slide generator function!
-  const getBodySlideGenerator = ru.getNonReplacingRandomDeckFunction(
+  const bodySlideGeneratorPool = DeckRandomizer.fromObjectSpec<Function>(
     bodySlideGenFunctionWeightSpec
   );
 
   function addBodySlide() {
-    slidePromises.push(getBodySlideGenerator()());
+    const generator = bodySlideGeneratorPool.draw();
+    slidePromises.push(generator());
     currentSlideCount++;
   }
 
