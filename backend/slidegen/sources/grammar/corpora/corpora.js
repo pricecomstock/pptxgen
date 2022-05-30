@@ -84,7 +84,7 @@ const tarotFortune = tarotJson.tarot_interpretations.reduce(
 // FILM & TV
 const iabCategory = loadJsonFromCorporaFile(
   "film-tv/iab_categories.json"
-).iab.map(category => category.category_name);
+).iab.map((category) => category.category_name);
 const netflixGenre = loadJsonFromCorporaFile("film-tv/netflix-categories.json")
   .categories;
 
@@ -103,7 +103,7 @@ const environmentalHazard = loadJsonFromCorporaFile(
   "geography/environmental_hazards.json"
 ).entries;
 const city = loadJsonFromCorporaFile("geography/us_cities.json").cities.map(
-  city => {
+  (city) => {
     return `${city.city}, ${city.state}`;
   }
 );
@@ -144,7 +144,7 @@ const technicalFabric = loadJsonFromCorporaFile(
 // MATH
 const primeNumber = loadJsonFromCorporaFile(
   "mathematics/primes.json"
-).primes.map(num => num.toString());
+).primes.map((num) => num.toString());
 
 // MEDICINE
 const disease = flat(
@@ -184,13 +184,13 @@ const clothing = loadJsonFromCorporaFile("objects/clothing.json").clothes;
 // PLANTS
 const cannabisStrain = loadJsonFromCorporaFile("plants/cannabis.json").cannabis;
 const plant = loadJsonFromCorporaFile("plants/plants.json").instruments.map(
-  p => p.name
+  (p) => p.name
 );
 const flower = loadJsonFromCorporaFile("plants/flowers.json").flowers;
 
 // SCIENCE
 const elements = loadJsonFromCorporaFile("science/elements.json").elements.map(
-  e => e.name
+  (e) => e.name
 );
 const toxicChemicalJson = loadJsonFromCorporaFile(
   "science/toxic_chemicals.json"
@@ -203,28 +203,28 @@ const weatherCondition = loadJsonFromCorporaFile(
 ).conditions;
 const sizeComparisonFruit = loadJsonFromCorporaFile(
   "science/pregnancy.json"
-).pregnancy.map(p => p.fruit);
+).pregnancy.map((p) => p.fruit);
 
 // SPORTS
 const sport = loadJsonFromCorporaFile("sports/sports.json").sports;
 const nflTeam = loadJsonFromCorporaFile("sports/nfl_teams.json").nfl_teams.map(
-  t => t.name
+  (t) => t.name
 );
 const nhlTeam = loadJsonFromCorporaFile("sports/nhl_teams.json").nhl_teams.map(
-  t => t.name
+  (t) => t.name
 );
 const nbaTeam = loadJsonFromCorporaFile("sports/nba_teams.json").nba_teams.map(
-  t => t.name
+  (t) => t.name
 );
 const mlbTeam = loadJsonFromCorporaFile("sports/mlb_teams.json").mlb_teams.map(
-  t => t.name
+  (t) => t.name
 );
 const eplTeam = loadJsonFromCorporaFile(
   "sports/football/epl_teams.json"
-).epl_teams.map(t => t.name);
+).epl_teams.map((t) => t.name);
 const laligaTeam = loadJsonFromCorporaFile(
   "sports/football/laliga_teams.json"
-).laLiga_teams.map(t => t.name);
+).laLiga_teams.map((t) => t.name);
 
 // TECHNOLOGY
 const programmingLanguage = loadJsonFromCorporaFile(
@@ -244,7 +244,7 @@ const appliance = loadJsonFromCorporaFile("technology/appliances.json")
 const shakespeareSonnet = flat(
   loadJsonFromCorporaFile(
     "words/literature/shakespeare_sonnets.json"
-  ).sonnets.map(s => s.lines)
+  ).sonnets.map((s) => s.lines)
 );
 const shakespearePhrase = loadJsonFromCorporaFile(
   "words/literature/shakespeare_phrases.json"
@@ -261,9 +261,9 @@ const adjective = loadJsonFromCorporaFile("words/adjs.json").adjs;
 const adverb = loadJsonFromCorporaFile("words/adverbs.json").adverbs;
 const compoundBreakdown = loadJsonFromCorporaFile("words/compounds.json")
   .compounds // TODO standalone "points"
-  .map(c => `${c.compoundWord} = ${c.firstWord} + ${c.secondWord}`);
+  .map((c) => `${c.compoundWord} = ${c.firstWord} + ${c.secondWord}`);
 const eggcorn = flat(
-  loadJsonFromCorporaFile("words/eggcorns.json").eggcorns.map(e => e.mistakes)
+  loadJsonFromCorporaFile("words/eggcorns.json").eggcorns.map((e) => e.mistakes)
 );
 const encouragingWord = loadJsonFromCorporaFile("words/encouraging_words.json")
   .encouraging_words; // TODO good for picture captions
@@ -274,7 +274,7 @@ const infinitiveVerb = loadJsonFromCorporaFile("words/infinitive_verbs.json");
 const resumeVerb = loadJsonFromCorporaFile("words/resume_action_words.json")
   .resume_action_words; // TODO combine with nouns for bullshit resume items
 const verb = loadJsonFromCorporaFile("words/verbs.json").verbs.map(
-  v => v.present
+  (v) => v.present
 );
 
 const interjection = loadJsonFromCorporaFile("words/interjections.json")
@@ -291,13 +291,15 @@ const proverb = loadJsonFromCorporaFile("words/proverbs.json").proverbs;
 
 const harryPotterSpellName = loadJsonFromCorporaFile(
   "words/spells.json"
-).spells.map(spell => spell.incantation);
+).spells.map((spell) => spell.incantation);
 const harryPotterSpellEffect = loadJsonFromCorporaFile(
   "words/spells.json"
-).spells.map(spell => spell.effect);
+).spells.map((spell) => spell.effect);
 const harryPotterSpell = loadJsonFromCorporaFile(
   "words/spells.json"
-).spells.map(spell => `${spell.incantation} (${spell.type}): ${spell.effect}`);
+).spells.map(
+  (spell) => `${spell.incantation} (${spell.type}): ${spell.effect}`
+);
 
 const stateOfInebriation = loadJsonFromCorporaFile(
   "words/states_of_drunkenness.json"
@@ -399,7 +401,7 @@ const corpora = {
   stateOfInebriation,
 
   object,
-  clothing
+  clothing,
 };
 
 // Check to make sure I didn't mess anything up in the incredibly clumsy process above

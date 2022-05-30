@@ -1,5 +1,5 @@
 var express = require("express");
-var api = require("./router.js").router;
+var api = require("../../backend/server/router.js").router;
 var serveStatic = require("serve-static");
 
 var app = express();

@@ -18,7 +18,7 @@ function titleCase(s) {
 }
 
 var books = [];
-fs.readFile("slidegen/sources/txt/books.csv", "utf8", (err, data) => {
+fs.readFile("backend/slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   if (err) throw err;
   books = csvParse(data, {
     columns: true,
@@ -32,38 +32,46 @@ fs.readFile("slidegen/sources/txt/books.csv", "utf8", (err, data) => {
 });
 
 var jeopardy = [];
-fs.readFile("slidegen/sources/txt/jeopardy.csv", "utf8", (err, data) => {
-  if (err) throw err;
-  jeopardy = csvParse(data, {
-    columns: true,
-  })
-    .map((record) => {
-      return {
-        category: titleCase(record.category),
-        question: record.question,
-        answer: record.answer,
-      };
+fs.readFile(
+  "backend/slidegen/sources/txt/jeopardy.csv",
+  "utf8",
+  (err, data) => {
+    if (err) throw err;
+    jeopardy = csvParse(data, {
+      columns: true,
     })
-    .filter((record) => {
-      return !record.question.includes("<a href"); // filter out image based jeopardy questions
-    });
-});
+      .map((record) => {
+        return {
+          category: titleCase(record.category),
+          question: record.question,
+          answer: record.answer,
+        };
+      })
+      .filter((record) => {
+        return !record.question.includes("<a href"); // filter out image based jeopardy questions
+      });
+  }
+);
 
 var quotes = [];
-fs.readFile("slidegen/sources/txt/author-quote.txt", "utf8", (err, data) => {
-  if (err) throw err;
-  let lines = data.split("\n");
+fs.readFile(
+  "backend/slidegen/sources/txt/author-quote.txt",
+  "utf8",
+  (err, data) => {
+    if (err) throw err;
+    let lines = data.split("\n");
 
-  quotes = lines.map((line) => {
-    let splitILine = line.split("\t");
-    let author = splitILine[0];
-    let quote = splitILine[1];
-    return {
-      author: author,
-      quote: quote,
-    };
-  });
-});
+    quotes = lines.map((line) => {
+      let splitILine = line.split("\t");
+      let author = splitILine[0];
+      let quote = splitILine[1];
+      return {
+        author: author,
+        quote: quote,
+      };
+    });
+  }
+);
 
 async function wikiTitle() {
   let article = await wikipedia.getRandomWikipediaArticle();

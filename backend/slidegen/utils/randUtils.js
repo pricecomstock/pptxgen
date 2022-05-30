@@ -18,6 +18,10 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * range) + min;
 }
 
+/**
+ * Returns a random number between 0 and 1 according to a normal distribution
+ * @returns
+ */
 function norm() {
   const precision = 6; // the higher this goes, the better approx of norm we get
   let rand = 0;
@@ -72,7 +76,7 @@ class rbgaColor {
   }
 
   toStringHex(includeAlpha) {
-    let intTo2DigitHex = val255 => val255.toString(16).padStart(2, "0");
+    let intTo2DigitHex = (val255) => val255.toString(16).padStart(2, "0");
 
     return `#${intTo2DigitHex(this.r)}${intTo2DigitHex(this.g)}${intTo2DigitHex(
       this.b
@@ -116,7 +120,7 @@ function getWeightedRandomFunction(spec) {
 function getNonReplacingRandomDeckFunction(spec) {
   let deck = [];
 
-  spec.forEach(item => {
+  spec.forEach((item) => {
     item.value;
     for (let j = 0; j < item.count; j++) {
       deck.push(item.value);
@@ -156,5 +160,5 @@ module.exports = {
   oneInN,
   randomDarkHexColor: randomDarkHexColor,
   generatedArray,
-  randomAnyRBGAColor
+  randomAnyRBGAColor,
 };
