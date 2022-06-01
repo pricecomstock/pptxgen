@@ -1,4 +1,5 @@
 import { PresentationOptions } from "./presentationOptions";
+import { Theme } from "./theme/theme";
 import {
   DeckRandomizer,
   getWeightedRandomFunction,
@@ -45,62 +46,6 @@ const bodySlideGenFunctionWeightSpec = [
   },
 ];
 
-const numGradientStepsPicker = getWeightedRandomFunction({
-  2: 14,
-  3: 8,
-  4: 3,
-  5: 1,
-  6: 1,
-});
-
-const fontPicker = getWeightedRandomFunction({
-  // Normal 70%
-  Rubik: 15,
-  Aleo: 15,
-  Nunito: 10,
-  "Noto Serif": 10,
-  Cabin: 10,
-  Merriweather: 10,
-
-  // Goofy 24%
-  Anton: 3,
-  Caveat: 3,
-  Kalam: 3,
-  "Patrick Hand": 3,
-  "Cutive Mono": 3,
-  "Coming Soon": 3,
-  "Just Me Again Down Here": 3,
-  Kavivanar: 3,
-
-  // Hard to read 6%
-  Lobster: 1,
-  Pacifico: 1,
-  "Dancing Script": 1,
-  "Reenie Beanie": 1,
-  Condiment: 1,
-  Orbitron: 1,
-});
-
-function generateTheme() {
-  let colors = [];
-  let numGradientSteps = numGradientStepsPicker();
-  for (let i = 0; i < numGradientSteps; i++) {
-    colors.push(randomDarkHexColor());
-  }
-
-  const gradientType =
-    Math.random() < 0.5 ? "linear-gradient" : "radial-gradient";
-
-  return {
-    colors: colors,
-    texture: randomInt(1, 41),
-    gradientType: gradientType,
-    gradientDirection:
-      gradientType == "linear-gradient" ? `${randomInt(-179, 180)}deg` : "",
-    font: fontPicker(),
-  };
-}
-
 async function generateSlideshow(options: PresentationOptions) {
   const { presenter, slideCount: desiredSlideCount, questions } = options;
   let currentSlideCount = 0;
@@ -139,7 +84,7 @@ async function generateSlideshow(options: PresentationOptions) {
 
   let slideshow = {
     slides: await Promise.all(slidePromises),
-    theme: generateTheme(),
+    theme: Theme.createRandom(),
   };
 
   return slideshow;

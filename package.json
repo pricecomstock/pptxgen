@@ -9,6 +9,7 @@
     "test": "vue-cli-service test:unit",
     "server-build": "tsc -p backend",
     "dev-server-build": "tsc -w -p backend",
+    "dev-server": "nodemon backend-build/server/server.js",
     "server": "nodemon backend/server/server.js"
   },
   "dependencies": {

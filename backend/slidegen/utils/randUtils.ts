@@ -1,3 +1,5 @@
+import { RGBAColor } from "./color";
+
 /** Chooses and returns a random item from an array */
 export function randomChoice(arr: Array<any>) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -70,42 +72,10 @@ export function randomDarkHexColor() {
   return "#" + r + g + b;
 }
 
-/** Represents an rbga color  */
-class rbgaColor {
-  public r: number;
-  public g: number;
-  public b: number;
-  public a: number;
-  constructor(r, g, b, a) {
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    this.a = a || 1;
-  }
-
-  toString() {
-    return `rgba(${this.r},${this.g},${this.b},${this.a})`;
-  }
-
-  /** Returns a clone with the specified alpha instead of this one */
-  withAlpha(cloneAlpha) {
-    return new rbgaColor(this.r, this.g, this.b, cloneAlpha);
-  }
-
-  /** Gives the hex string representing this color */
-  toStringHex(includeAlpha) {
-    let intTo2DigitHex = (val255) => val255.toString(16).padStart(2, "0");
-
-    return `#${intTo2DigitHex(this.r)}${intTo2DigitHex(this.g)}${intTo2DigitHex(
-      this.b
-    )}${includeAlpha ? intTo2DigitHex(Math.floor(this.a * 255)) : ""}`;
-  }
-}
-
 export function randomAnyRBGAColor(min, max, alpha) {
   const minColorValue = min || 0;
   const maxColorValue = max || 255;
-  return new rbgaColor(
+  return new RGBAColor(
     randomInt(minColorValue, maxColorValue),
     randomInt(minColorValue, maxColorValue),
     randomInt(minColorValue, maxColorValue),
@@ -136,8 +106,10 @@ and returns a function that, when called, will return a random key weighted by i
 Easiest way is to treat the weight as a percentage. Probably not the most efficient since it
 creates an array with a length equal to the sum of the values
 */
-export function getWeightedRandomFunction(spec: Record<any, number>) {
-  var i: any,
+export function getWeightedRandomFunction<T extends string | number>(
+  spec: Record<T, number>
+): () => T {
+  var i: T,
     j: number,
     table = [];
 
@@ -176,10 +148,10 @@ export function oneInN(n) {
 }
 
 /** Retruns an array with each item created by calling the given function */
-export function generatedArray(
+export function generatedArray<T>(
   length: number,
-  generatorFunction: (index: number) => {}
-) {
+  generatorFunction: (index: number) => T
+): T[] {
   return Array(length)
     .fill(undefined)
     .map((_value, index) => generatorFunction(index));
