@@ -1,7 +1,6 @@
 var express = require("express");
 const { PresentationOptions } = require("../slidegen/presentationOptions");
-
-const slidegen = require("../slidegen/slidegen");
+const generateSlideshow = require("../slidegen/generateSlideshow");
 
 var router = express.Router();
 router.use(express.json());
@@ -17,7 +16,7 @@ router.get("/", function(req, res) {
 router.get("/slides", (req, res) => {
   const options = new PresentationOptions(req.query);
 
-  slidegen.generateSlideshow(options).then((slideshow) => {
+  generateSlideshow.generateSlideshow(options).then((slideshow) => {
     res.json({
       message: "Here are some slides",
       slides: slideshow.slides,

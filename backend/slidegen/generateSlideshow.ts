@@ -1,11 +1,6 @@
 import { PresentationOptions } from "./presentationOptions";
 import { Theme } from "./theme/theme";
-import {
-  DeckRandomizer,
-  getWeightedRandomFunction,
-  randomDarkHexColor,
-  randomInt,
-} from "./utils/randUtils";
+import { DeckRandomizer } from "./utils/randUtils";
 
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
