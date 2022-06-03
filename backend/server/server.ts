@@ -19,8 +19,6 @@ app.use(function(req, res, next) {
 // Use all those above routes for the API
 app.use("/api", api);
 
-// TODO: make it so incorrect API calls don't fall through to vue-router
-
 // Favicon
 app.get("/favicon.ico", function(req, res) {
   //   console.log("favicon GET");

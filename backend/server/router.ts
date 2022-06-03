@@ -29,5 +29,4 @@ router.get("/slides", (req, res) => {
 // POST //
 //------//
 
-// Export
 module.exports.router = router;
