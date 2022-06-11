@@ -26,6 +26,7 @@ export class Image extends SlideVisualElement {
     this.url = url;
   }
 }
+
 export class HalfImageBulletsOptions {
   constructor(
     public title: string, // idk what this does

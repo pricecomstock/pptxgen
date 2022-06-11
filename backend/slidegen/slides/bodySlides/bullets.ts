@@ -21,6 +21,9 @@ const randomBulletFormat = getWeightedRandomFunction({
 });
 
 export class BulletSlideOptions {
+  public plaintext: boolean = false;
+  public ordered: boolean = false;
+
   constructor(
     public title: string,
     public bullets: string[],
@@ -28,7 +31,10 @@ export class BulletSlideOptions {
     public maxWidth: string,
     public chart?: ChartSpec,
     public contentImages?: Image[]
-  ) {}
+  ) {
+    this.plaintext = bulletFormat === "plain";
+    this.ordered = bulletFormat === "ordered";
+  }
 
   static async generateRandom(hasChart = false, hasImage = false) {
     const titlePromise = randString.compositeTitle();
@@ -49,15 +55,5 @@ export class BulletSlideOptions {
     const [title, bullets] = await Promise.all([titlePromise, bulletsPromise]);
 
     return new BulletSlideOptions(title, bullets, bulletFormat, maxWidth);
-  }
-
-  // TODO rename to be more clearly a boolean, or eliminate
-  get plaintext() {
-    return this.bulletFormat === "plain";
-  }
-
-  // TODO rename to be more clearly a boolean, or eliminate
-  get ordered() {
-    return this.bulletFormat === "ordered";
   }
 }
