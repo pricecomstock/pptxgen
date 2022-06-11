@@ -1,6 +1,6 @@
 // The standard, "bullet point" slide
 
-import { Image } from "./bodySlide";
+import { Image } from ".";
 import * as randString from "../../randString";
 import { ChartSpec } from "../../sources/chart/chart";
 import {
@@ -39,6 +39,7 @@ export class BulletSlideOptions {
   static async generateRandom(hasChart = false, hasImage = false) {
     const titlePromise = randString.compositeTitle();
 
+    // TODO move this to another file that creates whole sets of bullets they can follow themes
     const bulletsPromise = generatedAsyncArray<string>(
       randomNumBullets(),
       randString.compositeBullet

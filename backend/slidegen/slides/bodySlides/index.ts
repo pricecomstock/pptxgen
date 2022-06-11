@@ -3,16 +3,21 @@ import { BulletSlideOptions } from "./bullets";
 
 export type SlideType = "Bullets" | "HalfImageBullets" | "HalfImageTitle";
 
-export class SlideVisualElement {
-  public width?: string;
-  public position?: {
-    top?: number;
-    bottom?: number;
-    left?: number;
-    right?: number;
-  };
+export interface Position {
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+}
 
-  constructor(width?, position?) {
+export class SlideVisualElement {
+  /** I believe width and position are not actually used since the switch to Grid-based slides */
+  public width?: string;
+
+  /** I believe width and position are not actually used since the switch to Grid-based slides */
+  public position?: Position;
+
+  constructor(width?: string, position?: Position) {
     this.width = width;
     this.position = position;
   }
@@ -21,7 +26,7 @@ export class SlideVisualElement {
 export class Image extends SlideVisualElement {
   public url: string;
 
-  constructor(url, width, position) {
+  constructor(url: string, width?: string, position?: Position) {
     super(width, position);
     this.url = url;
   }
