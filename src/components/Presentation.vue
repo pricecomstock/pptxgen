@@ -11,11 +11,11 @@
       class="tag slide-counter"
       :class="{
         'is-dark': currentSlideIndex != this.slideshow.length - 2,
-        'is-danger': currentSlideIndex === this.slideshow.length - 2
+        'is-danger': currentSlideIndex === this.slideshow.length - 2,
       }"
       v-if="
         currentSlideIndex !== 0 &&
-          currentSlideIndex !== this.slideshow.length - 1
+        currentSlideIndex !== this.slideshow.length - 1
       "
     >
       {{ currentSlideIndex }}/{{ this.slideshow.length - 2 }}
@@ -52,7 +52,7 @@ export default {
   props: {
     slideshow: {
       type: Array,
-      required: true
+      required: true,
     },
     theme: {
       type: Object,
@@ -63,24 +63,24 @@ export default {
           gradientType: "linear-gradient",
           gradientDirection: "0deg",
           texture: 0,
-          font: "Aleo"
+          font: "Aleo",
         };
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       currentSlideIndex: 0,
       preloadedImages: [],
       baseUrl: process.env.BASE_URL,
-      isMobile: false
+      isMobile: false,
     };
   },
   components: {
     Title,
     Bullets,
     HalfImageTitle,
-    HalfImageBullets
+    HalfImageBullets,
   },
   computed: {
     currentSlide() {
@@ -98,24 +98,19 @@ export default {
             ? ""
             : this.theme.gradientDirection + ", "
         }${this.theme.colors.join(", ")})`,
-        "font-family": `"${
-          this.theme.font
-        }", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`
+        "font-family": `"${this.theme.font}", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`,
       };
-    }
+    },
   },
   watch: {
     slideshow() {
       this.newSlideshow();
-    }
+    },
   },
   methods: {
     nextSlide() {
       if (this.currentSlideIndex < this.slideshow.length - 1) {
         this.currentSlideIndex += 1;
-        // console.log("Next Slide!");
-      } else {
-        // console.log("Already at end of slideshow!");
       }
     },
     isMobileDevice() {
@@ -127,9 +122,6 @@ export default {
     previousSlide() {
       if (this.currentSlideIndex > 0) {
         this.currentSlideIndex -= 1;
-        // console.log("Previous Slide!");
-      } else {
-        // console.log("Already at start of slideshow!");
       }
     },
     newSlideshow() {
@@ -142,8 +134,8 @@ export default {
       if (this.theme.font) {
         WebFontLoader.load({
           google: {
-            families: [this.theme.font]
-          }
+            families: [this.theme.font],
+          },
         });
       }
     },
@@ -151,13 +143,13 @@ export default {
       this.preloadedImages = [];
     },
     preloadImages() {
-      this.slideshow.forEach(slide => {
+      this.slideshow.forEach((slide) => {
         if (slide.options.imageUrl) {
           this.loadImageFromUrl(slide.options.imageUrl);
         }
 
         if (slide.options.contentImages) {
-          slide.options.contentImages.forEach(cImg => {
+          slide.options.contentImages.forEach((cImg) => {
             this.loadImageFromUrl(cImg.url);
           });
         }
@@ -170,22 +162,12 @@ export default {
     },
     fullscreen() {
       this.$emit("fullscreen");
-    }
+    },
   },
   mounted() {
     this.isMobile = this.isMobileDevice();
     this.newSlideshow();
-  }
-  // ready() {
-  //   // var el = this.$el;
-  //   // el.addEventListener('keyup', event => {
-  //   //   if (event.keyCode === 40 || event.keyCode === 39) { // down arrow, right arrow
-  //   //     this.nextSlide();
-  //   //   } else if (event.keyCode === 37 || event.keyCode === 38 ) { // up arrow, back arrow
-  //   //     this.previousSlide();
-  //   //   }
-  //   // })
-  // }
+  },
 };
 </script>
 
