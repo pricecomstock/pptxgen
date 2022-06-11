@@ -11,13 +11,13 @@ const stringLists = require("./sources/stringLists");
 const aboutMeGenerator = require("./sources/grammar/generators/aboutMe");
 const boldClaimGenerator = require("./sources/grammar/generators/boldClaim");
 
-function titleCase(s) {
+export function titleCase(s) {
   return s.replace(/\w*/g, (txt) => {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }
 
-var books = [];
+const books = [];
 fs.readFile("backend/slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   if (err) throw err;
   books = csvParse(data, {
@@ -31,7 +31,7 @@ fs.readFile("backend/slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   });
 });
 
-var jeopardy = [];
+const jeopardy = [];
 fs.readFile(
   "backend/slidegen/sources/txt/jeopardy.csv",
   "utf8",
@@ -53,7 +53,7 @@ fs.readFile(
   }
 );
 
-var quotes = [];
+const quotes = [];
 fs.readFile(
   "backend/slidegen/sources/txt/author-quote.txt",
   "utf8",
@@ -73,17 +73,17 @@ fs.readFile(
   }
 );
 
-async function wikiTitle() {
+export async function wikiTitle(): Promise<string> {
   let article = await wikipedia.getRandomWikipediaArticle();
   return article.title;
 }
 
-async function wikiExtract() {
+export async function wikiExtract(): Promise<string> {
   let article = await wikipedia.getRandomWikipediaArticle();
   return article.extract;
 }
 
-async function wikiExtractExcerpt() {
+export async function wikiExtractExcerpt(): Promise<string> {
   // Gets one sentence from an extract
   let article = await wikipedia.getRandomWikipediaArticle();
   let extractSentences = article.extract.split(".").filter((sentence) => {
@@ -92,60 +92,60 @@ async function wikiExtractExcerpt() {
   return randomChoice(extractSentences) + ".";
 }
 
-async function wikiDescription() {
+export async function wikiDescription(): Promise<string> {
   let article = await wikipedia.getRandomWikipediaArticle();
   return article.description;
 }
 
-async function wikiAll() {
+export async function wikiAll(): Promise<string> {
   return await wikipedia.getRandomWikipediaArticle();
 }
 
-function jargon() {
+export function jargon(): string {
   return jargonCreator.generateJargonPhrase();
 }
 
-function shortJargon() {
+export function shortJargon(): string {
   return jargonCreator.generateShortJargonPhrase();
 }
 
-function quoteAndAuthor() {
+export function quoteAndAuthor(): string {
   return randomChoice(quotes);
 }
 
-function quote() {
+export function quote(): string {
   return randomChoice(quotes).quote;
 }
 
-function quoteAuthor() {
+export function quoteAuthor(): string {
   return randomChoice(quotes).author;
 }
 
-function bookTitle() {
+export function bookTitle(): string {
   return randomChoice(books).title;
 }
 
-function bookAuthor() {
+export function bookAuthor(): string {
   return randomChoice(books).authors;
 }
 
-function jeopardyAnswer() {
+export function jeopardyAnswer(): string {
   return randomChoice(jeopardy).answer;
 }
 
-function jeopardyQuestion() {
+export function jeopardyQuestion(): string {
   return randomChoice(jeopardy).question;
 }
 
-function jeopardyCategory() {
+export function jeopardyCategory(): string {
   return randomChoice(jeopardy).category;
 }
 
-async function redditNoContext() {
+export async function redditNoContext(): Promise<string> {
   return await reddit.randomTitleFromSubreddit("nocontext");
 }
 
-async function redditStrange() {
+export async function redditStrange(): Promise<string> {
   return await reddit.randomTitleFromMultireddit([
     "fifthworldproblems",
     "fifthworldproblems",
@@ -157,7 +157,7 @@ async function redditStrange() {
   ]);
 }
 
-async function redditAdvice() {
+export async function redditAdvice(): Promise<string> {
   return await reddit.randomTitleFromMultireddit([
     "advice",
     "relationships",
@@ -170,28 +170,30 @@ async function redditAdvice() {
     "fitness",
     "writing",
     "christianity",
+    "entrepreneur",
   ]);
 }
-async function redditPhrases() {
+
+export async function redditPhrases(): Promise<string> {
   return await reddit.randomTitleFromMultireddit([
     "showerthoughts",
     "pointlessstories",
   ]);
 }
 
-async function redditQuestion() {
+export async function redditQuestion(): Promise<string> {
   return await reddit.randomTitleFromSubreddit("nostupidquestions");
 }
 
-function getToKnowQuestion() {
+export function getToKnowQuestion(): Promise<string> {
   return randomChoice(stringLists.questionsToGetToKnowSomeone);
 }
 
-function philisophicalQuestion() {
+export function philisophicalQuestion(): Promise<string> {
   return randomChoice(stringLists.philisophicalQuestions);
 }
 
-async function compositeQuestion() {
+export async function compositeQuestion(): Promise<string> {
   const choice = Math.random();
 
   if (choice <= 0.5) {
@@ -203,7 +205,7 @@ async function compositeQuestion() {
   }
 }
 
-async function compositePhrase() {
+export async function compositePhrase(): Promise<string> {
   const choice = Math.random();
 
   if (choice <= 0.25) {
@@ -232,7 +234,7 @@ async function compositePhrase() {
   }
 }
 
-async function compositeTopic() {
+export async function compositeTopic(): Promise<string> {
   const choice = Math.random();
 
   if (choice <= 0.5) {
@@ -246,7 +248,7 @@ async function compositeTopic() {
   }
 }
 
-async function compositeTitle() {
+export async function compositeTitle(): Promise<string> {
   const chooser = getWeightedRandomFunction({
     wiki: 10,
     book: 20,
@@ -267,7 +269,7 @@ async function compositeTitle() {
   }
 }
 
-async function compositeProfound() {
+export async function compositeProfound(): Promise<string> {
   const choice = Math.random();
 
   if (choice <= 0.5) {
@@ -283,7 +285,7 @@ async function compositeProfound() {
   }
 }
 
-async function compositeHuman() {
+export async function compositeHuman(): Promise<string> {
   const choice = Math.random();
 
   if (choice <= 0.5) {
@@ -293,7 +295,7 @@ async function compositeHuman() {
   }
 }
 
-async function compositeBullet() {
+export async function compositeBullet(): Promise<string> {
   const choice = Math.random();
 
   if (choice <= 0.8) {
@@ -305,17 +307,9 @@ async function compositeBullet() {
   }
 }
 
-function aboutMe() {
+export function aboutMe(): string {
   return aboutMeGenerator.aboutMe();
 }
-
-// setTimeout(async () => {
-//   console.debug("Composite Bullet:", await compositeBullet())
-//   console.debug("Composite Topic:", await compositeTopic())
-//   console.debug("Composite Human:", await compositeHuman())
-//   console.debug("Composite Phrase:", await compositePhrase())
-//   console.debug("Composite Question:", await compositeQuestion())
-// }, 3000)
 
 module.exports = {
   wikiTitle,

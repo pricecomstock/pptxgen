@@ -1,12 +1,12 @@
 import { RGBAColor } from "./color";
 
 /** Chooses and returns a random item from an array */
-export function randomChoice(arr: Array<any>) {
+export function randomChoice<T>(arr: Array<T>): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /** Chooses a random item from an array, removes it, and returns it */
-export function randomPop(arr: Array<any>) {
+export function randomPop<T>(arr: Array<T>) {
   if (arr.length === 0) {
     return undefined;
   }
@@ -16,7 +16,7 @@ export function randomPop(arr: Array<any>) {
 }
 
 /** Chooses a random integer between min and max, inclusive */
-export function randomInt(min: number, max: number) {
+export function randomInt(min: number, max: number): number {
   let exMax = max + 1;
   let range = exMax - min;
   return Math.floor(Math.random() * range) + min;
@@ -25,7 +25,7 @@ export function randomInt(min: number, max: number) {
 /**
  * Returns a random number between 0 and 1 according to a normal distribution
  */
-export function norm() {
+export function norm(): number {
   const precision = 6; // the higher this goes, the better approx of norm we get
   let rand = 0;
   for (let i = 0; i < precision; i++) {
@@ -36,7 +36,7 @@ export function norm() {
 }
 
 /** Returns a random integer between min and max inclusive, according to a normal distribution */
-export function normInt(min: number, max: number) {
+export function normInt(min: number, max: number): number {
   return Math.floor(min + norm() * (max - min + 1));
 }
 
@@ -48,7 +48,7 @@ export function randomIntArray(
   min: number,
   max: number,
   isNormalDistributed: boolean
-) {
+): number[] {
   let arr = [];
 
   if (isNormalDistributed) {
@@ -65,14 +65,14 @@ export function randomIntArray(
 }
 
 /** Returns a random hex color code  */
-export function randomDarkHexColor() {
+export function randomDarkHexColor(): string {
   let r = ((Math.random() * 0xbb) << 0).toString(16).padStart(2, "0");
   let g = ((Math.random() * 0xbb) << 0).toString(16).padStart(2, "0");
   let b = ((Math.random() * 0xbb) << 0).toString(16).padStart(2, "0");
   return "#" + r + g + b;
 }
 
-export function randomAnyRBGAColor(min, max, alpha) {
+export function randomAnyRBGAColor(min, max, alpha): RGBAColor {
   const minColorValue = min || 0;
   const maxColorValue = max || 255;
   return new RGBAColor(
@@ -86,7 +86,9 @@ export function randomAnyRBGAColor(min, max, alpha) {
 /** Takes an object like `{ 'a': 1, 'b': 2, 'c': 3 }` and expands it to
  * ['a', 'b', 'b', 'c', 'c', 'c']
  */
-export function expandCountsToArray(spec: Record<any, number>) {
+export function expandCountsToArray<T extends string | number>(
+  spec: Record<T, number>
+): Array<T> {
   let i: any,
     j: number,
     arr = [];
@@ -143,7 +145,7 @@ export function getNonReplacingRandomDeckFunction(
 }
 
 /** Randomly returns true approximately once out of N calls */
-export function oneInN(n) {
+export function oneInN(n): boolean {
   return Math.random() < 1 / n;
 }
 
@@ -157,8 +159,20 @@ export function generatedArray<T>(
     .map((_value, index) => generatorFunction(index));
 }
 
+/** Retruns an array with each item created by calling the given function */
+export function generatedAsyncArray<T>(
+  length: number,
+  generatorFunction: (index: number) => Promise<T>
+): Promise<T[]> {
+  return Promise.all(
+    Array(length)
+      .fill(undefined)
+      .map((_value, index) => generatorFunction(index))
+  );
+}
+
 /** Shuffles an array in place. This is mutative! */
-export function shuffleArrayInPlace(arr) {
+export function shuffleArrayInPlace<T>(arr: Array<T>): Array<T> {
   let currentIndex = arr.length;
   let temporaryValue, randomIndex;
 

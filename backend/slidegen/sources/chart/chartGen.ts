@@ -1,4 +1,7 @@
-const ru = require("../../utils/randUtils");
+import { ChartData, ChartDataSets, ChartOptions } from "chart.js";
+import { ChartSpec } from "./chart";
+
+import * as ru from "../../utils/randUtils";
 const su = require("../../utils/stringUtils");
 const chartTextGenerator = require("../grammar/generators/chartText");
 
@@ -10,12 +13,12 @@ function createChart(chartType, size, chartJsData, chartJsOptions, maxWidth) {
     size,
     chartJsData,
     chartJsOptions,
-    maxWidth
+    maxWidth,
   };
 }
 
-function getRandomBarChart() {
-  const barDatasetGenerator = dataPointCount => {
+function getRandomBarChart(): ChartSpec {
+  const barDatasetGenerator = (dataPointCount): ChartDataSets => {
     const colors = ru.generatedArray(dataPointCount, () =>
       ru.randomAnyRBGAColor(0, 150, 1)
     );
@@ -25,10 +28,10 @@ function getRandomBarChart() {
       // data: ru.randomIntArray(dataPointCount,1,5,false),
       data: ru.randomIntArray(dataPointCount, 1, 10, false),
       backgroundColor: colors.map(
-        color => color.withAlpha(0.3).toStringHex(transparent) // only include alpha if transparent
+        (color) => color.withAlpha(0.3).toStringHex(transparent) // only include alpha if transparent
       ),
-      borderColor: colors.map(color => color.toStringHex()),
-      borderWidth: transparent ? 4 : 0
+      borderColor: colors.map((color) => color.toStringHex()),
+      borderWidth: transparent ? 4 : 0,
     };
   };
 
@@ -40,54 +43,54 @@ function getRandomBarChart() {
 
   const chartTitle = chartTextGenerator.barChartTitle();
 
-  const chartJsData = {
+  const chartJsData: ChartData = {
     labels: chartTextGenerator.barChartXAxisArray(numData),
-    datasets: [barDatasetGenerator(numData)]
+    datasets: [barDatasetGenerator(numData)],
   };
   // console.log(data);
-  const chartJsOptions = {
+  const chartJsOptions: ChartOptions = {
     legend: {
       display: false,
       labels: {
-        fontSize: 36
-      }
+        fontSize: 36,
+      },
     },
     title: {
       display: true,
       text: su.titleCase(chartTitle).match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
-      padding: 20
+      padding: 20,
     },
     scales: {
       yAxes: [
         {
           ticks: {
             suggestedMin: 0,
-            fontSize: 36
-          }
-        }
+            fontSize: 36,
+          },
+        },
       ],
       xAxes: [
         {
           ticks: {
-            fontSize: 48
-          }
-        }
-      ]
+            fontSize: 48,
+          },
+        },
+      ],
     },
     layout: {
       padding: {
         left: 25,
         right: 25,
         top: 0,
-        bottom: 15
-      }
+        bottom: 15,
+      },
     },
     elements: {
       rectangle: {
-        borderWidth: 8
-      }
-    }
+        borderWidth: 8,
+      },
+    },
   };
 
   return createChart("bar", size, chartJsData, chartJsOptions, maxWidth);
@@ -97,10 +100,10 @@ function getRandomLineChart() {
   // TOOLS
   const lineChartTypes = {
     TREND: "trend",
-    MULTILINE: "multiline"
+    MULTILINE: "multiline",
   };
   const pickLineChartType = ru.getWeightedRandomFunction({
-    [lineChartTypes.TREND]: 3
+    [lineChartTypes.TREND]: 3,
     // TODO Uncomment and add multiline charts
     // [lineChartTypes.MULTILINE]: 1
   });
@@ -122,20 +125,20 @@ function getRandomLineChart() {
       fill: isAreaChart ? "origin" : false,
       backgroundColor: color.withAlpha(0.3).toStringHex(true),
 
-      data: ru.randomIntArray(dataPointCount, 1, 100, false)
+      data: ru.randomIntArray(dataPointCount, 1, 100, false),
     };
   };
 
   const getRandomDatasetCount = ru.getWeightedRandomFunction({
     2: 80,
     3: 17,
-    40: 3
+    40: 3,
   });
 
-  const getRandomYearArray = numberOfDataPoints => {
+  const getRandomYearArray = (numberOfDataPoints) => {
     const interval = ru.randomInt(2, 12);
     const endYear = new Date().getFullYear() + ru.randomInt(-5, 10);
-    const years = ru.generatedArray(numberOfDataPoints, index => {
+    const years = ru.generatedArray(numberOfDataPoints, (index) => {
       return endYear - interval * (numberOfDataPoints - index - 1);
     });
 
@@ -160,7 +163,7 @@ function getRandomLineChart() {
     labels: getRandomYearArray(dataPointCount),
     datasets: ru.generatedArray(datasetCount, () =>
       lineDatasetGenerator(dataPointCount, ru.oneInN(5), lineChartType)
-    )
+    ),
   };
   // console.log(data);
   const chartJsOptions = {
@@ -168,50 +171,50 @@ function getRandomLineChart() {
       display: lineChartType !== lineChartTypes.TREND,
       position: "bottom",
       labels: {
-        fontSize: 36
-      }
+        fontSize: 36,
+      },
     }, // Line chart needs this
     title: {
       display: true,
       text: su.titleCase(chartTitle).match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
       fontSize: 56,
-      padding: 20
+      padding: 20,
     },
     scales: {
       yAxes: [
         {
           ticks: {
             suggestedMin: 0,
-            fontSize: 36
+            fontSize: 36,
           },
-          display: false
-        }
+          display: false,
+        },
       ],
       xAxes: [
         {
           ticks: {
-            fontSize: 48
+            fontSize: 48,
           },
           gridLines: {
-            display: false // don't show vertical lines
+            display: false, // don't show vertical lines
           },
-          display: !ru.oneInN(5) // don't show axis 1/5 times
-        }
-      ]
+          display: !ru.oneInN(5), // don't show axis 1/5 times
+        },
+      ],
     },
     layout: {
       padding: {
         left: 25,
         right: 25,
         top: 0,
-        bottom: 15
-      }
+        bottom: 15,
+      },
     },
     elements: {
       line: {
-        borderWidth: 10
-      }
-    }
+        borderWidth: 10,
+      },
+    },
   };
 
   return createChart("line", size, chartJsData, chartJsOptions, maxWidth);
@@ -233,7 +236,7 @@ module.exports = {
   // getRandomPieChart,
   getRandomBarChart,
   getRandomLineChart,
-  getRandomChart
+  getRandomChart,
 };
 
 // TODO WOW THIS HELPS https://tobiasahlin.com/blog/chartjs-charts-to-get-you-started/

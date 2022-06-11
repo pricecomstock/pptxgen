@@ -19,8 +19,8 @@ const titleSlideFunctions = {
       options: {
         title,
         subtitle,
-        imageUrl
-      }
+        imageUrl,
+      },
     };
   },
   async generateTitleSlide(title, subtitle) {
@@ -44,10 +44,10 @@ const titleSlideFunctions = {
       options: {
         title: randomChoice(stringLists.endTitles),
         subtitle: questions ? randomChoice(stringLists.questionPrompts) : "",
-        imageUrl: await randImg.background()
-      }
+        imageUrl: await randImg.background(),
+      },
     };
-  }
+  },
 };
 
 module.exports = titleSlideFunctions;

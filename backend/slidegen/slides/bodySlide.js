@@ -1,4 +1,4 @@
-const randImg = require("../randImage");
+import * as randImg from "../randImage";
 const randString = require("../randString");
 const randomChoice = require("../utils/randUtils").randomChoice;
 const randomInt = require("../utils/randUtils").randomInt;
@@ -6,12 +6,6 @@ const getWeightedRandomFunction = require("../utils/randUtils")
   .getWeightedRandomFunction;
 const stringLists = require("../sources/stringLists");
 const chartGen = require("../sources/chart/chartGen");
-
-const randomNumBullets = getWeightedRandomFunction({
-  1: 60,
-  2: 38,
-  3: 2,
-});
 
 async function getBullets(numBullets) {
   let bullets = [];

@@ -21,7 +21,7 @@ export class RGBAColor {
   }
 
   /** Gives the hex string representing this color */
-  toStringHex(includeAlpha) {
+  toStringHex(includeAlpha = false) {
     let intTo2DigitHex = (val255) => val255.toString(16).padStart(2, "0");
 
     return `#${intTo2DigitHex(this.r)}${intTo2DigitHex(this.g)}${intTo2DigitHex(
