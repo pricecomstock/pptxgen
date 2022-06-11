@@ -95,7 +95,7 @@ async function generateBodySlideWithGraph() {
   return assembleStandardSlide(
     await randString.compositeTitle(),
     await getBullets(randomNumBullets()),
-    await randImg.graph()
+    await randImg.redditGraph()
   );
 }
 

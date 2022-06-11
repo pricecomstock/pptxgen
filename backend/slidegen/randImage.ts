@@ -42,7 +42,7 @@ export async function interesting(): Promise<string> {
   ]);
 }
 
-export async function graph(): Promise<string> {
+export async function redditGraph(): Promise<string> {
   return reddit.randomImageOrGifFromMultireddit([
     "dataisbeautiful",
     "dataisugly",
@@ -79,7 +79,7 @@ export const anyRandomImage = async (): Promise<string> => {
     animal,
     gif,
     interesting,
-    graph,
+    redditGraph,
     stockPhoto,
     wiki,
   ])();
