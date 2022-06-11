@@ -17,7 +17,7 @@ export function titleCase(s) {
   });
 }
 
-const books = [];
+let books = [];
 fs.readFile("backend/slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   if (err) throw err;
   books = csvParse(data, {
@@ -31,7 +31,7 @@ fs.readFile("backend/slidegen/sources/txt/books.csv", "utf8", (err, data) => {
   });
 });
 
-const jeopardy = [];
+let jeopardy = [];
 fs.readFile(
   "backend/slidegen/sources/txt/jeopardy.csv",
   "utf8",
@@ -53,7 +53,7 @@ fs.readFile(
   }
 );
 
-const quotes = [];
+let quotes = [];
 fs.readFile(
   "backend/slidegen/sources/txt/author-quote.txt",
   "utf8",
