@@ -8,9 +8,9 @@
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
     "server-build": "tsc -p backend",
-    "dev-server-build": "tsc -w -p backend",
-    "dev-server": "nodemon backend-build/server/server.js",
-    "server": "nodemon backend/server/server.js"
+    "server-build-watch": "tsc -w -p backend",
+    "server": "nodemon backend-build/server/server.js",
+    "dev-server": "nodemon backend/server/server.ts --project backend/tsconfig.json"
   },
   "dependencies": {
     "alloyfinger": "^0.1.16",
@@ -42,6 +42,7 @@
     "nodemon": "^2.0.16",
     "sass": "^1.51.0",
     "sass-loader": "^7.3.1",
+    "ts-node": "^10.8.1",
     "vue-template-compiler": "^2.6.14"
   },
   "postcss": {

@@ -1,5 +1,5 @@
 var express = require("express");
-var api = require("./router.js").router;
+var api = require("./router").router;
 var serveStatic = require("serve-static");
 import * as path from "path";
 
