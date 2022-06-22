@@ -58,18 +58,22 @@ export async function stockPhoto(): Promise<string> {
 }
 
 export async function wiki(): Promise<string> {
+  let attemptsMade = 0;
+  const maxAttempts = 3;
+
   let imageUrl = null;
 
-  while (!imageUrl) {
-    let article = wikipedia.getRandomWikipediaArticle();
+  while (attemptsMade < maxAttempts && !imageUrl) {
+    attemptsMade++;
     try {
-      imageUrl = article.originalimage.source;
+      let article = await wikipedia.getRandomWikipediaArticle();
+      imageUrl = article?.originalimage?.source;
     } catch (error) {
       imageUrl = null;
     }
   }
 
-  return imageUrl;
+  return imageUrl ?? "";
 }
 
 export const anyRandomImage = async (): Promise<string> => {

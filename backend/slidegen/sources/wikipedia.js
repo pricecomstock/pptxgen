@@ -1,6 +1,6 @@
 const axios = require("axios").create({
   baseURL: "https://en.wikipedia.org/api/rest_v1/",
-  timeout: 3000
+  timeout: 3000,
 });
 
 async function getRandomWikipediaArticle() {
@@ -8,8 +8,8 @@ async function getRandomWikipediaArticle() {
     const response = await axios.get("/page/random/summary");
     return response.data;
   } catch (err) {
-    return getRandomWikipediaArticle();
-    //FIX this could be an infinite loop
+    console.log(err);
+    throw err;
   }
 }
 
