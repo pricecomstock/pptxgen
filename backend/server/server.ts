@@ -1,13 +1,16 @@
 var express = require("express");
 var api = require("./router.js").router;
 var serveStatic = require("serve-static");
+import * as path from "path";
+
+const distDir = path.join(process.cwd(), "dist");
 
 var app = express();
-app.use(serveStatic(__dirname + "/dist"));
-app.use("/textures", serveStatic(__dirname + "/dist/textures"));
+app.use(serveStatic(distDir));
+app.use("/textures", serveStatic(distDir + "/textures"));
 
 // This is for development mostly
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -20,17 +23,17 @@ app.use(function(req, res, next) {
 app.use("/api", api);
 
 // Favicon
-app.get("/favicon.ico", function(req, res) {
+app.get("/favicon.ico", function (req, res) {
   //   console.log("favicon GET");
-  res.sendFile(__dirname + "/dist/favicon.ico");
+  res.sendFile(distDir + "/favicon.ico");
 });
 
 // Everything else should fall through to vue-router
-app.get("/*", function(req, res) {
-  res.sendFile(__dirname + "/dist/index.html");
+app.get("/*", function (req, res) {
+  res.sendFile(distDir + "/index.html");
 });
 
 var port = process.env.PORT || 5000;
 app.listen(port);
 
-// console.log("server started " + port);
+console.log(`server started on port ${port}`);
