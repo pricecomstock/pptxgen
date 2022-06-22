@@ -2,7 +2,7 @@ const tracery = require("tracery-grammar");
 const { isPlural, isSingular, plural, singular } = require("pluralize");
 
 // grammar sets
-const corpora = require("./corpora/corpora");
+const corpora = require("./corpora");
 const aboutMe = require("./composites/aboutMe");
 const chartText = require("./composites/chartText");
 const jargon = require("./composites/jargon");
@@ -29,7 +29,7 @@ const grammarSpec = {
   ...specificAdjectiveSets,
   ...specificModifierSets,
   ...utility,
-  ...jargon
+  ...jargon,
 };
 
 const grammar = tracery.createGrammar(grammarSpec);
@@ -67,8 +67,8 @@ grammar.addModifiers({
     }
   },
 
-  singularize: phrase => applyToPrepositionPhrase(phrase, singular),
-  pluralize: phrase => applyToPrepositionPhrase(phrase, plural)
+  singularize: (phrase) => applyToPrepositionPhrase(phrase, singular),
+  pluralize: (phrase) => applyToPrepositionPhrase(phrase, plural),
 });
 
 function tokenize(s) {
@@ -84,7 +84,7 @@ function applyToPrepositionPhrase(phrase, fn) {
     _whole = "",
     prePreposition = "",
     preposition = "",
-    postPreposition = ""
+    postPreposition = "",
   ] = match;
 
   return `${fn(prePreposition)} ${preposition}${postPreposition}`;

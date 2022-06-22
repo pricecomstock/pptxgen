@@ -11,7 +11,9 @@ function reduceToNameAndSynonymArray(list) {
 }
 
 function loadJsonFromCorporaFile(relativeFilePath) {
-  return JSON.parse(fs.readFileSync(path.join(__dirname, relativeFilePath)));
+  return JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), "corpora", relativeFilePath))
+  );
 }
 
 function flat(array) {
@@ -48,19 +50,24 @@ const room = loadJsonFromCorporaFile("architecture/rooms.json").rooms;
 const artType = loadJsonFromCorporaFile("art/isms.json").isms;
 
 // ACADEMIC
-const academicSubject = loadJsonFromCorporaFile("books/academic_subjects.json")
-  .subjects;
+const academicSubject = loadJsonFromCorporaFile(
+  "books/academic_subjects.json"
+).subjects;
 
 // CORPORATE
 const car = loadJsonFromCorporaFile("corporations/cars.json").cars;
-const charity = loadJsonFromCorporaFile("corporations/charities.json")
-  .charities;
-const company = loadJsonFromCorporaFile("corporations/fortune500.json")
-  .companies;
-const industry = loadJsonFromCorporaFile("corporations/industries.json")
-  .industries;
-const newspaper = loadJsonFromCorporaFile("corporations/newspapers.json")
-  .newspapers;
+const charity = loadJsonFromCorporaFile(
+  "corporations/charities.json"
+).charities;
+const company = loadJsonFromCorporaFile(
+  "corporations/fortune500.json"
+).companies;
+const industry = loadJsonFromCorporaFile(
+  "corporations/industries.json"
+).industries;
+const newspaper = loadJsonFromCorporaFile(
+  "corporations/newspapers.json"
+).newspapers;
 
 // TAROT
 const tarotJson = loadJsonFromCorporaFile(
@@ -85,8 +92,9 @@ const tarotFortune = tarotJson.tarot_interpretations.reduce(
 const iabCategory = loadJsonFromCorporaFile(
   "film-tv/iab_categories.json"
 ).iab.map((category) => category.category_name);
-const netflixGenre = loadJsonFromCorporaFile("film-tv/netflix-categories.json")
-  .categories;
+const netflixGenre = loadJsonFromCorporaFile(
+  "film-tv/netflix-categories.json"
+).categories;
 
 // GAMES
 const streetFighterMove = loadJsonFromCorporaFile(
@@ -94,8 +102,9 @@ const streetFighterMove = loadJsonFromCorporaFile(
 ).characters.reduce((accumulator, currentItem) => {
   return accumulator.concat(currentItem.moves);
 }, []);
-const wrestlingMove = loadJsonFromCorporaFile("games/wrestling_moves.json")
-  .moves;
+const wrestlingMove = loadJsonFromCorporaFile(
+  "games/wrestling_moves.json"
+).moves;
 
 // GEOGRAPHY
 const country = loadJsonFromCorporaFile("geography/countries.json").countries;
@@ -114,14 +123,17 @@ const usGovAgency = loadJsonFromCorporaFile(
 ).agencies;
 
 // HUMANS
-const occupation = loadJsonFromCorporaFile("humans/occupations.json")
-  .occupations;
+const occupation = loadJsonFromCorporaFile(
+  "humans/occupations.json"
+).occupations;
 const mood = loadJsonFromCorporaFile("humans/moods.json").moods;
-const humanAdjective = loadJsonFromCorporaFile("humans/descriptions.json")
-  .descriptions;
+const humanAdjective = loadJsonFromCorporaFile(
+  "humans/descriptions.json"
+).descriptions;
 const humanPrefix = loadJsonFromCorporaFile("humans/prefixes.json").prefixes;
-const honorific = loadJsonFromCorporaFile("humans/englishHonorifics.json")
-  .englishHonorifics;
+const honorific = loadJsonFromCorporaFile(
+  "humans/englishHonorifics.json"
+).englishHonorifics;
 
 // MATERIALS
 const bodyFluid = loadJsonFromCorporaFile(
@@ -159,18 +171,22 @@ const symptom = loadJsonFromCorporaFile("medicine/symptoms.json").symptoms;
 
 // MUSIC
 const musicGenre = loadJsonFromCorporaFile("music/genres.json").genres;
-const instrument = loadJsonFromCorporaFile("music/instruments.json")
-  .instruments;
+const instrument = loadJsonFromCorporaFile(
+  "music/instruments.json"
+).instruments;
 
 // MYTHOLOGY
-const greekGod = loadJsonFromCorporaFile("mythology/greek_gods.json")
-  .greek_gods;
-const greekTitan = loadJsonFromCorporaFile("mythology/greek_titans.json")
-  .greek_titans;
+const greekGod = loadJsonFromCorporaFile(
+  "mythology/greek_gods.json"
+).greek_gods;
+const greekTitan = loadJsonFromCorporaFile(
+  "mythology/greek_titans.json"
+).greek_titans;
 const monster = loadJsonFromCorporaFile("mythology/monsters.json").names;
 
-const allNorseGods = loadJsonFromCorporaFile("mythology/norse_gods.json")
-  .norse_deities;
+const allNorseGods = loadJsonFromCorporaFile(
+  "mythology/norse_gods.json"
+).norse_deities;
 const norseGod = allNorseGods.gods.concat(allNorseGods.goddesses);
 
 const lovecraftJson = loadJsonFromCorporaFile("mythology/lovecraft.json");
@@ -237,8 +253,9 @@ const knot = loadJsonFromCorporaFile("technology/knots.json").knots;
 const computerTechnology = loadJsonFromCorporaFile(
   "technology/computer_sciences.json"
 ).computer_sciences;
-const appliance = loadJsonFromCorporaFile("technology/appliances.json")
-  .appliances;
+const appliance = loadJsonFromCorporaFile(
+  "technology/appliances.json"
+).appliances;
 
 // WORDS - LITERATURE
 const shakespeareSonnet = flat(
@@ -255,8 +272,9 @@ const lovecraftWord = loadJsonFromCorporaFile(
 
 // WORDS - GENERAL
 const emoji = loadJsonFromCorporaFile("words/emoji/emoji.json").emoji;
-const kaomoji = loadJsonFromCorporaFile("words/emoji/cute_kaomoji.json")
-  .cuteKaomoji;
+const kaomoji = loadJsonFromCorporaFile(
+  "words/emoji/cute_kaomoji.json"
+).cuteKaomoji;
 const adjective = loadJsonFromCorporaFile("words/adjs.json").adjs;
 const adverb = loadJsonFromCorporaFile("words/adverbs.json").adverbs;
 const compoundBreakdown = loadJsonFromCorporaFile("words/compounds.json")
@@ -265,28 +283,35 @@ const compoundBreakdown = loadJsonFromCorporaFile("words/compounds.json")
 const eggcorn = flat(
   loadJsonFromCorporaFile("words/eggcorns.json").eggcorns.map((e) => e.mistakes)
 );
-const encouragingWord = loadJsonFromCorporaFile("words/encouraging_words.json")
-  .encouraging_words; // TODO good for picture captions
+const encouragingWord = loadJsonFromCorporaFile(
+  "words/encouraging_words.json"
+).encouraging_words; // TODO good for picture captions
 
-const ergativeVerb = loadJsonFromCorporaFile("words/ergative_verbs.json")
-  .ergative_verbs;
+const ergativeVerb = loadJsonFromCorporaFile(
+  "words/ergative_verbs.json"
+).ergative_verbs;
 const infinitiveVerb = loadJsonFromCorporaFile("words/infinitive_verbs.json");
-const resumeVerb = loadJsonFromCorporaFile("words/resume_action_words.json")
-  .resume_action_words; // TODO combine with nouns for bullshit resume items
+const resumeVerb = loadJsonFromCorporaFile(
+  "words/resume_action_words.json"
+).resume_action_words; // TODO combine with nouns for bullshit resume items
 const verb = loadJsonFromCorporaFile("words/verbs.json").verbs.map(
   (v) => v.present
 );
 
-const interjection = loadJsonFromCorporaFile("words/interjections.json")
-  .interjections;
+const interjection = loadJsonFromCorporaFile(
+  "words/interjections.json"
+).interjections;
 const noun = loadJsonFromCorporaFile("words/nouns.json").nouns;
-const personalNoun = loadJsonFromCorporaFile("words/personal_nouns.json")
-  .personalNouns;
+const personalNoun = loadJsonFromCorporaFile(
+  "words/personal_nouns.json"
+).personalNouns;
 
-const harvardSentence = loadJsonFromCorporaFile("words/harvard_sentences.json")
-  .data;
-const oprahQuote = loadJsonFromCorporaFile("words/oprah_quotes.json")
-  .oprahQuotes;
+const harvardSentence = loadJsonFromCorporaFile(
+  "words/harvard_sentences.json"
+).data;
+const oprahQuote = loadJsonFromCorporaFile(
+  "words/oprah_quotes.json"
+).oprahQuotes;
 const proverb = loadJsonFromCorporaFile("words/proverbs.json").proverbs;
 
 const harryPotterSpellName = loadJsonFromCorporaFile(
