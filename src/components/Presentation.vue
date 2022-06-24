@@ -5,6 +5,8 @@
     :style="themeStyles"
     @keyup.left="previousSlide()"
     @keyup.right="nextSlide()"
+    @keyup.up="previousSlide()"
+    @keyup.down="nextSlide()"
     @keypress.enter="nextSlide()"
   >
     <div
