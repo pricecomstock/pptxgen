@@ -1,44 +1,20 @@
 import { PresentationOptions } from "./presentationOptions";
 import { Theme } from "./theme/theme";
-import { DeckRandomizer } from "./utils/randUtils";
+import { DeckRandomizer, WeightedChoice } from "./utils/randUtils";
 
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
 const bodyGen = require("./slides/bodySlide");
 
 const bodySlideGenFunctionWeightSpec = [
-  {
-    value: bodyGen.generateStockPhotoSlide,
-    count: 4,
-  },
-  {
-    value: bodyGen.generateWikiImageSlide,
-    count: 5,
-  },
-  {
-    value: bodyGen.generateQuoteHalfImage,
-    count: 3,
-  },
-  {
-    value: bodyGen.generateExtractHalfImage,
-    count: 1,
-  },
-  {
-    value: bodyGen.generateHalfBulletSlide,
-    count: 1,
-  },
-  // {
-  //   value: bodyGen.generateWeirdThoughtSlide,
-  //   count: 3
-  // },
-  {
-    value: bodyGen.generateStrategySlide,
-    count: 1,
-  },
-  {
-    value: bodyGen.generateChartSlide,
-    count: 2,
-  },
+  new WeightedChoice<Function>(bodyGen.generateStockPhotoSlide, 4),
+  new WeightedChoice<Function>(bodyGen.generateWikiImageSlide, 5),
+  new WeightedChoice<Function>(bodyGen.generateQuoteHalfImage, 3),
+  new WeightedChoice<Function>(bodyGen.generateExtractHalfImage, 1),
+  new WeightedChoice<Function>(bodyGen.generateHalfBulletSlide, 1),
+  new WeightedChoice<Function>(bodyGen.generateWeirdThoughtSlide, 3),
+  new WeightedChoice<Function>(bodyGen.generateStrategySlide, 1),
+  new WeightedChoice<Function>(bodyGen.generateChartSlide, 2),
 ];
 
 async function generateSlideshow(options: PresentationOptions) {
@@ -47,9 +23,10 @@ async function generateSlideshow(options: PresentationOptions) {
 
   let slidePromises = [];
 
-  const bodySlideGeneratorPool = DeckRandomizer.fromObjectSpec<Function>(
-    bodySlideGenFunctionWeightSpec
-  );
+  const bodySlideGeneratorPool =
+    DeckRandomizer.fromWeightedChoiceArray<Function>(
+      bodySlideGenFunctionWeightSpec
+    );
 
   function addBodySlide() {
     const generator = bodySlideGeneratorPool.draw();

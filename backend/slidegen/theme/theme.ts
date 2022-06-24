@@ -4,17 +4,19 @@ import {
   generatedArray,
   getWeightedRandomFunction,
   randomDarkHexColor,
+  weightedRandomChoiceFunction,
+  WeightedChoice,
 } from "../utils/randUtils";
 
 type GradientType = "linear-gradient" | "radial-gradient";
 
-const pickGradientStepCount = getWeightedRandomFunction<number>({
-  2: 14,
-  3: 8,
-  4: 3,
-  5: 1,
-  6: 1,
-});
+const pickGradientStepCount = weightedRandomChoiceFunction<number>([
+  new WeightedChoice(2, 14),
+  new WeightedChoice(3, 8),
+  new WeightedChoice(4, 3),
+  new WeightedChoice(5, 1),
+  new WeightedChoice(6, 1),
+]);
 
 const pickFont = getWeightedRandomFunction<string>({
   // Normal 70%

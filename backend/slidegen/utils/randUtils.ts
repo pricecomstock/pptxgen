@@ -107,11 +107,12 @@ export function expandCountsToArray<T extends string | number>(
 and returns a function that, when called, will return a random key weighted by its value.
 Easiest way is to treat the weight as a percentage. Probably not the most efficient since it
 creates an array with a length equal to the sum of the values
+@deprecated because it only supports strings well
 */
 export function getWeightedRandomFunction<T extends string | number>(
   spec: Record<T, number>
 ): () => T {
-  var i: T,
+  let i: T,
     j: number,
     table = [];
 
@@ -121,26 +122,29 @@ export function getWeightedRandomFunction<T extends string | number>(
     }
   }
 
-  return function() {
+  // If everything is an integer, we want the function to return numbers instead of strings
+  if (
+    table.every((tableItem) => {
+      return !isNaN(tableItem) && !isNaN(parseInt(tableItem));
+    })
+  ) {
+    table = table.map(parseInt);
+  }
+
+  return function () {
     return table[Math.floor(Math.random() * table.length)];
   };
 }
 
-/** A bad deck function */
-export function getNonReplacingRandomDeckFunction(
-  spec: Array<{ value: any; count: number }>
-) {
-  let deck = [];
-
-  spec.forEach((item) => {
-    item.value;
-    for (let j = 0; j < item.count; j++) {
-      deck.push(item.value);
-    }
-  });
-
-  return function() {
-    return randomPop(deck);
+/**
+ *
+ */
+export function weightedRandomChoiceFunction<T>(
+  weightedChoices: Array<WeightedChoice<T>>
+): () => T {
+  const arr = weightedChoices.flatMap((choice) => choice.expand());
+  return () => {
+    return randomChoice(arr);
   };
 }
 
@@ -154,9 +158,11 @@ export function generatedArray<T>(
   length: number,
   generatorFunction: (index: number) => T
 ): T[] {
-  return Array(length)
-    .fill(undefined)
-    .map((_value, index) => generatorFunction(index));
+  let a = Array(length);
+  a.fill(undefined);
+  a = a.map((_value, index) => generatorFunction(index));
+
+  return a;
 }
 
 /** Retruns an array with each item created by calling the given function */
@@ -208,10 +214,10 @@ export class DeckRandomizer<T> {
     this._pointer = 0;
   }
 
-  static fromObjectSpec<T>(spec: Array<{ value: T; count: number }>) {
+  static fromWeightedChoiceArray<T>(spec: Array<WeightedChoice<T>>) {
     let arr: T[] = [];
     spec.forEach((item) => {
-      for (let i = 0; i < item.count; i++) {
+      for (let i = 0; i < item.weight; i++) {
         arr.push(item.value);
       }
     });
@@ -250,17 +256,26 @@ export class DeckRandomizer<T> {
   }
 }
 
+export class WeightedChoice<T> {
+  constructor(public value: T, public weight: number) {}
+
+  public expand(): Array<T> {
+    return Array(this.weight).fill(this.value);
+  }
+}
+
 module.exports = {
   randomChoice,
   randomInt,
   norm,
   normInt,
   getWeightedRandomFunction,
-  getNonReplacingRandomDeckFunction,
+  weightedRandomChoiceFunction,
   randomIntArray,
   oneInN,
   randomDarkHexColor,
   generatedArray,
   randomAnyRBGAColor,
   DeckRandomizer,
+  WeightedChoice,
 };
