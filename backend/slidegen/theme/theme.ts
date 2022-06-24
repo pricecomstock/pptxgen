@@ -18,33 +18,33 @@ const pickGradientStepCount = weightedRandomChoiceFunction<number>([
   new WeightedChoice(6, 1),
 ]);
 
-const pickFont = getWeightedRandomFunction<string>({
+const pickFont = weightedRandomChoiceFunction<string>([
   // Normal 70%
-  Rubik: 15,
-  Aleo: 15,
-  Nunito: 10,
-  "Noto Serif": 10,
-  Cabin: 10,
-  Merriweather: 10,
+  new WeightedChoice("Rubik", 15),
+  new WeightedChoice("Aleo", 15),
+  new WeightedChoice("Nunito", 10),
+  new WeightedChoice("Noto Serif", 10),
+  new WeightedChoice("Cabin", 10),
+  new WeightedChoice("Merriweather", 10),
 
   // Goofy 24%
-  Anton: 3,
-  Caveat: 3,
-  Kalam: 3,
-  "Patrick Hand": 3,
-  "Cutive Mono": 3,
-  "Coming Soon": 3,
-  "Just Me Again Down Here": 3,
-  Kavivanar: 3,
+  new WeightedChoice("Anton", 3),
+  new WeightedChoice("Caveat", 3),
+  new WeightedChoice("Kalam", 3),
+  new WeightedChoice("Patrick Hand", 3),
+  new WeightedChoice("Cutive Mono", 3),
+  new WeightedChoice("Coming Soon", 3),
+  new WeightedChoice("Just Me Again Down Here", 3),
+  new WeightedChoice("Kavivanar", 3),
 
   // Hard to read 6%
-  Lobster: 1,
-  Pacifico: 1,
-  "Dancing Script": 1,
-  "Reenie Beanie": 1,
-  Condiment: 1,
-  Orbitron: 1,
-});
+  new WeightedChoice("Lobster", 1),
+  new WeightedChoice("Pacifico", 1),
+  new WeightedChoice("Dancing Script", 1),
+  new WeightedChoice("Reenie Beanie", 1),
+  new WeightedChoice("Condiment", 1),
+  new WeightedChoice("Orbitron", 1),
+]);
 
 function randomThemeColors(length: number) {
   return generatedArray<string>(length, randomDarkHexColor);
