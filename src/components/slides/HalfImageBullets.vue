@@ -6,7 +6,7 @@
       :style="[backgroundStyles]"
     >
       <div class="container is-fluid center-parent">
-        <p class="half-image-title" :style="titleStyles">
+        <p class="half-image-title">
           {{ slideOptions.title }}
         </p>
         <p class="pres-body">
@@ -19,7 +19,6 @@
         v-if="!slideOptions.ordered"
         class="has-text-left"
         :class="listClasses"
-        :style="bulletStyles"
       >
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
@@ -63,10 +62,10 @@ export default {
           image: "assets/otie.jpg",
           imageLeft: true,
           plaintext: false,
-          ordered: false
+          ordered: false,
         };
-      }
-    }
+      },
+    },
   },
   computed: {
     listClasses() {
@@ -74,13 +73,13 @@ export default {
         "half-bullets":
           !this.slideOptions.plaintext && !this.slideOptions.ordered,
         "half-numbered": this.slideOptions.ordered,
-        "half-plain": this.slideOptions.plaintext
+        "half-plain": this.slideOptions.plaintext,
       };
     },
     bulletStyles() {
       let fontSizeModifier = this.scale(this.bulletCharCount, 0, 250, 2, 1.05);
       return {
-        "font-size": `${3 + fontSizeModifier}vh`
+        "font-size": `${3 + fontSizeModifier}vh`,
       };
     },
     titleStyles() {
@@ -92,11 +91,11 @@ export default {
         0
       );
       return {
-        "font-size": `${4 + fontSizeModifier}vw`
+        "font-size": `${4 + fontSizeModifier}vw`,
       };
-    }
+    },
   },
-  mixins: [backgroundImage, scale]
+  mixins: [backgroundImage, scale],
 };
 </script>
 

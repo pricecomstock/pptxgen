@@ -181,9 +181,12 @@ export default {
   overflow: hidden;
   position: relative;
 
+  // Everything inside the presentation can use em units to scale relative to this font size
+  font-size: max(6vmin, 1rem);
+
   .slide-counter {
     font-family: "Open Sans", sans-serif;
-    font-size: 1.5em; // TODO javascript font scaling
+    font-size: 0.4em;
     border-radius: 0 0 0 1vw;
     min-width: 8%;
     position: absolute;
@@ -263,12 +266,18 @@ export default {
   }
 }
 
+// By using em these will scale relative to general slide font size which is
+// determined in top level presentation
 .pres-title {
-  font-size: 5vw;
+  font-size: 1.5em;
 }
 
 .pres-body {
-  font-size: 3vw;
+  font-size: 1em;
+}
+
+.slide-title {
+  font-size: 1.5em;
 }
 
 .presentation:focus {

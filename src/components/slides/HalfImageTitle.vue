@@ -40,24 +40,24 @@ export default {
         return {
           title: "This is a title slide that's pretty long!",
           imageUrl: "assets/otie.jpg",
-          imgLeft: false
+          imgLeft: false,
         };
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .half-image-title {
   width: 100%;
-  font-size: 3vw;
+  font-size: 1em;
   display: block;
 }
 
 .half-image-subtitle {
   width: 100%;
-  font-size: 1.5vw;
+  font-size: 0.5em;
   display: block;
 }
 

@@ -1,18 +1,17 @@
 <template>
   <div class="grid-slide">
-    <div class="slide-title" :style="titleStyles">
+    <div class="slide-title">
       {{ slideOptions.title }}
     </div>
     <div
       :class="{
         'slide-content': chartOrImageOnSlide,
-        'slide-content-no-visual': !chartOrImageOnSlide
+        'slide-content-no-visual': !chartOrImageOnSlide,
       }"
     >
       <ul
         v-if="!slideOptions.ordered && !slideOptions.plaintext"
         class="bullet-bullets"
-        :style="bulletStyles"
       >
         <li v-for="(bullet, index) in slideOptions.bullets" :key="index">
           {{ bullet }}
@@ -77,23 +76,23 @@ export default {
                 top: "0px",
                 right: "0px",
                 bottom: "0px",
-                left: "0px"
+                left: "0px",
               },
-              width: 100
-            }
-          ]
+              width: 100,
+            },
+          ],
         };
-      }
+      },
     },
     slideNumber: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   mixins: [scale],
   computed: {
     imageStyles() {
-      return this.slideOptions.contentImages.map(img => {
+      return this.slideOptions.contentImages.map((img) => {
         return {
           position: "absolute",
           top: img.position.top || null, // ? img.position.top : null,
@@ -103,7 +102,7 @@ export default {
           width: img.width || "auto",
           height: img.height || "auto",
           "max-height": img.maxHeight || "75%",
-          "max-width": img.maxWidth || "50%"
+          "max-width": img.maxWidth || "50%",
         };
       });
     },
@@ -118,35 +117,16 @@ export default {
         height: `${chart.size.y}vw`,
         width: `${chart.size.x}vw`,
         "max-height": "75%",
-        "max-width": "50%"
-      };
-    },
-    bulletStyles() {
-      let fontSizeModifier = this.scale(this.bulletCharCount, 0, 350, 2, 1.05);
-      return {
-        "font-size": `${3 + fontSizeModifier}vh`
-        // "max-width": this.slideOptions.maxWidth
+        "max-width": "50%",
       };
     },
     chartOrImageOnSlide() {
       return this.slideOptions.contentImages || this.slideOptions.chart;
     },
-    titleStyles() {
-      let fontSizeModifier = this.scale(
-        this.slideOptions.title.length,
-        0,
-        50,
-        0.5,
-        0
-      );
-      return {
-        "font-size": `${4 + fontSizeModifier}vw`
-      };
-    }
   },
   components: {
-    chart
-  }
+    chart,
+  },
 };
 </script>
 
