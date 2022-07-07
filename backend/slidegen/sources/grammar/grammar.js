@@ -32,7 +32,7 @@ const grammarSpec = {
   ...jargon,
 };
 
-const grammar = tracery.createGrammar(grammarSpec);
+export const grammar = tracery.createGrammar(grammarSpec);
 
 grammar.addModifiers(tracery.baseEngModifiers);
 grammar.addModifiers({

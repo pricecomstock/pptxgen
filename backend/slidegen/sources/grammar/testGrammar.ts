@@ -2,7 +2,11 @@ const grammar = require("./grammar");
 
 const timeout = 5000;
 
-function testGrammar(testTemplate, numCopies = 5, filter = () => true) {
+function testGrammar(
+  testTemplate,
+  numCopies = 5,
+  filter = (item?: string) => true
+) {
   const endTime = Date.now() + timeout;
   const samples = [];
 
@@ -19,7 +23,7 @@ function testGrammar(testTemplate, numCopies = 5, filter = () => true) {
 }
 
 // const filter = (s) => /can be/gi.test(s);
-const filter = () => true;
+const filter = (item?: string) => true;
 testGrammar("#boldClaim#", 8, filter);
 
 module.exports = testGrammar;
