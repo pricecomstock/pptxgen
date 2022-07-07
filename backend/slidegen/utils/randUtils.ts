@@ -128,9 +128,7 @@ export function getWeightedRandomFunction<T extends string | number>(
       return !isNaN(tableItem) && !isNaN(parseInt(tableItem));
     })
   ) {
-    console.log("🔴====> ~ file: randUtils.ts ~ line 132 ~ table", table);
     table = table.map(Number);
-    console.log("🔴====> ~ file: randUtils.ts ~ line 132 ~ table", table);
   }
 
   return function () {
