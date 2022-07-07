@@ -1,6 +1,6 @@
 const randomChoice = require("./utils/randUtils").randomChoice;
-const getWeightedRandomFunction = require("./utils/randUtils")
-  .getWeightedRandomFunction;
+const getWeightedRandomFunction =
+  require("./utils/randUtils").getWeightedRandomFunction;
 const wikipedia = require("./sources/wikipedia");
 const reddit = require("./sources/reddit");
 const jargonCreator = require("./sources/grammar/generators/jargon");
