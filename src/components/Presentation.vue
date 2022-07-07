@@ -182,7 +182,7 @@ export default {
   position: relative;
 
   // Everything inside the presentation can use em units to scale relative to this font size
-  font-size: max(6vmin, 1rem);
+  font-size: max(5.5vmin, 1rem);
 
   .slide-counter {
     font-family: "Open Sans", sans-serif;
