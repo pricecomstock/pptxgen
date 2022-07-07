@@ -3,7 +3,8 @@ const specificModifierSets = {
     "currently",
     "right now",
     "at the moment",
-    "as we speak"
+    "as we speak",
+    "at present",
   ],
   sportLevel: [
     "childhood",
@@ -14,8 +15,10 @@ const specificModifierSets = {
     "intramural",
     "minor league",
     "professional",
-    "over-30 league"
-  ]
+    "division I",
+    "division II",
+    "over-30 league",
+  ],
 };
 
 module.exports = specificModifierSets;

@@ -4,13 +4,19 @@ const SpeechGrammar = {
     "a bit",
     "a little",
     "somewhat",
+    "sorta",
+    "kinda",
     "quite",
     "pretty",
+    "really",
     "very",
     "super",
+    "crazy",
+    "super-duper",
     "unbelievably",
-    "really fuckin"
-  ]
+    "extremely",
+    "really fuckin",
+  ],
 };
 
 module.exports = SpeechGrammar;
