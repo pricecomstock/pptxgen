@@ -9,12 +9,7 @@ function barChartTitle() {
 }
 
 function barChartXAxisArray(count) {
-  const x = getListFromRandomGrammarTemplate(
-    grammar.raw["barChartXAxis"],
-    count
-  );
-  console.log(x);
-  return x;
+  return getListFromRandomGrammarTemplate(grammar.raw["barChartXAxis"], count);
 }
 
 function barChartXAxisSingle() {
