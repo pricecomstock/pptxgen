@@ -24,7 +24,7 @@
                   class="button"
                   :class="{
                     'is-selected': numSlides === option,
-                    'is-info': numSlides === option
+                    'is-info': numSlides === option,
                   }"
                   @click="numSlides = option"
                   :key="index"
@@ -117,9 +117,9 @@ export default {
           type: "Title",
           options: {
             title: "No slideshow loaded",
-            subtitle: "...yet"
-          }
-        }
+            subtitle: "...yet",
+          },
+        },
       ],
       presenter: "",
       numSlidesOptions: [4, 5, 6, 7, 8],
@@ -131,11 +131,11 @@ export default {
       nsfw: false,
       theme: {},
       imageReadyToDownload: false,
-      downloadableImage: ""
+      downloadableImage: "",
     };
   },
   components: {
-    Presentation
+    Presentation,
   },
   methods: {
     fullScreenElementWithId(id) {
@@ -162,25 +162,23 @@ export default {
 
       axios
         .get(
-          `/slides?presenter=${this.presenter}&count=${
-            this.numSlides
-          }&questions=${this.questionPrompt}`
+          `/slides?presenter=${this.presenter}&slideCount=${this.numSlides}&questions=${this.questionPrompt}`
         )
-        .then(res => {
+        .then((res) => {
           // console.log(res.data);
           this.slides = res.data.slides;
           this.theme = res.data.theme;
           this.slideshowLoaded = true;
           this.slideshowLoading = false;
         });
-    }
+    },
     // exportSlide() {
     //   html2canvas(document.querySelector('#presentation-window'))
     //     .then( (canvas) => {
     //       this.downloadableImage = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     //     })
     // }
-  }
+  },
 };
 </script>
 
