@@ -8,28 +8,28 @@ const aboutMe = {
     "associate's degree in",
     "certified in",
     "enjoys",
-    "#characterType# of"
+    "#characterType# of",
   ],
   qualification: [
     "#occupation.capitalizeAll# for #organization#",
     "#expertStatement#",
-    "#integer35# years of experience in #field#"
+    "#integer35# years of experience in #field#",
   ],
   opinionPhrase: [
     "#opinionVerb# #opinionTarget#",
-    "#opinionTarget# makes me #mood#"
+    "#opinionTarget# makes me #mood#",
   ],
 
   nickname: [
     "#honorific# #field.capitalizeAll#",
     "#honorific# #mood.capitalizeAll#",
-    "#honorific# #iabCategory#"
+    "#honorific# #iabCategory#",
   ],
 
   nicknameStatement: [
     'you can call me "#nickname#"',
     'I\'ve been called "#nickname#"',
-    'given the nickname "#nickname#"'
+    'given the nickname "#nickname#"',
   ],
 
   funFact: [
@@ -46,7 +46,7 @@ const aboutMe = {
     "always wearing at least one item made of #technicalFabric#",
     "#severityModifier# #stateOfInebriation# #currentTimeModifier#",
     "#sportsTeam# fan",
-    "competitive in #sportLevel# #sport#"
+    "played #sportLevel# #sport# competitively",
   ],
 
   originVerb: ["originally from", "grew up in", "lived in"],
@@ -58,8 +58,8 @@ const aboutMe = {
     "#qualification#",
     "#funFact#",
     "#origin#",
-    "#nicknameStatement#"
-  ]
+    "#nicknameStatement#",
+  ],
 };
 
 module.exports = aboutMe;

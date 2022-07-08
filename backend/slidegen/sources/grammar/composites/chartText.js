@@ -9,11 +9,11 @@ const chartText = {
     "#environmentalHazard#",
     "What's better?",
     "I polled a group of #pollGroup#",
-    "What #pollGroup# prefer"
+    "What #pollGroup# prefer",
   ],
 
   // Bar Charts
-  barChartXAxis1: [
+  barChartXAxis: [
     "#noun#",
     "#fightingMove#",
     "#organization#",
@@ -26,20 +26,18 @@ const chartText = {
     "#city#",
     "#sportsTeam#",
     "#computerTechnology#",
-    "#netflixGenre#"
-  ],
-  barChartXAxis2: [
+    "#netflixGenre#",
     "#verb.ing#",
     "#ergativeVerb#",
     "#infinitiveVerb#",
     "#emoji#",
-    "#mood#"
+    "#mood#",
   ],
 
   // Line Charts
 
   lineChartLabel: [
-    "#barChartXAxis1#" // TODO shhhh this is fine it doesn't need it's own data
+    "#barChartXAxis#", // TODO shhhh this is fine it doesn't need it's own data
   ],
 
   trendable: [
@@ -55,15 +53,15 @@ const chartText = {
     "#instrument.s#",
     "#stateOfInebriation#",
     "#toxicChemical#",
-    "#disease#"
+    "#disease#",
   ],
 
   trendLineChartTitle: [
     "#trendable# over time",
     "popularity of #trendable#",
     "#trendable# trends",
-    "history of #trendable#"
-  ]
+    "history of #trendable#",
+  ],
 };
 
 module.exports = chartText;

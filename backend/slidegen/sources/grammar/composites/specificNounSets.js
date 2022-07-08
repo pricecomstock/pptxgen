@@ -4,7 +4,7 @@ const specificNounSets = {
     "#company#",
     "Big #industry.capitalizeAll#",
     "#usGovAgency#",
-    "#newspaper#"
+    "#newspaper#",
   ],
 
   sportsTeam: [
@@ -13,7 +13,7 @@ const specificNounSets = {
     "#nbaTeam#",
     "#mlbTeam#",
     "#eplTeam#",
-    "#laligaTeam#"
+    "#laligaTeam#",
   ],
 
   fightingMove: ["#wrestlingMove#", "#streetFighterMove#"],
@@ -22,7 +22,7 @@ const specificNounSets = {
     "#industry#",
     "#academicSubject#",
     "#artType#",
-    "#netflixGenre#"
+    "#netflixGenre#",
   ],
   opinionTarget: [
     "#field#",
@@ -30,7 +30,8 @@ const specificNounSets = {
     "#occupation.s#",
     "#charity#",
     "#eventType#",
-    "#appliance.s#"
+    "#appliance.s#",
+    "#weatherCondition.lowercase# weather",
   ],
   petAnimal: [
     "dog",
@@ -48,7 +49,7 @@ const specificNounSets = {
     "parrot",
     "parakeet",
     "millipede",
-    "bunny"
+    "bunny",
   ],
   authorityFigure: [
     "mother",
@@ -67,8 +68,8 @@ const specificNounSets = {
     "president",
     "prophet",
     "spiritual guide",
-    "priest"
-  ]
+    "priest",
+  ],
 };
 
 module.exports = specificNounSets;

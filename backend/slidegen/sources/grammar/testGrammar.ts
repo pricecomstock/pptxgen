@@ -24,6 +24,7 @@ function testGrammar(
 
 // const filter = (s) => /can be/gi.test(s);
 const filter = (item?: string) => true;
-testGrammar("#boldClaim#", 8, filter);
+testGrammar("#opinionPhrase#", 8, filter);
+console.log("Symbols", grammar.raw["opinionPhrase"]);
 
 module.exports = testGrammar;

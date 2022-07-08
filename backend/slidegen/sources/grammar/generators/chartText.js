@@ -1,24 +1,24 @@
 const grammar = require("../grammar");
-const ru = require("../../../utils/randUtils");
 
-const chooseBarXGenerationTemplate = ru.getWeightedRandomFunction({
-  barChartXAxis1: 2,
-  barChartXAxis2: 1
-});
+const {
+  getListFromRandomGrammarTemplate,
+} = require("../../../textGenerators/lists");
 
 function barChartTitle() {
   return grammar.flatten("#barChartTitle.capitalize#");
 }
 
 function barChartXAxisArray(count) {
-  const generationTemplate = chooseBarXGenerationTemplate();
-  return ru.generatedArray(count, () =>
-    grammar.flatten(`#${generationTemplate}#`)
+  const x = getListFromRandomGrammarTemplate(
+    grammar.raw["barChartXAxis"],
+    count
   );
+  console.log(x);
+  return x;
 }
+
 function barChartXAxisSingle() {
-  const generationTemplate = chooseBarXGenerationTemplate();
-  return grammar.flatten(`#${generationTemplate}#`);
+  return grammar.flatten(`#barChartXAxis#`);
 }
 
 function trendLineChartTitle() {
@@ -34,5 +34,5 @@ module.exports = {
   barChartXAxisSingle,
   barChartXAxisArray,
   lineChartLabel,
-  trendLineChartTitle
+  trendLineChartTitle,
 };
