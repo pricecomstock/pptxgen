@@ -35,7 +35,7 @@ function getRandomBarChart(): ChartSpec {
     };
   };
 
-  const numData = 2; // TODO Increase when I can make items in chart more related
+  const numData = ru.randomChoice([2, 2, 3]);
 
   let widthVw = ru.randomInt(33, 36);
   let heightVw = ru.randomInt(33, 36);
