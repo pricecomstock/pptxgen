@@ -8,8 +8,8 @@ const stringLists = require("../sources/stringLists");
 const chartGen = require("../sources/chart/chartGen");
 
 const randomNumBullets = getWeightedRandomFunction({
-  1: 60,
-  2: 38,
+  1: 75,
+  2: 25,
   3: 2,
 });
 
