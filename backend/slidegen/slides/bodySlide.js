@@ -140,7 +140,7 @@ async function generateChartSlide() {
 }
 
 async function generateAboutMeSlide() {
-  const bulletCount = randomInt(2, 4);
+  const bulletCount = randomChoice([3, 3, 3, 4]);
   let bullets = [];
   for (let i = 0; i < bulletCount; i++) {
     bullets.push(randString.aboutMe());
