@@ -4,7 +4,7 @@ const randomChoice = require("../utils/randUtils").randomChoice;
 
 const axios = require("axios").create({
   baseURL: "https://reddit.com/",
-  timeout: 5000
+  timeout: 5000,
 });
 
 async function randomUrlFromSubreddit(subreddit, testRE) {
@@ -21,7 +21,7 @@ async function randomUrlFromSubreddit(subreddit, testRE) {
       }
 
       // Find the children with a valid image url
-      const validChildren = data.data.children.filter(child => {
+      const validChildren = data.data.children.filter((child) => {
         return testRE.test(child.data.url);
       });
 
@@ -59,6 +59,7 @@ async function randomTitleFromSubreddit(subreddit) {
       title = randomChoice(data.data.children).data.title;
     } catch (err) {
       console.error("error getting subreddit title", err.msg);
+      title = "Oops!";
     }
 
     // title = title.replace(tagMatchRe, "")
@@ -96,5 +97,5 @@ module.exports = {
   randomImageOrGifFromSubreddit,
   randomImageFromMultireddit,
   randomImageOrGifFromMultireddit,
-  randomTitleFromMultireddit
+  randomTitleFromMultireddit,
 };
