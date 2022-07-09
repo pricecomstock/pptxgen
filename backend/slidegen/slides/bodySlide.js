@@ -1,4 +1,5 @@
 import * as randImg from "../randImage";
+import { uniqueAboutMeArray } from "../sources/grammar/generators/aboutMe";
 const randString = require("../randString");
 const randomChoice = require("../utils/randUtils").randomChoice;
 const randomInt = require("../utils/randUtils").randomInt;
@@ -141,16 +142,14 @@ async function generateChartSlide() {
 
 async function generateAboutMeSlide() {
   const bulletCount = randomChoice([3, 3, 3, 4]);
-  let bullets = [];
-  for (let i = 0; i < bulletCount; i++) {
-    bullets.push(randString.aboutMe());
-  }
-  let bulletStrings = await Promise.all(bullets);
+
+  const bullets = uniqueAboutMeArray(bulletCount);
+
   return {
     type: "Bullets",
     options: {
       title: randomChoice(stringLists.aboutMeTitles),
-      bullets: bulletStrings,
+      bullets: bullets,
     },
   };
 }
@@ -180,7 +179,7 @@ async function generateExtractHalfImage() {
 async function generateHalfBulletSlide() {
   return assembleHalfImageBulletSlide(
     await randString.compositeTitle(),
-    await getBullets(randomNumBullets()),
+    await getBullets(1), // more than one is too many words
     await randImg.background()
   );
 }
@@ -188,7 +187,7 @@ async function generateHalfBulletSlide() {
 async function generateWeirdThoughtSlide() {
   return assembleHalfImageBulletSlide(
     await randString.compositeQuestion(),
-    await getBullets(randomNumBullets()),
+    await getBullets(1),
     await randImg.background(),
     true,
     false,
