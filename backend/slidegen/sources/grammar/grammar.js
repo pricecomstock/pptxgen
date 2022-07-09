@@ -13,6 +13,8 @@ const specificAdjectiveSets = require("./composites/specificAdjectiveSets");
 const specificModifierSets = require("./composites/specificModifierSets");
 const utility = require("./composites/utility");
 const boldClaims = require("./composites/boldClaims");
+const slideTitle = require("./composites/slideTitle");
+const sponsorships = require("./composites/sponsorships");
 
 // TODO ensure all these are not undefined somehow
 // TODO separate NSFW things
@@ -23,6 +25,8 @@ const grammarSpec = {
   ...boldClaims,
   ...chartText,
   ...speech,
+  ...slideTitle,
+  ...sponsorships,
 
   ...specificNounSets,
   ...specificVerbSets,

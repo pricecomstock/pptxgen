@@ -1,4 +1,5 @@
 const grammar = require("./sources/grammar/grammar");
+import { genericContinue } from "./sources/grammar/generators/slideTitle";
 import { getListFromRandomGrammarTemplate } from "./textGenerators/lists";
 import {
   weightedRandomChoiceFunction,
@@ -206,7 +207,7 @@ export async function compositePhrase(): Promise<string> {
     return jeopardyQuestion();
   } else if (choice <= 0.15) {
     return grammar.flatten("#harvardSentence#");
-  } else if (choice <= 0.4) {
+  } else if (choice <= 0.35) {
     return boldClaimGenerator.boldClaim();
   } else if (choice <= 0.55) {
     return quote();
@@ -254,7 +255,7 @@ const chooseCompositeTopicGenerator = weightedRandomChoiceFunction<
       grammar.raw["barChartXAxis"],
       2
     ).join(" vs. ");
-  }, 5),
+  }, 3),
 ]);
 
 export async function compositeTopic() {
@@ -265,9 +266,10 @@ export async function compositeTopic() {
 export async function compositeTitle(): Promise<string> {
   const chooser = getWeightedRandomFunction({
     wiki: 10,
-    book: 20,
-    jeopardyAnswer: 50,
+    book: 15,
+    jeopardyAnswer: 30,
     jeopardyCategory: 20,
+    genericContinue: 15,
   });
 
   const choice = chooser();
@@ -278,6 +280,8 @@ export async function compositeTitle(): Promise<string> {
     return bookTitle();
   } else if (choice === "jeopardyAnswer") {
     return jeopardyAnswer();
+  } else if (choice === "genericContinue") {
+    return genericContinue();
   } else {
     return jeopardyCategory();
   }
