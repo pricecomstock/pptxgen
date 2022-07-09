@@ -1,3 +1,11 @@
+const grammar = require("./sources/grammar/grammar");
+import { getListFromRandomGrammarTemplate } from "./textGenerators/lists";
+import {
+  weightedRandomChoiceFunction,
+  WeightedChoice,
+} from "./utils/randUtils";
+import { retry } from "./utils/retry";
+
 const randomChoice = require("./utils/randUtils").randomChoice;
 const getWeightedRandomFunction =
   require("./utils/randUtils").getWeightedRandomFunction;
@@ -17,61 +25,44 @@ export function titleCase(s) {
   });
 }
 
-let books = [];
-fs.readFile("backend/slidegen/sources/txt/books.csv", "utf8", (err, data) => {
-  if (err) throw err;
-  books = csvParse(data, {
-    columns: true,
-    cast: true,
-  }).map((record) => {
-    return {
-      title: record.original_title,
-      authors: record.authors,
-    };
-  });
-});
+const booksData = fs.readFileSync(
+  "backend/slidegen/sources/txt/books.csv",
+  "utf8"
+);
+const books = csvParse(booksData, { columns: true, cast: true }).map(
+  (record) => ({
+    title: record.original_title,
+    authors: record.authors,
+  })
+);
 
-let jeopardy = [];
-fs.readFile(
+const jeopardyData = fs.readFileSync(
   "backend/slidegen/sources/txt/jeopardy.csv",
-  "utf8",
-  (err, data) => {
-    if (err) throw err;
-    jeopardy = csvParse(data, {
-      columns: true,
-    })
-      .map((record) => {
-        return {
-          category: titleCase(record.category),
-          question: record.question,
-          answer: record.answer,
-        };
-      })
-      .filter((record) => {
-        return !record.question.includes("<a href"); // filter out image based jeopardy questions
-      });
-  }
+  "utf8"
 );
+const jeopardy = csvParse(jeopardyData, { columns: true })
+  .map((record) => ({
+    category: titleCase(record.category),
+    question: record.question,
+    answer: record.answer,
+  }))
+  .filter(
+    (record) => !record.question.includes("<a href") // filter out image based jeopardy questions
+  );
 
-let quotes = [];
-fs.readFile(
+const quotesData = fs.readFileSync(
   "backend/slidegen/sources/txt/author-quote.txt",
-  "utf8",
-  (err, data) => {
-    if (err) throw err;
-    let lines = data.split("\n");
-
-    quotes = lines.map((line) => {
-      let splitILine = line.split("\t");
-      let author = splitILine[0];
-      let quote = splitILine[1];
-      return {
-        author: author,
-        quote: quote,
-      };
-    });
-  }
+  "utf8"
 );
+const quotes = quotesData.split("\n").map((line) => {
+  let splitILine = line.split("\t");
+  let author = splitILine[0];
+  let quote = splitILine[1];
+  return {
+    author: author,
+    quote: quote,
+  };
+});
 
 export async function wikiTitle(): Promise<string> {
   let article = await wikipedia.getRandomWikipediaArticle();
@@ -205,11 +196,16 @@ export async function compositeQuestion(): Promise<string> {
   }
 }
 
+// TODO fix this to use WeightedChoice
+// TODO word clues can be used for rhetorical questions (what do we mean when we say _)
+// TODO nicknames from little miss/mister list, dog names
 export async function compositePhrase(): Promise<string> {
   const choice = Math.random();
 
-  if (choice <= 0.25) {
+  if (choice <= 0.08) {
     return jeopardyQuestion();
+  } else if (choice <= 0.15) {
+    return grammar.flatten("#harvardSentence#");
   } else if (choice <= 0.4) {
     return boldClaimGenerator.boldClaim();
   } else if (choice <= 0.55) {
@@ -234,18 +230,36 @@ export async function compositePhrase(): Promise<string> {
   }
 }
 
-export async function compositeTopic(): Promise<string> {
-  const choice = Math.random();
+const chooseCompositeTopicGenerator = weightedRandomChoiceFunction<
+  () => Promise<string> | string
+>([
+  new WeightedChoice(wikiTitle, 5),
+  new WeightedChoice(jeopardyAnswer, 5),
+  new WeightedChoice(jeopardyCategory, 5),
+  new WeightedChoice(bookTitle, 2),
 
-  if (choice <= 0.5) {
-    return await wikiTitle();
-  } else if (choice <= 0.7) {
-    return jeopardyAnswer();
-  } else if (choice <= 0.85) {
-    return bookTitle();
-  } else {
-    return jeopardyCategory();
-  }
+  // bold claims (the short ones)
+  new WeightedChoice(
+    () =>
+      retry(
+        () => grammar.flatten("#boldClaim#"),
+        (title) => title.split(" ").length < 7
+      ),
+    3
+  ),
+
+  // blank vs. blank
+  new WeightedChoice(() => {
+    return getListFromRandomGrammarTemplate(
+      grammar.raw["barChartXAxis"],
+      2
+    ).join(" vs. ");
+  }, 5),
+]);
+
+export async function compositeTopic() {
+  const generator = chooseCompositeTopicGenerator();
+  return generator();
 }
 
 export async function compositeTitle(): Promise<string> {
