@@ -22,7 +22,7 @@ export function getListFromGrammarTemplate(
 export function getListFromRandomGrammarTemplate(
   grammarTemplateArray: string[],
   length: number
-) {
+): string[] {
   const grammarTemplate = randomChoice(grammarTemplateArray);
   return getListFromGrammarTemplate(grammarTemplate, length);
 }
