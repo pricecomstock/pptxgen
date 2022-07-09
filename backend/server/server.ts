@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express");
 var api = require("./router").router;
 var serveStatic = require("serve-static");

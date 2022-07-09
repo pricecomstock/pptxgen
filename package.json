@@ -21,6 +21,7 @@
     "chart.js": "^2.9.4",
     "class-transformer": "^0.5.1",
     "csv": "^5.5.3",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "pluralize": "git+https://github.com/plurals/pluralize.git",
     "reflect-metadata": "^0.1.13",
