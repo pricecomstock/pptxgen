@@ -14,7 +14,6 @@ const chartText = {
 
   // Bar Charts
   barChartXAxis: [
-    "#noun#",
     "#fightingMove#",
     "#organization#",
     "#disease#",

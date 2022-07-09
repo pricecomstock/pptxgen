@@ -41,8 +41,6 @@ function getRandomBarChart(): ChartSpec {
   let heightVw = ru.randomInt(33, 36);
   const size = { x: widthVw, y: heightVw };
 
-  const chartTitle = chartTextGenerator.barChartTitle();
-
   const chartJsData: ChartData = {
     labels: chartTextGenerator.barChartXAxisArray(numData),
     datasets: [barDatasetGenerator(numData)],
@@ -52,28 +50,28 @@ function getRandomBarChart(): ChartSpec {
     legend: {
       display: false,
       labels: {
-        fontSize: 36,
+        fontSize: 48,
       },
     },
-    title: {
-      display: true,
-      text: su.titleCase(chartTitle).match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
-      fontSize: 56,
-      padding: 20,
-    },
+    // title: {
+    //   display: true,
+    //   text: su.titleCase(chartTitle).match(/(\S+\s?){1,5}/g) || [], //clunkily split every few words
+    //   fontSize: 56,
+    //   padding: 20,
+    // },
     scales: {
       yAxes: [
         {
           ticks: {
             suggestedMin: 0,
-            fontSize: 36,
+            fontSize: 48,
           },
         },
       ],
       xAxes: [
         {
           ticks: {
-            fontSize: 48,
+            fontSize: 56,
           },
         },
       ],
@@ -193,7 +191,7 @@ function getRandomLineChart() {
       xAxes: [
         {
           ticks: {
-            fontSize: 48,
+            fontSize: 56,
           },
           gridLines: {
             display: false, // don't show vertical lines
