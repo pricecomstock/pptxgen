@@ -24,7 +24,11 @@ const titleSlideFunctions = {
     };
   },
   async generateTitleSlide(title, subtitle) {
-    return this.assembleTitleSlide(title, subtitle, await randImg.background());
+    return this.assembleTitleSlide(
+      title ?? (await randString.compositeTopic()),
+      subtitle ?? (await randString.wikiDescription()),
+      await randImg.background()
+    );
   },
   async generateFullRandomTitleSlide() {
     return await this.generateTitleSlide(
