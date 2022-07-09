@@ -1,6 +1,7 @@
 import { PresentationOptions } from "./presentationOptions";
 import { Theme } from "./theme/theme";
 import { DeckRandomizer, WeightedChoice } from "./utils/randUtils";
+import { getAssociatedWords } from "./utils/wordAssociations";
 
 // var testSlides = require("./serverTestSlides");
 const titleGen = require("./slides/titleSlide");
@@ -18,7 +19,12 @@ const bodySlideGenFunctionWeightSpec = [
 ];
 
 async function generateSlideshow(options: PresentationOptions) {
-  const { presenter, slideCount: desiredSlideCount, questions } = options;
+  const {
+    presenter,
+    slideCount: desiredSlideCount,
+    questions,
+    topic,
+  } = options;
   let currentSlideCount = 0;
 
   let slidePromises = [];
@@ -35,12 +41,16 @@ async function generateSlideshow(options: PresentationOptions) {
   }
 
   // TITLE SLIDE
-  if (presenter != "") {
-    // both exist
-    slidePromises.push(titleGen.generateTitleSlideForPresenter(presenter));
-  } else {
-    slidePromises.push(titleGen.generateFullRandomTitleSlide());
+  const title = topic || undefined;
+  let subTitle = undefined;
+  if (presenter) {
+    subTitle = `by ${presenter}`;
+  } else if (topic) {
+    // If someone chooses a topic but not a presenter, we don't want a random subtitle
+    // subTitle = "";
   }
+
+  slidePromises.push(titleGen.generateTitleSlide(title, subTitle));
 
   // ABOUT ME SLIDE
   slidePromises.push(bodyGen.generateAboutMeSlide());

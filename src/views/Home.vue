@@ -6,18 +6,29 @@
         <div class="box">
           <div class="field">
             <div class="control">
-              <label class="label is-large">Presenter's name</label>
+              <label class="label is-medium">presenter's name</label>
               <input
                 type="text"
                 v-model="presenter"
                 class="input is-medium"
-                placeholder="An Expert"
+                placeholder="an expert"
               />
             </div>
           </div>
           <div class="field">
             <div class="control">
-              <label class="label is-large">Number of body slides</label>
+              <label class="label is-medium">needs slides about</label>
+              <input
+                type="text"
+                v-model="topic"
+                class="input is-medium"
+                placeholder="leave blank for a surprise"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label is-medium">how many?</label>
               <div class="buttons has-addons is-centered are-medium">
                 <span
                   v-for="(option, index) in numSlidesOptions"
@@ -33,9 +44,10 @@
               </div>
             </div>
           </div>
+          <hr />
           <div class="field">
             <div class="control">
-              <label class="label is-large">Other options</label>
+              <label class="label is-medium">other options</label>
               <div class="field">
                 <input
                   id="questionsinput"
@@ -43,7 +55,7 @@
                   type="checkbox"
                   class="switch is-outlined is-rounded is-info"
                 />
-                <label for="questionsinput">Prompt for Questions</label>
+                <label for="questionsinput">prompt for questions</label>
               </div>
               <!-- <div class="field">
                 <input id="nsfwinput" v-model="nsfw" type="checkbox" class="switch is-outlined is-rounded is-danger">
@@ -51,12 +63,6 @@
               </div> -->
             </div>
           </div>
-          <!-- <div class="field">
-            <div class="control">
-              <label class="label is-medium">And I need slides on</label>
-              <input type="text" v-model="topic" class="input is-medium" placeholder="A Topic">
-            </div>
-          </div> -->
         </div>
         <div class="buttons is-centered">
           <a
@@ -162,7 +168,7 @@ export default {
 
       axios
         .get(
-          `/slides?presenter=${this.presenter}&slideCount=${this.numSlides}&questions=${this.questionPrompt}`
+          `/slides?presenter=${this.presenter}&slideCount=${this.numSlides}&questions=${this.questionPrompt}&topic=${this.topic}`
         )
         .then((res) => {
           // console.log(res.data);
