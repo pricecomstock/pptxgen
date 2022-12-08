@@ -77,10 +77,10 @@ export default {
         twitter: true,
         resume: true,
         blog: false,
-        github: true
+        github: true,
       },
       githubUrl: details.githubUrl,
-      version: details.appVersion
+      version: details.appVersion,
     };
   },
   computed: {
@@ -90,8 +90,8 @@ export default {
       } else {
         return this.appName + " ©" + this.year;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -116,7 +116,7 @@ html {
 .section.pcfooter {
   background-color: hsl(0, 0%, 96%);
   padding: 1rem 0rem;
-  position: absolute;
+  position: relative;
   left: 0px;
   right: 0px;
   bottom: 0px;

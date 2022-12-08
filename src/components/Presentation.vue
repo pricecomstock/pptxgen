@@ -5,17 +5,19 @@
     :style="themeStyles"
     @keyup.left="previousSlide()"
     @keyup.right="nextSlide()"
+    @keyup.up="previousSlide()"
+    @keyup.down="nextSlide()"
     @keypress.enter="nextSlide()"
   >
     <div
       class="tag slide-counter"
       :class="{
         'is-dark': currentSlideIndex != this.slideshow.length - 2,
-        'is-danger': currentSlideIndex === this.slideshow.length - 2
+        'is-danger': currentSlideIndex === this.slideshow.length - 2,
       }"
       v-if="
         currentSlideIndex !== 0 &&
-          currentSlideIndex !== this.slideshow.length - 1
+        currentSlideIndex !== this.slideshow.length - 1
       "
     >
       {{ currentSlideIndex }}/{{ this.slideshow.length - 2 }}
@@ -52,7 +54,7 @@ export default {
   props: {
     slideshow: {
       type: Array,
-      required: true
+      required: true,
     },
     theme: {
       type: Object,
@@ -63,24 +65,24 @@ export default {
           gradientType: "linear-gradient",
           gradientDirection: "0deg",
           texture: 0,
-          font: "Aleo"
+          font: "Aleo",
         };
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       currentSlideIndex: 0,
       preloadedImages: [],
       baseUrl: process.env.BASE_URL,
-      isMobile: false
+      isMobile: false,
     };
   },
   components: {
     Title,
     Bullets,
     HalfImageTitle,
-    HalfImageBullets
+    HalfImageBullets,
   },
   computed: {
     currentSlide() {
@@ -98,24 +100,19 @@ export default {
             ? ""
             : this.theme.gradientDirection + ", "
         }${this.theme.colors.join(", ")})`,
-        "font-family": `"${
-          this.theme.font
-        }", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`
+        "font-family": `"${this.theme.font}", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif`,
       };
-    }
+    },
   },
   watch: {
     slideshow() {
       this.newSlideshow();
-    }
+    },
   },
   methods: {
     nextSlide() {
       if (this.currentSlideIndex < this.slideshow.length - 1) {
         this.currentSlideIndex += 1;
-        // console.log("Next Slide!");
-      } else {
-        // console.log("Already at end of slideshow!");
       }
     },
     isMobileDevice() {
@@ -127,9 +124,6 @@ export default {
     previousSlide() {
       if (this.currentSlideIndex > 0) {
         this.currentSlideIndex -= 1;
-        // console.log("Previous Slide!");
-      } else {
-        // console.log("Already at start of slideshow!");
       }
     },
     newSlideshow() {
@@ -142,8 +136,8 @@ export default {
       if (this.theme.font) {
         WebFontLoader.load({
           google: {
-            families: [this.theme.font]
-          }
+            families: [this.theme.font],
+          },
         });
       }
     },
@@ -151,13 +145,13 @@ export default {
       this.preloadedImages = [];
     },
     preloadImages() {
-      this.slideshow.forEach(slide => {
+      this.slideshow.forEach((slide) => {
         if (slide.options.imageUrl) {
           this.loadImageFromUrl(slide.options.imageUrl);
         }
 
         if (slide.options.contentImages) {
-          slide.options.contentImages.forEach(cImg => {
+          slide.options.contentImages.forEach((cImg) => {
             this.loadImageFromUrl(cImg.url);
           });
         }
@@ -170,22 +164,12 @@ export default {
     },
     fullscreen() {
       this.$emit("fullscreen");
-    }
+    },
   },
   mounted() {
     this.isMobile = this.isMobileDevice();
     this.newSlideshow();
-  }
-  // ready() {
-  //   // var el = this.$el;
-  //   // el.addEventListener('keyup', event => {
-  //   //   if (event.keyCode === 40 || event.keyCode === 39) { // down arrow, right arrow
-  //   //     this.nextSlide();
-  //   //   } else if (event.keyCode === 37 || event.keyCode === 38 ) { // up arrow, back arrow
-  //   //     this.previousSlide();
-  //   //   }
-  //   // })
-  // }
+  },
 };
 </script>
 
@@ -197,9 +181,12 @@ export default {
   overflow: hidden;
   position: relative;
 
+  // Everything inside the presentation can use em units to scale relative to this font size
+  font-size: max(6vmin, 1rem);
+
   .slide-counter {
     font-family: "Open Sans", sans-serif;
-    font-size: 1.5em; // TODO javascript font scaling
+    font-size: 0.4em;
     border-radius: 0 0 0 1vw;
     min-width: 8%;
     position: absolute;
@@ -271,6 +258,7 @@ export default {
     grid-row: body-begin/v-end;
     grid-column: visual-begin / visual-end;
     width: 100%;
+    max-height: 100%;
     height: auto;
   }
   .slide-chart {
@@ -279,12 +267,18 @@ export default {
   }
 }
 
+// By using em these will scale relative to general slide font size which is
+// determined in top level presentation
 .pres-title {
-  font-size: 5vw;
+  font-size: 1.5em;
 }
 
 .pres-body {
-  font-size: 3vw;
+  font-size: 1em;
+}
+
+.slide-title {
+  font-size: 1.5em;
 }
 
 .presentation:focus {
